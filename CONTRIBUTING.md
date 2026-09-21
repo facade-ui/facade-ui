@@ -69,6 +69,19 @@ UI emits `type="button"` on the anchor, or `role="button"` with
 ## Visual snapshots
 
 Baselines are namespaced by platform under `e2e/__screenshots__/<platform>/`,
-because macOS and the Linux CI container rasterise text differently. Update the
-ones for your own platform with `pnpm e2e:update`; Linux baselines come from the
-CI artifact.
+because macOS and the Linux CI container rasterise text differently. Both sets
+are committed, and **a visual change means updating both**:
+
+1. `pnpm e2e:update` for your own platform, and commit the result.
+2. Push. The `visual` job fails on the Linux baselines, and uploads a
+   `visual-diff` artifact.
+3. Check the diffs in the HTML report. If the change is intended, take the
+   `*-actual.png` files out of `test-results/`, drop the `-actual` suffix, and
+   commit them over `e2e/__screenshots__/linux/`.
+
+Step 3 is the only way to produce Linux baselines without Docker. With Docker
+installed you can skip the round trip:
+
+```bash
+docker run --rm -v "$PWD":/w -w /w mcr.microsoft.com/playwright:v1.63.0-noble   bash -c "corepack enable && pnpm install --frozen-lockfile && pnpm --filter @facade-ui/docs build && pnpm exec playwright test e2e/visual.spec.ts --update-snapshots"
+```

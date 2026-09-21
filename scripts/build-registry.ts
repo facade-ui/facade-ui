@@ -15,6 +15,12 @@
  * checked-in source of truth stays reviewable. `--check` makes the script fail
  * instead of writing, which is what CI runs.
  *
+ * Output is run through Prettier rather than plain `JSON.stringify`. The two
+ * disagree — Prettier collapses short arrays onto one line, `JSON.stringify`
+ * always expands them — so without this, `pnpm format:check` and
+ * `pnpm registry:build --check` fight over the same file and which one passes
+ * depends on the order they ran in.
+ *
  * Usage: `pnpm registry:build [--check]`
  */
 
@@ -27,6 +33,8 @@ import {
   readdirSync,
 } from "node:fs"
 import { resolve } from "node:path"
+
+import { format, resolveConfig } from "prettier"
 
 import {
   ITEM_SCHEMA,
@@ -45,6 +53,12 @@ import {
 } from "./lib/registry.ts"
 
 const check = process.argv.includes("--check")
+
+/** Formats JSON exactly as `pnpm format` would, so the two never disagree. */
+const prettierOptions = await resolveConfig(REGISTRY_JSON)
+const formatJson = async (value: unknown, filepath: string): Promise<string> =>
+  format(JSON.stringify(value, null, 2), { ...prettierOptions, filepath, parser: "json" })
+
 const registry = readRegistry()
 
 /** source path (`src/ui/button.tsx`) -> the item that ships it. */
@@ -157,7 +171,7 @@ const indexJson = {
   })),
 }
 
-const nextRegistryJson = JSON.stringify(registry, null, 2) + "\n"
+const nextRegistryJson = await formatJson(registry, REGISTRY_JSON)
 
 if (check) {
   const current = readFileSync(REGISTRY_JSON, "utf8")
