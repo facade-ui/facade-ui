@@ -1,0 +1,44 @@
+/**
+ * Docs app stylesheet.
+ *
+ * Everything visual comes from the registry's own token layer — the docs site is
+ * the largest consumer of Facade UI, and dogfooding it is the cheapest way to
+ * notice a token that does not work in practice.
+ */
+
+@import "@facade-ui/registry/tokens/globals.css";
+@import "@facade-ui/registry/tokens/themes.css";
+
+/* Tailwind v4 scans from the stylesheet's own project; the registry package
+   lives outside it, so its sources have to be declared explicitly. */
+@source "../";
+@source "../../../packages/registry/src";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Shiki emits both themes; the dark one is swapped in by the `.dark` class
+   rather than by a media query, so it follows the site's own theme toggle. */
+@layer components {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
+
+  .dark .shiki,
+  .dark .shiki span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}

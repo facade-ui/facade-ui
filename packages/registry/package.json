@@ -14,8 +14,7 @@
     "./motion/*": "./src/motion/*.tsx",
     "./sections/*": "./src/sections/*.tsx",
     "./templates/*": "./src/templates/*.tsx",
-    "./tokens/globals.css": "./src/tokens/globals.css",
-    "./tokens/*": "./src/tokens/*.css"
+    "./tokens/*": "./src/tokens/*"
   },
   "scripts": {
     "lint": "eslint .",
