@@ -20,6 +20,7 @@ const PAGES = [
   "/components",
   "/docs/installation",
   "/docs/theming",
+  "/docs/customise",
   "/docs/accessibility",
   // One item page, which exercises the props table, code blocks and preview frame.
   "/components/feature-grid",
