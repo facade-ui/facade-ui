@@ -1,0 +1,49 @@
+{
+  "name": "@facade-ui/registry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": ["**/*.css"],
+  "exports": {
+    ".": "./src/index.ts",
+    "./lib/*": "./src/lib/*.ts",
+    "./ui/*": "./src/ui/*.tsx",
+    "./motion/*": "./src/motion/*.tsx",
+    "./sections/*": "./src/sections/*.tsx",
+    "./templates/*": "./src/templates/*.tsx",
+    "./tokens/globals.css": "./src/tokens/globals.css",
+    "./tokens/*": "./src/tokens/*.css"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@base-ui-components/react": "1.0.0-rc.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.47.0",
+    "motion": "^13.4.0",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@facade-ui/eslint-config": "workspace:*",
+    "@facade-ui/tsconfig": "workspace:*",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "jsdom": "^28.0.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.6"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  }
+}
