@@ -4,11 +4,32 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "public/r/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "public/r/**",
+        ".generated/**"
+      ]
     },
     "dev": { "cache": false, "persistent": true },
     "lint": { "dependsOn": ["^build"] },
     "typecheck": { "dependsOn": ["^build"] },
-    "test": { "dependsOn": ["^build"], "outputs": ["coverage/**"] }
+    "test": { "dependsOn": ["^build"], "outputs": ["coverage/**"] },
+
+    "registry": {
+      "inputs": ["../../packages/registry/**", "../../scripts/**"],
+      "outputs": ["public/r/**", ".generated/**"]
+    },
+
+    "@facade-ui/docs#typecheck": { "dependsOn": ["^build", "registry"] },
+    "@facade-ui/docs#test": {
+      "dependsOn": ["^build", "registry"],
+      "outputs": ["coverage/**"]
+    },
+    "@facade-ui/docs#build": {
+      "dependsOn": ["^build", "registry"],
+      "outputs": [".next/**", "!.next/cache/**", "public/r/**", ".generated/**"]
+    }
   }
 }
