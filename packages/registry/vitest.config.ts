@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url"
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
+    alias: { "@registry": fileURLToPath(new URL("./src", import.meta.url)) },
   },
   test: {
     environment: "jsdom",

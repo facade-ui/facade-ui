@@ -20,11 +20,11 @@
 import { CheckIcon, XIcon } from "lucide-react"
 import type { ElementType, ReactNode } from "react"
 
-import type { CtaItem, HeadingLevel, LinkComponent } from "@/lib/types"
-import { cn, slugId } from "@/lib/utils"
-import { Badge } from "./badge"
-import { buttonVariants } from "./button"
-import { Heading } from "./heading"
+import type { CtaItem, HeadingLevel, LinkComponent } from "@registry/lib/types"
+import { cn, slugId } from "@registry/lib/utils"
+import { Badge } from "@registry/ui/badge"
+import { buttonVariants } from "@registry/ui/button"
+import { Heading } from "@registry/ui/heading"
 
 export interface PricingFeature {
   label: string
@@ -87,7 +87,7 @@ export function PricingTier({
     <Root
       className={cn(
         "bg-card text-card-foreground relative flex h-full flex-col gap-6 rounded-xl border p-6 sm:p-8",
-        featured && "border-primary shadow-lg ring-1 ring-primary",
+        featured && "border-primary ring-primary shadow-lg ring-1",
         className,
       )}
     >
@@ -103,12 +103,15 @@ export function PricingTier({
           ) : null}
         </div>
         {description ? (
-          <p className="text-muted-foreground text-sm text-pretty">{description}</p>
+          <p className="text-muted-foreground text-pretty text-sm">{description}</p>
         ) : null}
       </div>
 
       <p className="flex items-baseline gap-1">
-        <span aria-hidden className="text-foreground text-display-sm font-semibold tracking-tight">
+        <span
+          aria-hidden
+          className="text-foreground text-display-sm font-semibold tracking-tight"
+        >
           {price}
         </span>
         {period ? (
@@ -136,9 +139,16 @@ export function PricingTier({
                   included ? "text-primary" : "text-muted-foreground",
                 )}
               />
-              <span className={cn("flex flex-col gap-0.5", !included && "text-muted-foreground")}>
+              <span
+                className={cn(
+                  "flex flex-col gap-0.5",
+                  !included && "text-muted-foreground",
+                )}
+              >
                 <span className={cn(!included && "line-through")}>
-                  <span className="sr-only">{included ? "Included: " : "Not included: "}</span>
+                  <span className="sr-only">
+                    {included ? "Included: " : "Not included: "}
+                  </span>
                   {feature.label}
                 </span>
                 {feature.note ? (
@@ -169,7 +179,9 @@ export function PricingTier({
           {cta.label}
         </Link>
         {footnote ? (
-          <p className="text-muted-foreground text-center text-xs text-pretty">{footnote}</p>
+          <p className="text-muted-foreground text-pretty text-center text-xs">
+            {footnote}
+          </p>
         ) : null}
       </div>
     </Root>

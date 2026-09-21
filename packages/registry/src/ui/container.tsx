@@ -14,11 +14,14 @@
 
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@registry/lib/utils"
 
 export type ContainerElement = "div" | "section" | "header" | "footer" | "nav" | "main"
 
-export interface ContainerProps extends Omit<ComponentPropsWithoutRef<"div">, "children"> {
+export interface ContainerProps extends Omit<
+  ComponentPropsWithoutRef<"div">,
+  "children"
+> {
   as?: ContainerElement
   /** `lg` is `--facade-container-max`. `sm`/`md` narrow it for prose. */
   size?: "sm" | "md" | "lg" | "full"
@@ -46,7 +49,12 @@ export function Container({
 
   return (
     <Component
-      className={cn("mx-auto w-full", sizes[size], gutter && "px-gutter sm:px-8", className)}
+      className={cn(
+        "mx-auto w-full",
+        sizes[size],
+        gutter && "px-gutter sm:px-8",
+        className,
+      )}
       {...props}
     >
       {children}

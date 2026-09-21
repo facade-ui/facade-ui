@@ -11,7 +11,7 @@
 
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@registry/lib/utils"
 
 export interface EyebrowProps extends Omit<ComponentPropsWithoutRef<"p">, "children"> {
   as?: "p" | "span" | "div"
@@ -26,13 +26,19 @@ const tones: Record<NonNullable<EyebrowProps["tone"]>, string> = {
   foreground: "text-foreground",
 }
 
-export function Eyebrow({ as = "p", tone = "muted", className, children, ...props }: EyebrowProps) {
+export function Eyebrow({
+  as = "p",
+  tone = "muted",
+  className,
+  children,
+  ...props
+}: EyebrowProps) {
   const Component = as as ElementType
 
   return (
     <Component
       className={cn(
-        "text-sm font-semibold tracking-[0.12em] uppercase",
+        "text-sm font-semibold uppercase tracking-[0.12em]",
         tones[tone],
         className,
       )}

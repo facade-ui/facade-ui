@@ -16,8 +16,8 @@
 
 import type { ElementType } from "react"
 
-import type { ImageComponent, LinkComponent } from "@/lib/types"
-import { cn } from "@/lib/utils"
+import type { ImageComponent, LinkComponent } from "@registry/lib/types"
+import { cn } from "@registry/lib/utils"
 
 export interface LogoItem {
   /** Company name. Always exposed to assistive tech. */
@@ -72,12 +72,20 @@ export function LogoMark({
         decoding="async"
         className={cn("w-auto object-contain", heights[size])}
       />
-      <span className={showName ? "text-muted-foreground text-sm font-medium" : "sr-only"}>
+      <span
+        className={showName ? "text-muted-foreground text-sm font-medium" : "sr-only"}
+      >
         {name}
       </span>
     </>
   ) : (
-    <span className={cn("text-muted-foreground text-lg font-semibold tracking-tight", heights[size], "flex items-center")}>
+    <span
+      className={cn(
+        "text-muted-foreground text-lg font-semibold tracking-tight",
+        heights[size],
+        "flex items-center",
+      )}
+    >
       {name}
     </span>
   )
@@ -85,7 +93,7 @@ export function LogoMark({
   const shared = cn(
     "inline-flex items-center gap-2",
     muted &&
-      "opacity-70 grayscale transition-[opacity,filter] duration-facade-base ease-facade-out hover:opacity-100 hover:grayscale-0 focus-visible:opacity-100 focus-visible:grayscale-0",
+      "duration-facade-base ease-facade-out opacity-70 grayscale transition-[opacity,filter] hover:opacity-100 hover:grayscale-0 focus-visible:opacity-100 focus-visible:grayscale-0",
     className,
   )
 
@@ -98,7 +106,7 @@ export function LogoMark({
       href={href}
       className={cn(
         shared,
-        "rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background",
+        "focus-visible:ring-ring focus-visible:ring-offset-background rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-4",
       )}
     >
       {content}

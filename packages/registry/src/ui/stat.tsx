@@ -17,7 +17,7 @@
 
 import type { ReactNode } from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@registry/lib/utils"
 
 export interface StatItem {
   /** The figure, including its unit or symbol. */
@@ -53,16 +53,24 @@ export function Stat({
   children,
 }: StatProps) {
   return (
-    <div className={cn("flex flex-col-reverse gap-2", align === "center" && "items-center text-center", className)}>
+    <div
+      className={cn(
+        "flex flex-col-reverse gap-2",
+        align === "center" && "items-center text-center",
+        className,
+      )}
+    >
       <dt className="text-muted-foreground text-sm font-medium">
         {label}
         {description ? (
-          <span className="text-muted-foreground mt-1 block text-sm font-normal text-pretty">
+          <span className="text-muted-foreground mt-1 block text-pretty text-sm font-normal">
             {description}
           </span>
         ) : null}
       </dt>
-      <dd className={cn("text-foreground font-semibold tracking-tight", valueSizes[size])}>
+      <dd
+        className={cn("text-foreground font-semibold tracking-tight", valueSizes[size])}
+      >
         {srValue ? (
           <>
             <span aria-hidden>{value}</span>

@@ -2,7 +2,9 @@
   "extends": "@facade-ui/tsconfig/react-library.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": {
+      "@registry/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "*.ts", "*.tsx"],
   "exclude": ["node_modules", "dist"]

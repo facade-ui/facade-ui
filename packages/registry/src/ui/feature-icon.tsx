@@ -15,17 +15,17 @@
 import { cva, type VariantProps } from "class-variance-authority"
 import type { ElementType } from "react"
 
-import type { IconComponent } from "@/lib/types"
-import { cn } from "@/lib/utils"
+import type { IconComponent } from "@registry/lib/types"
+import { cn } from "@registry/lib/utils"
 
 export const featureIconVariants = cva(
-  "inline-flex items-center justify-center shrink-0",
+  "inline-flex shrink-0 items-center justify-center",
   {
     variants: {
       variant: {
         soft: "bg-accent text-accent-foreground",
         solid: "bg-primary text-primary-foreground",
-        outline: "border border-border bg-background text-foreground",
+        outline: "border-border bg-background text-foreground border",
         plain: "text-primary",
       },
       size: {

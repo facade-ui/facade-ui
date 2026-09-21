@@ -15,11 +15,12 @@
 
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react"
 
-import type { SectionBaseProps } from "@/lib/types"
-import { cn } from "@/lib/utils"
+import type { SectionBaseProps } from "@registry/lib/types"
+import { cn } from "@registry/lib/utils"
 
 export interface SectionProps
-  extends Omit<ComponentPropsWithoutRef<"section">, "children">,
+  extends
+    Omit<ComponentPropsWithoutRef<"section">, "children">,
     Pick<SectionBaseProps, "as" | "spacing"> {
   /** Id of the heading that names this section. Omit only when `as="div"`. */
   labelledBy?: string

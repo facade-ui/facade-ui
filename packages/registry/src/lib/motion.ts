@@ -49,7 +49,10 @@ export const FACADE_MOTION_DISTANCE_PX = FACADE_MOTION_DISTANCE_REM * 16
 export type FadeDirection = "up" | "down" | "left" | "right" | "none"
 
 /** Only `opacity` and `transform` are animated — never anything that reflows. */
-export function offsetFor(direction: FadeDirection, distance = FACADE_MOTION_DISTANCE_PX) {
+export function offsetFor(
+  direction: FadeDirection,
+  distance = FACADE_MOTION_DISTANCE_PX,
+) {
   switch (direction) {
     case "up":
       return { y: distance, x: 0 }
@@ -96,4 +99,8 @@ export function staggerVariants(stagger = 0.08, delayChildren = 0): Variants {
 }
 
 /** Default viewport config for `Reveal`: fire once, slightly before fully in view. */
-export const FACADE_VIEWPORT = { once: true, amount: 0.25, margin: "0px 0px -10% 0px" } as const
+export const FACADE_VIEWPORT = {
+  once: true,
+  amount: 0.25,
+  margin: "0px 0px -10% 0px",
+} as const
