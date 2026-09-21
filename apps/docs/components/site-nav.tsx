@@ -16,7 +16,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import type { NavGroup } from "@/lib/registry"
-import { Button } from "@registry/ui/button"
+import { buttonVariants } from "@registry/ui/button"
 import { cn } from "@registry/lib/utils"
 
 const GUIDE_LINKS = [
@@ -106,15 +106,13 @@ export function SiteNav({ groups }: SiteNavProps) {
 export function SiteNavMobile({ groups }: SiteNavProps) {
   return (
     <Dialog.Root>
+      {/* buttonVariants, not render={<Button />}: Base UI inspects the element
+          handed to `render` to decide whether it is a native button, and cannot
+          see through a wrapper component — so it warns on every mount even
+          though the DOM ends up correct. Base UI renders a real <button> here. */}
       <Dialog.Trigger
-        render={
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            aria-label="Open navigation"
-          />
-        }
+        aria-label="Open navigation"
+        className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "lg:hidden")}
       >
         <MenuIcon aria-hidden />
       </Dialog.Trigger>
@@ -124,9 +122,8 @@ export function SiteNavMobile({ groups }: SiteNavProps) {
           <div className="flex items-center justify-between">
             <Dialog.Title className="text-base font-semibold">Documentation</Dialog.Title>
             <Dialog.Close
-              render={
-                <Button variant="ghost" size="icon" aria-label="Close navigation" />
-              }
+              aria-label="Close navigation"
+              className={buttonVariants({ variant: "ghost", size: "icon" })}
             >
               <XIcon aria-hidden />
             </Dialog.Close>

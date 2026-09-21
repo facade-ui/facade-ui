@@ -3,26 +3,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@registry/*": [
-        "../../packages/registry/src/*"
-      ],
-      "@scripts/*": [
-        "../../scripts/lib/*"
-      ]
+      "@/*": ["./*"],
+      "@registry/*": ["../../packages/registry/src/*"],
+      "@scripts/*": ["../../scripts/lib/*"]
     },
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

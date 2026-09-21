@@ -6,30 +6,11 @@
  * Swaps only the list slots on the static `UspList`; everything visual and every
  * accessibility decision stays in that one file.
  *
- * Dependencies: react, @registry/motion/stagger, @registry/sections/usp-list.
+ * Dependencies: react, @registry/motion/slots, @registry/sections/usp-list.
  */
 
-import type { ReactNode } from "react"
-
-import { Stagger, StaggerItem } from "@registry/motion/stagger"
+import { StaggerList, StaggerListItem } from "@registry/motion/slots"
 import { UspList, type UspListProps } from "@registry/sections/usp-list"
-
-interface SlotProps {
-  className?: string
-  children?: ReactNode
-}
-
-const StaggerList = ({ className, children }: SlotProps) => (
-  <Stagger as="ul" className={className}>
-    {children}
-  </Stagger>
-)
-
-const StaggerListItem = ({ className, children }: SlotProps) => (
-  <StaggerItem as="li" className={className}>
-    {children}
-  </StaggerItem>
-)
 
 export type UspListMotionProps = Omit<UspListProps, "listAs" | "itemAs">
 
