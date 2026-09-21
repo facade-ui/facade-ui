@@ -52,6 +52,24 @@ describe("FaqAccordion", () => {
     expect(document.getElementById(panelId!)).toHaveTextContent("MIT licensed")
   })
 
+  it("puts data-panel-open on the trigger, which the chevron rotation targets", async () => {
+    // Base UI uses `data-open` on the *panel* and `data-panel-open` on the
+    // *trigger*. The chevron sits inside the trigger, so it must target the
+    // latter — pinned here because a wrong selector fails silently in CSS.
+    const user = userEvent.setup()
+    render(<FaqAccordion items={items} />)
+
+    const trigger = screen.getByRole("button", { name: "Is it free?" })
+    expect(trigger).not.toHaveAttribute("data-panel-open")
+
+    await user.click(trigger)
+    expect(trigger).toHaveAttribute("data-panel-open")
+    // `className` on an SVG element is an SVGAnimatedString, not a string.
+    expect(trigger.querySelector("svg")?.getAttribute("class")).toContain(
+      "group-data-[panel-open]:rotate-180",
+    )
+  })
+
   it("keeps closed answers in the DOM so find-in-page can reach them", () => {
     render(<FaqAccordion items={items} />)
     // hiddenUntilFound keeps the text present but hidden, rather than unmounted.

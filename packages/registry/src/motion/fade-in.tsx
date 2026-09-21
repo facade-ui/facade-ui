@@ -31,6 +31,7 @@ export type MotionTag =
   | "ul"
   | "ol"
   | "li"
+  | "dl"
   | "figure"
 
 export interface FadeInProps {

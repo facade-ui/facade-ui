@@ -34,7 +34,10 @@ export async function CodeBlock({
 }: CodeBlockProps) {
   const html = await codeToHtml(code.trimEnd(), {
     lang,
-    themes: { light: "github-light", dark: "github-dark" },
+    // The plain GitHub themes fail WCAG AA on comments and several token
+    // colours — caught by the axe pass over the docs pages. The high-contrast
+    // variants keep the familiar look and clear 4.5:1.
+    themes: { light: "github-light-high-contrast", dark: "github-dark-high-contrast" },
     defaultColor: false,
   })
 

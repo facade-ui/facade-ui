@@ -24,24 +24,20 @@
 `cta-band`, `footer` — each with a `-motion` variant where motion adds
 something the static version cannot do.
 
-## Not started
-
 ### Phase 2 — Breadth
 
 `stats`, `testimonials-grid`, `testimonial-single`, `pricing-tiers`,
 `pricing-comparison`, `card-list`, `feature-tabs`, `steps`, `team`,
-`newsletter`, `banner`, `nav-side`.
+`newsletter`, `banner`, `nav-side`, plus the `input` atom they needed.
 
-Two atoms are already in place for these (`Stat`, `PricingTier`,
-`Testimonial`), so several are assembly rather than new design.
+The form-field contrast gap flagged here earlier is closed. shadcn already
+separates `--border` (dividers) from `--input` (control boundaries), so
+`--input` was darkened until it clears 3:1 against the background in all six
+theme scopes, and `scripts/check-contrast.ts` now **enforces** it rather than
+reporting it. `--border` stays informational, because a hairline divider is
+decoration.
 
-One thing to settle first: `newsletter` is the first section with a form field,
-and the token layer's `--border` sits at roughly 1.3:1 against the background.
-That is fine for a decorative divider and **not** fine as the only boundary of
-an input, which WCAG 2.2 requires to clear 3:1. Either a dedicated
-`--facade-field-border` token or a darker `--input` is needed before that
-section ships. `scripts/check-contrast.ts` already reports the ratio; it is
-listed as informational rather than enforced, and that line will need to move.
+## Not started
 
 ### Phase 3 — Templates and theming
 

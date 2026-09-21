@@ -7,6 +7,7 @@
  */
 
 import {
+  BlocksIcon,
   BoltIcon,
   ChartNoAxesColumnIcon,
   GaugeIcon,
@@ -15,6 +16,9 @@ import {
   PaletteIcon,
   RocketIcon,
   ShieldCheckIcon,
+  GlobeIcon,
+  AtSignIcon,
+  TerminalIcon,
   WaypointsIcon,
 } from "lucide-react"
 
@@ -245,3 +249,243 @@ export const FOOTER_GROUPS = [
 ]
 
 export { MediaPlaceholder }
+
+// ------------------------------------------------------------------ phase 2
+
+export const STATS = [
+  { value: "99.98%", label: "Uptime", description: "Rolling 90 days" },
+  { value: "1.2K", srValue: "1200", label: "Teams onboarded" },
+  { value: "18ms", label: "Median response" },
+  { value: "216", label: "Accessibility checks", description: "Per commit" },
+]
+
+export const QUOTES = [
+  {
+    id: "rosa",
+    rating: 5 as const,
+    quote:
+      "We replaced three hand-rolled landing pages in an afternoon. The sections dropped straight into our existing theme.",
+    author: { name: "Rosa Iqbal", title: "Head of Design, Northwind" },
+  },
+  {
+    id: "tomas",
+    quote:
+      "The accessibility work is already done, which is the part we always ran out of time for.",
+    author: { name: "Tomas Lindqvist", title: "Engineering lead, Contoso" },
+  },
+  {
+    id: "amara",
+    rating: 5 as const,
+    quote:
+      "Reading the source was the sell. It is the code I would have written on a good day, and now it is in our repo.",
+    author: { name: "Amara Okonkwo", title: "Staff engineer, Globex" },
+  },
+  {
+    id: "jonas",
+    quote: "One primitive library, one token layer. Our bundle went down, not up.",
+    author: { name: "Jonas Weber", title: "Frontend lead, Initech" },
+  },
+]
+
+export const PLANS = [
+  {
+    name: "Starter",
+    price: "$0",
+    srPrice: "Free",
+    period: "/month",
+    description: "Everything you need to ship a landing page.",
+    features: [
+      { label: "All sections and atoms" },
+      { label: "Three theme presets" },
+      { label: "Priority support", included: false },
+    ],
+    cta: { label: "Start free", href: "#start" },
+  },
+  {
+    featured: true,
+    name: "Team",
+    price: "$29",
+    srPrice: "29 dollars",
+    period: "/month",
+    description: "For teams shipping more than one site.",
+    features: [
+      { label: "Everything in Starter" },
+      { label: "Shared theme tokens", note: "Sync across projects" },
+      { label: "Priority support" },
+    ],
+    cta: { label: "Start a trial", href: "#trial" },
+    footnote: "No card required for 14 days.",
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    srPrice: "Custom pricing",
+    description: "Procurement, SSO and an accessibility statement.",
+    features: [
+      { label: "Everything in Team" },
+      { label: "SSO and SCIM" },
+      { label: "VPAT on request" },
+    ],
+    cta: { label: "Talk to us", href: "#contact" },
+  },
+]
+
+export const COMPARISON_PLANS = [
+  {
+    name: "Starter",
+    price: "$0",
+    srPrice: "Free",
+    period: "/mo",
+    cta: { label: "Start", href: "#start" },
+  },
+  {
+    name: "Team",
+    price: "$29",
+    srPrice: "29 dollars",
+    period: "/mo",
+    featured: true,
+    cta: { label: "Try it", href: "#trial" },
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    srPrice: "Custom pricing",
+    cta: { label: "Contact", href: "#contact" },
+  },
+]
+
+export const COMPARISON_GROUPS = [
+  {
+    title: "Components",
+    features: [
+      { label: "Sections and atoms", values: [true, true, true] },
+      { label: "Templates", values: [false, true, true] },
+      { label: "Theme presets", values: ["3", "3 + custom", "Unlimited"] },
+    ],
+  },
+  {
+    title: "Collaboration",
+    features: [
+      {
+        label: "Shared tokens",
+        values: [false, true, true],
+        note: "Sync across projects",
+      },
+      { label: "Seats", values: ["1", "10", "Unlimited"] },
+      { label: "SSO and SCIM", values: [false, false, true] },
+    ],
+  },
+  {
+    title: "Support",
+    features: [
+      { label: "Community", values: [true, true, true] },
+      { label: "Priority email", values: [false, true, true] },
+      { label: "VPAT on request", values: [false, false, true] },
+    ],
+  },
+]
+
+export const POSTS = [
+  {
+    id: "v01",
+    title: "Facade UI v0.1",
+    href: "#v01",
+    description:
+      "Twelve core sections, thirteen atoms, and a contrast check that runs on every commit.",
+    tag: "Release",
+    dateTime: "2026-09-21",
+    dateLabel: "21 September 2026",
+  },
+  {
+    id: "rsc",
+    title: "Why sections are server components",
+    href: "#rsc",
+    description:
+      "And the one place that breaks down: icon components cannot cross the boundary as props.",
+    tag: "Engineering",
+    dateTime: "2026-09-14",
+    dateLabel: "14 September 2026",
+  },
+  {
+    id: "contrast",
+    title: "Checking contrast from the tokens themselves",
+    href: "#contrast",
+    description:
+      "An accessibility statement nobody verifies is just a wish. Here is the script that verifies ours.",
+    tag: "Accessibility",
+    dateTime: "2026-09-02",
+    dateLabel: "2 September 2026",
+  },
+]
+
+export const STEPS = [
+  {
+    icon: TerminalIcon,
+    title: "Run the command",
+    description: "One shadcn add per piece. Dependencies come with it.",
+  },
+  {
+    icon: BlocksIcon,
+    title: "Compose the page",
+    description: "Pass typed content and slots. No prop soup.",
+  },
+  {
+    icon: PaletteIcon,
+    title: "Apply your theme",
+    description: "Override the shadcn token names and everything follows.",
+  },
+]
+
+export const TABS = [
+  {
+    label: "Install",
+    title: "One command per piece",
+    description:
+      "Add exactly the section you need. Its dependencies are resolved from the real import graph.",
+    icon: TerminalIcon,
+    bullets: ["npm packages and registry items alike", "Pinned to tested version ranges"],
+    media: <MediaPlaceholder label="Install flow" ratio="aspect-[16/10]" />,
+  },
+  {
+    label: "Compose",
+    title: "Sections take content, not configuration",
+    description:
+      "Typed data plus slots, so a page reads as composition rather than a wall of props.",
+    icon: BlocksIcon,
+    bullets: ["Slots for media, actions and children", "Heading level always explicit"],
+    media: <MediaPlaceholder label="Composed page" ratio="aspect-[16/10]" />,
+  },
+  {
+    label: "Theme",
+    title: "One block of tokens re-themes everything",
+    description:
+      "Sections reference only shadcn's token names, so your existing theme already fits.",
+    icon: PaletteIcon,
+    bullets: ["Three presets, light and dark", "Contrast verified in CI"],
+    media: <MediaPlaceholder label="Theme tokens" ratio="aspect-[16/10]" />,
+  },
+]
+
+export const TEAM = [
+  {
+    name: "Rosa Iqbal",
+    role: "Design systems",
+    bio: "Spent a decade making component libraries that people actually use.",
+    social: [
+      { label: "Mastodon", href: "https://example.com", icon: AtSignIcon },
+      { label: "her website", href: "https://example.com", icon: GlobeIcon },
+    ],
+  },
+  {
+    name: "Tomas Lindqvist",
+    role: "Accessibility",
+    bio: "Believes an accessibility statement nobody verifies is just a wish.",
+    social: [{ label: "Mastodon", href: "https://example.com", icon: AtSignIcon }],
+  },
+  {
+    name: "Amara Okonkwo",
+    role: "Engineering",
+    bio: "Writes the source you will be reading after you run the install command.",
+    social: [{ label: "their website", href: "https://example.com", icon: GlobeIcon }],
+  },
+]

@@ -55,7 +55,7 @@ jobs:
         run: pnpm registry:validate
 
   a11y:
-    name: axe (6 theme scopes)
+    name: axe (previews in 6 theme scopes, plus the docs site)
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble

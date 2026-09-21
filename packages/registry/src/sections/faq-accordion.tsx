@@ -146,7 +146,7 @@ export function FaqAccordion({
                   <ChevronDownIcon
                     aria-hidden
                     focusable="false"
-                    className="text-muted-foreground duration-facade-base ease-facade-out size-5 shrink-0 transition-transform group-data-[open]:rotate-180"
+                    className="text-muted-foreground duration-facade-base ease-facade-out size-5 shrink-0 transition-transform group-data-[panel-open]:rotate-180"
                   />
                 </Accordion.Trigger>
               </Accordion.Header>

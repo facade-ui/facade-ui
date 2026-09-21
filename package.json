@@ -22,7 +22,7 @@
     "docs:props": "tsx scripts/extract-props.ts",
     "contrast": "tsx scripts/check-contrast.ts",
     "e2e": "playwright test",
-    "e2e:a11y": "playwright test e2e/a11y.spec.ts",
+    "e2e:a11y": "playwright test e2e/a11y.spec.ts e2e/docs-a11y.spec.ts",
     "e2e:update": "playwright test e2e/visual.spec.ts --update-snapshots",
     "smoke": "tsx scripts/smoke-install.ts"
   },
