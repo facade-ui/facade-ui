@@ -9,6 +9,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 env:
   TURBO_TELEMETRY_DISABLED: 1
   NEXT_TELEMETRY_DISABLED: 1
@@ -18,9 +21,9 @@ jobs:
     name: Lint, types, tests, registry
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm
@@ -60,16 +63,16 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @facade-ui/docs build
       - run: pnpm e2e:a11y
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: axe-report
@@ -82,34 +85,42 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @facade-ui/docs build
       - run: pnpm exec playwright test e2e/visual.spec.ts
-      # Snapshots are namespaced by platform. The first run on a new Linux image
-      # has no baseline and will fail; download this artifact, commit the PNGs
-      # under e2e/__screenshots__/linux/, and it becomes the baseline.
-      - uses: actions/upload-artifact@v4
+
+      # Snapshots are namespaced by platform, so the Linux baselines committed
+      # under e2e/__screenshots__/linux/ are the ones this job compares against.
+      #
+      # On failure the artifact carries three things: the HTML report with
+      # side-by-side diffs, the per-test `*-actual.png` files, and the snapshot
+      # directory itself (which is where Playwright writes a baseline that did
+      # not previously exist). To accept an intentional change, take the
+      # `*-actual.png` files out of `test-results/`, drop the `-actual` suffix,
+      # and commit them over the ones in e2e/__screenshots__/linux/.
+      - uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: visual-diff
           path: |
             playwright-report
             test-results
+            e2e/__screenshots__
           retention-days: 7
 
   smoke:
     name: Fresh install smoke test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm

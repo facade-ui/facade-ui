@@ -65,14 +65,19 @@ sensibly cover.
 
 ## Known gaps
 
-- **Visual baselines exist for macOS only.** Snapshots are namespaced by
-  platform because macOS and the Linux CI container rasterise text differently.
-  The first CI run of the `visual` job will fail with no Linux baseline;
-  download the artifact and commit the PNGs under
-  `e2e/__screenshots__/linux/` to bootstrap it.
-- **No GitHub remote yet.** The plan calls for a PR per registry item; the work
-  so far is committed to `main` in a local repository. Point it at
-  `facade-ui/facade-ui` and the CI workflow is ready to run as-is.
+- **Visual baselines weigh about 21 MB per platform.** Snapshots are namespaced
+  by platform, because macOS and the Linux CI container rasterise text
+  differently, and both sets are committed — roughly 42 MB, growing with every
+  intentional visual change. Most of it is the full-page template snapshots,
+  which are 4,000–6,500 px tall and largely redundant: a template is composition
+  over sections that are already snapshotted individually. Capturing templates
+  at viewport height instead would cut about a third of the weight and make the
+  diffs readable, at the cost of not catching a template-only regression below
+  the fold.
+- **No PR per registry item.** The brief asks for one; the work landed as seven
+  phase-scoped commits pushed straight to `main` on
+  [facade-ui/facade-ui](https://github.com/facade-ui/facade-ui). Worth turning
+  on branch protection before the next change.
 - **`facadeui.dev` is not live.** Registry dependency URLs already point at it,
   which is correct for what ships; the smoke test rewrites them to a local
   server so it can run offline.
