@@ -83,6 +83,22 @@ export interface CtaItem {
   "aria-label"?: string
 }
 
+/**
+ * How a section's list is built, so the `-motion` variant can be a real wrapper.
+ *
+ * The static section renders `<List>` and `<Item>` from these slots, defaulting
+ * to plain `ul`/`li`. The motion variant passes Base-UI-free `Stagger` and
+ * `StaggerItem` adapters instead, which is what lets one file stay entirely free
+ * of motion imports while the other gets per-item choreography — rather than
+ * settling for a single fade over the whole band.
+ */
+export interface ListSlotProps {
+  /** Wraps the list. Defaults to `"ul"`. */
+  listAs?: ElementType
+  /** Wraps each item. Defaults to `"li"`. */
+  itemAs?: ElementType
+}
+
 /** Props shared by every section: outline control plus a styling hook. */
 export interface SectionBaseProps {
   /** Heading level for the section's own title. Defaults to `2`. */

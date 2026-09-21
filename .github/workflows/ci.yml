@@ -1,0 +1,120 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TURBO_TELEMETRY_DISABLED: 1
+  NEXT_TELEMETRY_DISABLED: 1
+
+jobs:
+  verify:
+    name: Lint, types, tests, registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Format
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      # Resolves every theme scope from the real CSS and fails if a text pair
+      # drops below 4.5:1 or the focus ring below 3:1.
+      - name: Token contrast
+        run: pnpm contrast
+
+      - name: Build registry
+        run: pnpm registry:build
+
+      # Fails if registry.json's derived dependencies no longer match the import
+      # graph, i.e. someone edited a component without rebuilding.
+      - name: Registry is up to date
+        run: pnpm exec tsx scripts/build-registry.ts --check
+
+      - name: Validate registry against shadcn's schema
+        run: pnpm registry:validate
+
+  a11y:
+    name: axe (6 theme scopes)
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @facade-ui/docs build
+      - run: pnpm e2e:a11y
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: axe-report
+          path: playwright-report
+          retention-days: 7
+
+  visual:
+    name: Visual regression
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @facade-ui/docs build
+      - run: pnpm exec playwright test e2e/visual.spec.ts
+      # Snapshots are namespaced by platform. The first run on a new Linux image
+      # has no baseline and will fail; download this artifact, commit the PNGs
+      # under e2e/__screenshots__/linux/, and it becomes the baseline.
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-diff
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7
+
+  smoke:
+    name: Fresh install smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm registry:build
+      # Installs every item into a throwaway create-next-app + shadcn init
+      # project from a local file server, then typechecks the result.
+      - run: pnpm exec tsx scripts/smoke-install.ts

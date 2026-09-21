@@ -11,6 +11,11 @@
  * announcing "image, Acme logo" for every item. Set `showName` to make it
  * visible instead.
  *
+ * The `muted` resting treatment (desaturate and fade) is applied to the image
+ * only, never to a shared wrapper. On the wrapper it also dims the text
+ * fallback and the visible name, pushing both under 4.5:1 — which the axe run
+ * caught, and which is why the class list below is split the way it is.
+ *
  * Dependencies: react, @/lib/types, @/lib/utils.
  */
 
@@ -61,6 +66,14 @@ export function LogoMark({
   const Image = (image ?? "img") as ElementType
   const Link = (link ?? "a") as ElementType
 
+  // Only ever applied to the image. Text keeps its full contrast.
+  const imageTreatment = cn(
+    "w-auto object-contain",
+    heights[size],
+    muted &&
+      "duration-facade-base ease-facade-out opacity-70 grayscale transition-[opacity,filter] group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0",
+  )
+
   const content = src ? (
     <>
       <Image
@@ -70,7 +83,7 @@ export function LogoMark({
         height={height}
         loading="lazy"
         decoding="async"
-        className={cn("w-auto object-contain", heights[size])}
+        className={imageTreatment}
       />
       <span
         className={showName ? "text-muted-foreground text-sm font-medium" : "sr-only"}
@@ -90,12 +103,7 @@ export function LogoMark({
     </span>
   )
 
-  const shared = cn(
-    "inline-flex items-center gap-2",
-    muted &&
-      "duration-facade-base ease-facade-out opacity-70 grayscale transition-[opacity,filter] hover:opacity-100 hover:grayscale-0 focus-visible:opacity-100 focus-visible:grayscale-0",
-    className,
-  )
+  const shared = cn("group inline-flex items-center gap-2", className)
 
   if (!href) {
     return <span className={shared}>{content}</span>
