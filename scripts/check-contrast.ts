@@ -1,71 +1,19 @@
 /**
  * Verifies every Facade UI theme preset against the WCAG 2.2 AA bar.
  *
- * Reads the real token values out of `globals.css` and `themes.css`, resolves
- * each theme scope (light/dark x neutral/warm/vivid), and checks the pairs that
- * sections actually put on screen. Text pairs must clear 4.5:1; the focus ring
+ * Reads the real token values out of `globals.css` and `themes.css` through
+ * `lib/css-tokens.ts`, resolving each theme scope (light/dark x neutral/warm/
+ * vivid), then checks the pairs that sections actually put on screen. Text pairs must clear 4.5:1; the focus ring
  * must clear 3:1 against its background. Failures exit non-zero, so CI blocks a
  * palette change that quietly breaks contrast.
  */
 
-import { readFileSync } from "node:fs"
-import { fileURLToPath } from "node:url"
-import { dirname, resolve } from "node:path"
 import { contrastRatio, parseOklch, type Rgb } from "./lib/color.ts"
+import { readScopes, type Tokens } from "./lib/css-tokens.ts"
 
-const here = dirname(fileURLToPath(import.meta.url))
-const tokensDir = resolve(here, "../packages/registry/src/tokens")
-
-type Tokens = Record<string, string>
-
-/** Pulls `--name: value;` declarations out of the rule whose selector matches. */
-function readBlock(css: string, selectorTest: (selector: string) => boolean): Tokens {
-  const tokens: Tokens = {}
-  const ruleRe = /([^{}]+)\{([^{}]*)\}/g
-  let rule: RegExpExecArray | null
-  const source = css.replace(/\/\*[\s\S]*?\*\//g, "")
-  while ((rule = ruleRe.exec(source)) !== null) {
-    // Everything after the previous rule's `}` may include at-statements such as
-    // `@import "…";` — the selector is only what follows the final `;`.
-    const head = rule[1]!
-    const selector = head.slice(head.lastIndexOf(";") + 1).trim()
-    if (selector.startsWith("@") || !selectorTest(selector)) continue
-    const declRe = /(--[\w-]+)\s*:\s*([^;]+);/g
-    let decl: RegExpExecArray | null
-    while ((decl = declRe.exec(rule[2]!)) !== null) tokens[decl[1]!] = decl[2]!.trim()
-  }
-  return tokens
-}
-
-const globals = readFileSync(resolve(tokensDir, "globals.css"), "utf8")
-const themes = readFileSync(resolve(tokensDir, "themes.css"), "utf8")
-
-const neutralLight = readBlock(globals, (s) => s === ":root")
-const neutralDark = readBlock(globals, (s) => s === ".dark")
-
-const preset = (name: string, dark: boolean): Tokens =>
-  readBlock(themes, (s) =>
-    s.split(",").some((part) => {
-      const p = part.trim()
-      const scoped = p.includes(`[data-facade-theme="${name}"]`)
-      return scoped && p.includes(".dark") === dark
-    }),
-  )
-
-const scopes: { label: string; tokens: Tokens }[] = [
-  { label: "neutral · light", tokens: neutralLight },
-  { label: "neutral · dark", tokens: { ...neutralLight, ...neutralDark } },
-  { label: "warm · light", tokens: { ...neutralLight, ...preset("warm", false) } },
-  {
-    label: "warm · dark",
-    tokens: { ...neutralLight, ...neutralDark, ...preset("warm", true) },
-  },
-  { label: "vivid · light", tokens: { ...neutralLight, ...preset("vivid", false) } },
-  {
-    label: "vivid · dark",
-    tokens: { ...neutralLight, ...neutralDark, ...preset("vivid", true) },
-  },
-]
+// The six theme scopes, resolved from the real stylesheets. Shared with
+// `extract-palettes.ts`, so the customiser scores exactly what CI enforces.
+const scopes: { label: string; tokens: Tokens }[] = readScopes()
 
 /** `[foreground, background, minimum ratio, what it is]` */
 const PAIRS: [string, string, number, string][] = [

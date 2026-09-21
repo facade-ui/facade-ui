@@ -45,12 +45,13 @@ The target is WCAG 2.2 AA, and the point is that it is _checked_:
 - `pnpm contrast` resolves all six theme scopes (light/dark x three presets)
   from the real CSS and fails if a text pair drops below 4.5:1 or the focus ring
   below 3:1. It has already caught two real regressions.
-- `pnpm e2e:a11y` runs axe-core over all 54 previews in all six scopes, plus the
-  docs site itself — 337 checks. It has already caught five real defects:
+- `pnpm e2e:a11y` runs axe-core over all 57 previews in all six scopes, plus the
+  docs site itself — 357 checks. It has already caught six real defects:
   `LogoMark`'s resting opacity dimming text below 4.5:1, an invalid
   `aria-orientation` Base UI puts on a `<ul>`, a `<dl>` with its `dt`/`dd` pairs
   nested two `div`s deep, a `<div>` where an `<li>` belongs inside an `<ol>`,
-  and syntax-highlighting themes whose comment colour failed AA.
+  syntax-highlighting themes whose comment colour failed AA, and a scrollable
+  export block no keyboard user could reach.
 - `eslint-plugin-jsx-a11y` runs in **strict** mode across the whole registry.
 - Unit tests pin reading order, accessible names, heading levels, focus return
   and Escape handling.
@@ -79,7 +80,7 @@ pnpm typecheck
 pnpm test               # vitest
 pnpm contrast           # WCAG check over every theme scope
 pnpm registry:build     # emit apps/docs/public/r/*.json
-pnpm registry:validate   # shadcn schema + Facade conventions
+pnpm registry:validate  # shadcn schema + Facade conventions
 pnpm e2e:a11y           # axe, 6 theme scopes
 pnpm e2e                # axe + visual regression
 pnpm smoke              # install every item into a fresh Next.js project
@@ -91,10 +92,10 @@ through the real shadcn CLI, and typechecks the result.
 
 ## Status
 
-Phases 0, 1 and 2 are complete: foundations, tooling, CI, tokens, motion,
-14 atoms, and 24 sections with motion variants — 59 registry items in all.
-Phase 3 (templates, theme customiser) is not built yet. See
-[ROADMAP.md](./ROADMAP.md).
+All four phases of the brief are built: foundations and tooling, the core
+sections, the breadth sections, and the templates plus the theme customiser —
+62 registry items in total, 699 end-to-end checks passing. See
+[ROADMAP.md](./ROADMAP.md) for what is deliberately still open.
 
 ## Licence
 

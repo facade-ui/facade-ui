@@ -1,0 +1,423 @@
+"use client"
+
+/**
+ * The theme customiser: edit a palette, see it scored, export the CSS.
+ *
+ * Built around one idea — it scores the palette against the **same pairs and
+ * the same thresholds** that `scripts/check-contrast.ts` enforces in CI. A
+ * customiser that happily exported a theme the build would reject is worse than
+ * no customiser at all, so the checks live in `lib/theme-tokens.ts` and both
+ * sides read them.
+ *
+ * Editing is in OKLCH rather than hex, and that is the point: lightness is the
+ * axis contrast actually depends on, so dragging the L slider moves the ratio
+ * predictably instead of by trial and error. The live ratio sits beside each
+ * pair as you drag.
+ *
+ * a11y of the tool itself:
+ *
+ *  - Every slider is a labelled `<input type="range">` with its value in the
+ *    accessible name, so the control is usable without seeing the swatch.
+ *  - The pass/fail state of each pair is text and an icon, never colour alone.
+ *  - The results table is a real table with row headers.
+ *  - The exported-CSS block scrolls, so it is focusable and labelled.
+ *  - The preview applies the palette to a scoped subtree via inline custom
+ *    properties, so the surrounding docs chrome stays readable no matter how
+ *    unreadable the palette being edited is. Editing a broken theme must not
+ *    break the tool you are using to fix it.
+ */
+
+import { CheckIcon, RotateCcwIcon, XIcon } from "lucide-react"
+import { useMemo, useState, type CSSProperties } from "react"
+
+import palettes from "@/.generated/palettes.json"
+import { contrastRatio, formatOklch, parseOklch, toHex } from "@/lib/oklch"
+import {
+  EDITABLE_TOKENS,
+  checkPalette,
+  toCss,
+  type Palette,
+  type TokenName,
+} from "@/lib/theme-tokens"
+import { CopyButton } from "./copy-button"
+import { Badge } from "@registry/ui/badge"
+import { Button } from "@registry/ui/button"
+import { cn } from "@registry/lib/utils"
+
+const PRESETS = ["neutral", "warm", "vivid"] as const
+type Preset = (typeof PRESETS)[number]
+type Mode = "light" | "dark"
+
+const shipped = palettes as Record<string, Palette>
+const startingPalette = (preset: Preset, mode: Mode): Palette => ({
+  ...shipped[`${preset}-${mode}`]!,
+})
+
+/** Human labels, so the sliders do not read as raw custom property names. */
+const TOKEN_LABELS: Record<TokenName, string> = {
+  "--background": "Background",
+  "--foreground": "Foreground",
+  "--card": "Card",
+  "--card-foreground": "Card foreground",
+  "--popover": "Popover",
+  "--popover-foreground": "Popover foreground",
+  "--primary": "Primary",
+  "--primary-foreground": "Primary foreground",
+  "--secondary": "Secondary",
+  "--secondary-foreground": "Secondary foreground",
+  "--muted": "Muted",
+  "--muted-foreground": "Muted foreground",
+  "--accent": "Accent",
+  "--accent-foreground": "Accent foreground",
+  "--destructive": "Destructive",
+  "--destructive-foreground": "Destructive foreground",
+  "--border": "Border",
+  "--input": "Input border",
+  "--ring": "Focus ring",
+}
+
+interface ChannelProps {
+  id: string
+  label: string
+  value: number
+  min: number
+  max: number
+  step: number
+  suffix?: string
+  onChange: (next: number) => void
+}
+
+function Channel({
+  id,
+  label,
+  value,
+  min,
+  max,
+  step,
+  suffix = "",
+  onChange,
+}: ChannelProps) {
+  return (
+    <span className="flex items-center gap-2">
+      <label
+        htmlFor={id}
+        className="text-muted-foreground w-4 shrink-0 text-xs font-medium"
+      >
+        {label}
+      </label>
+      <input
+        id={id}
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(event) => onChange(Number(event.target.value))}
+        className="accent-primary focus-visible:ring-ring h-6 w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2"
+      />
+      <output
+        htmlFor={id}
+        className="text-muted-foreground w-12 shrink-0 text-right font-mono text-xs"
+      >
+        {value}
+        {suffix}
+      </output>
+    </span>
+  )
+}
+
+export function ThemeCustomiser() {
+  const [preset, setPreset] = useState<Preset>("neutral")
+  const [mode, setMode] = useState<Mode>("light")
+  const [light, setLight] = useState<Palette>(() => startingPalette("neutral", "light"))
+  const [dark, setDark] = useState<Palette>(() => startingPalette("neutral", "dark"))
+
+  const palette = mode === "light" ? light : dark
+  const setPalette = mode === "light" ? setLight : setDark
+
+  const loadPreset = (next: Preset) => {
+    setPreset(next)
+    setLight(startingPalette(next, "light"))
+    setDark(startingPalette(next, "dark"))
+  }
+
+  const updateToken = (
+    token: TokenName,
+    patch: Partial<{ l: number; c: number; h: number }>,
+  ) => {
+    const current = parseOklch(palette[token])
+    if (!current) return
+    setPalette({ ...palette, [token]: formatOklch({ ...current, ...patch }) })
+  }
+
+  const checks = useMemo(() => checkPalette(palette, contrastRatio), [palette])
+  const failures = checks.filter((check) => !check.passes)
+
+  // Scoped to the preview subtree, so an unreadable palette cannot make the
+  // controls unreadable too.
+  const previewStyle = useMemo(
+    () =>
+      Object.fromEntries(
+        EDITABLE_TOKENS.map((token) => [token, palette[token]]),
+      ) as CSSProperties,
+    [palette],
+  )
+
+  const css = useMemo(
+    () => toCss(light, dark, `[data-facade-theme="custom"]`),
+    [light, dark],
+  )
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-wrap items-center gap-3">
+        <fieldset className="border-border flex items-center gap-0.5 rounded-lg border p-0.5">
+          <legend className="sr-only">Starting preset</legend>
+          {PRESETS.map((value) => (
+            <label
+              key={value}
+              className={cn(
+                "has-[:focus-visible]:ring-ring cursor-pointer rounded-md px-3 py-1.5 text-sm capitalize transition-colors has-[:focus-visible]:ring-2",
+                preset === value
+                  ? "bg-secondary text-secondary-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              <input
+                type="radio"
+                name="customiser-preset"
+                value={value}
+                checked={preset === value}
+                onChange={() => loadPreset(value)}
+                className="sr-only"
+              />
+              {value}
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset className="border-border flex items-center gap-0.5 rounded-lg border p-0.5">
+          <legend className="sr-only">Editing which mode</legend>
+          {(["light", "dark"] as const).map((value) => (
+            <label
+              key={value}
+              className={cn(
+                "has-[:focus-visible]:ring-ring cursor-pointer rounded-md px-3 py-1.5 text-sm capitalize transition-colors has-[:focus-visible]:ring-2",
+                mode === value
+                  ? "bg-secondary text-secondary-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              <input
+                type="radio"
+                name="customiser-mode"
+                value={value}
+                checked={mode === value}
+                onChange={() => setMode(value)}
+                className="sr-only"
+              />
+              {value}
+            </label>
+          ))}
+        </fieldset>
+
+        <Button variant="outline" size="sm" onClick={() => loadPreset(preset)}>
+          <RotateCcwIcon aria-hidden className="size-4" />
+          Reset to {preset}
+        </Button>
+
+        <Badge
+          variant={failures.length ? "destructive" : "default"}
+          size="sm"
+          className="ml-auto"
+        >
+          {failures.length === 0
+            ? "All contrast checks pass"
+            : `${failures.length} contrast ${failures.length === 1 ? "check fails" : "checks fail"}`}
+        </Badge>
+      </div>
+
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="flex flex-col gap-5">
+          <h3 className="text-base font-semibold">Tokens — {mode}</h3>
+          <ul className="flex flex-col gap-4">
+            {EDITABLE_TOKENS.map((token) => {
+              const colour = parseOklch(palette[token])
+              if (!colour) return null
+              const hex = toHex(colour)
+              return (
+                <li key={token} className="flex flex-col gap-1.5">
+                  <span className="flex items-center gap-2">
+                    <span
+                      aria-hidden
+                      className="border-border size-6 shrink-0 rounded-md border"
+                      style={{ background: palette[token] }}
+                    />
+                    <span className="text-foreground text-sm font-medium">
+                      {TOKEN_LABELS[token]}
+                    </span>
+                    <code className="text-muted-foreground ml-auto font-mono text-xs">
+                      {hex}
+                    </code>
+                  </span>
+                  <Channel
+                    id={`${token}-l`}
+                    label="L"
+                    value={Number(colour.l.toFixed(3))}
+                    min={0}
+                    max={1}
+                    step={0.005}
+                    onChange={(l) => updateToken(token, { l })}
+                  />
+                  <Channel
+                    id={`${token}-c`}
+                    label="C"
+                    value={Number(colour.c.toFixed(3))}
+                    min={0}
+                    max={0.37}
+                    step={0.002}
+                    onChange={(c) => updateToken(token, { c })}
+                  />
+                  <Channel
+                    id={`${token}-h`}
+                    label="H"
+                    value={Number(colour.h.toFixed(0))}
+                    min={0}
+                    max={360}
+                    step={1}
+                    suffix="°"
+                    onChange={(h) => updateToken(token, { h })}
+                  />
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-8">
+          <section aria-labelledby="customiser-preview" className="flex flex-col gap-3">
+            <h3 id="customiser-preview" className="text-base font-semibold">
+              Preview
+            </h3>
+            <div
+              style={previewStyle}
+              className="bg-background text-foreground flex flex-col gap-4 rounded-xl border p-6"
+            >
+              <p className="text-balance text-lg font-semibold">A section heading</p>
+              <p className="text-muted-foreground text-pretty text-sm">
+                Supporting copy, which is where a muted foreground usually stops meeting
+                4.5:1.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-primary text-primary-foreground rounded-md px-4 py-2 text-sm font-medium">
+                  Primary
+                </span>
+                <span className="bg-secondary text-secondary-foreground rounded-md px-4 py-2 text-sm font-medium">
+                  Secondary
+                </span>
+                <span className="border-border text-foreground rounded-md border px-4 py-2 text-sm font-medium">
+                  Outline
+                </span>
+              </div>
+              <span className="border-input text-muted-foreground rounded-md border px-3 py-2.5 text-sm">
+                A form field border
+              </span>
+              <span className="ring-ring bg-card text-card-foreground rounded-md p-3 text-sm ring-2">
+                A focused card
+              </span>
+            </div>
+          </section>
+
+          <section aria-labelledby="customiser-checks" className="flex flex-col gap-3">
+            <h3 id="customiser-checks" className="text-base font-semibold">
+              Contrast — {mode}
+            </h3>
+            <p className="text-muted-foreground text-pretty text-sm">
+              The same pairs and thresholds <code>scripts/check-contrast.ts</code>{" "}
+              enforces in CI.
+            </p>
+            <div className="overflow-x-auto rounded-lg border">
+              <table className="w-full border-collapse text-left text-sm">
+                <caption className="sr-only">
+                  Contrast results for the {mode} palette
+                </caption>
+                <thead className="bg-muted/40">
+                  <tr>
+                    <th scope="col" className="px-3 py-2 font-medium">
+                      Pair
+                    </th>
+                    <th scope="col" className="px-3 py-2 font-medium">
+                      Ratio
+                    </th>
+                    <th scope="col" className="px-3 py-2 font-medium">
+                      Result
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {checks.map((check) => (
+                    <tr key={`${check.fg}-${check.bg}`} className="border-t">
+                      <th scope="row" className="px-3 py-2 text-left font-normal">
+                        {check.label}
+                      </th>
+                      <td className="px-3 py-2 font-mono text-xs">
+                        {check.ratio.toFixed(2)}:1
+                        <span className="text-muted-foreground"> (min {check.min})</span>
+                      </td>
+                      <td className="px-3 py-2">
+                        {/* Icon plus text: never colour alone. */}
+                        <span
+                          className={cn(
+                            "inline-flex items-center gap-1.5 text-xs font-medium",
+                            check.passes ? "text-foreground" : "text-destructive",
+                          )}
+                        >
+                          {check.passes ? (
+                            <CheckIcon aria-hidden className="size-4" />
+                          ) : (
+                            <XIcon aria-hidden className="size-4" />
+                          )}
+                          {check.passes ? "Passes" : "Fails"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section aria-labelledby="customiser-export" className="flex flex-col gap-3">
+        <h3 id="customiser-export" className="text-base font-semibold">
+          Export
+        </h3>
+        <p className="text-muted-foreground text-pretty text-sm">
+          Paste this into your stylesheet after the Facade tokens, then set{" "}
+          <code>data-facade-theme=&quot;custom&quot;</code> on <code>&lt;html&gt;</code>.
+        </p>
+        <figure className="bg-card overflow-hidden rounded-lg border">
+          <figcaption className="border-border bg-muted/40 flex items-center justify-between gap-3 border-b px-4 py-2">
+            <span className="text-muted-foreground font-mono text-xs">
+              app/globals.css
+            </span>
+            <CopyButton value={css} label="Copy CSS" />
+          </figcaption>
+          {/* Focusable, because it scrolls: a scroll container a keyboard user
+              cannot reach traps its own content (WCAG 2.1.1). */}
+          <div
+            tabIndex={0}
+            role="region"
+            aria-label="Exported CSS"
+            className="focus-visible:ring-ring max-h-80 overflow-auto focus-visible:outline-none focus-visible:ring-2"
+          >
+            <pre className="p-4 font-mono text-xs">
+              <code>{css}</code>
+            </pre>
+          </div>
+        </figure>
+      </section>
+    </div>
+  )
+}

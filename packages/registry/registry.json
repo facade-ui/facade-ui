@@ -1342,6 +1342,100 @@
         "https://facadeui.dev/r/types.json",
         "https://facadeui.dev/r/utils.json"
       ]
+    },
+    {
+      "name": "saas-landing",
+      "type": "registry:block",
+      "title": "SaaS landing page",
+      "description": "A complete SaaS marketing page assembled from registry sections, driven by one content object.",
+      "categories": [
+        "template"
+      ],
+      "files": [
+        {
+          "path": "src/templates/saas-landing.tsx",
+          "type": "registry:component",
+          "target": "components/templates/saas-landing.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/cta-band.json",
+        "https://facadeui.dev/r/faq-accordion.json",
+        "https://facadeui.dev/r/feature-grid.json",
+        "https://facadeui.dev/r/feature-rows.json",
+        "https://facadeui.dev/r/footer.json",
+        "https://facadeui.dev/r/hero-split.json",
+        "https://facadeui.dev/r/logo-cloud.json",
+        "https://facadeui.dev/r/logo-mark.json",
+        "https://facadeui.dev/r/nav-top.json",
+        "https://facadeui.dev/r/pricing-tier.json",
+        "https://facadeui.dev/r/pricing-tiers.json",
+        "https://facadeui.dev/r/stat.json",
+        "https://facadeui.dev/r/stats.json",
+        "https://facadeui.dev/r/testimonial.json",
+        "https://facadeui.dev/r/testimonials-grid.json",
+        "https://facadeui.dev/r/types.json"
+      ]
+    },
+    {
+      "name": "agency",
+      "type": "registry:block",
+      "title": "Agency site",
+      "description": "A studio site: overlay hero, work grid, process steps, a featured quote and the team.",
+      "categories": [
+        "template"
+      ],
+      "files": [
+        {
+          "path": "src/templates/agency.tsx",
+          "type": "registry:component",
+          "target": "components/templates/agency.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/card-list.json",
+        "https://facadeui.dev/r/cta-band.json",
+        "https://facadeui.dev/r/footer.json",
+        "https://facadeui.dev/r/hero-with-media.json",
+        "https://facadeui.dev/r/logo-cloud.json",
+        "https://facadeui.dev/r/logo-mark.json",
+        "https://facadeui.dev/r/nav-top.json",
+        "https://facadeui.dev/r/stat.json",
+        "https://facadeui.dev/r/stats.json",
+        "https://facadeui.dev/r/steps.json",
+        "https://facadeui.dev/r/team.json",
+        "https://facadeui.dev/r/testimonial.json",
+        "https://facadeui.dev/r/testimonial-single.json",
+        "https://facadeui.dev/r/types.json"
+      ]
+    },
+    {
+      "name": "product-launch",
+      "type": "registry:block",
+      "title": "Product launch",
+      "description": "A single-product launch page: announcement banner, bento highlights, tabbed detail and one email capture.",
+      "categories": [
+        "template"
+      ],
+      "files": [
+        {
+          "path": "src/templates/product-launch.tsx",
+          "type": "registry:component",
+          "target": "components/templates/product-launch.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/banner.json",
+        "https://facadeui.dev/r/bento-grid.json",
+        "https://facadeui.dev/r/faq-accordion.json",
+        "https://facadeui.dev/r/feature-tabs.json",
+        "https://facadeui.dev/r/footer.json",
+        "https://facadeui.dev/r/hero-centered.json",
+        "https://facadeui.dev/r/nav-top.json",
+        "https://facadeui.dev/r/newsletter.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/usp-list.json"
+      ]
     }
   ]
 }

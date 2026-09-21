@@ -7,7 +7,7 @@
     "dev": "next dev --turbopack",
     "build": "pnpm run registry && next build",
     "start": "next start",
-    "registry": "tsx ../../scripts/build-registry.ts && tsx ../../scripts/extract-props.ts",
+    "registry": "tsx ../../scripts/build-registry.ts && tsx ../../scripts/extract-props.ts && tsx ../../scripts/extract-palettes.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests"

@@ -51,6 +51,21 @@ pnpm e2e:update        # only if the visual change is intended
 - **Reading order must match visual order.** Alternating layouts use
   `lg:order-*`, never a reordered DOM.
 
+## Two things that will bite you
+
+**Icons cannot cross a server-to-client boundary as props.** Icon libraries do
+not mark their modules `"use client"`, so React refuses to serialise the
+reference. Static sections are server components and are unaffected; anything
+that renders a `-motion` variant, `FeatureTabs`, or a template while passing
+icons needs `"use client"` on the file that passes them.
+
+**Base UI's `render` prop cannot see through a wrapper component.** Passing
+`render={<Button />}` to `Dialog.Trigger` logs a warning on every mount even
+though the DOM ends up correct. Style the Base UI part with `buttonVariants`
+instead. And never use `render` to turn a button component into a link — Base
+UI emits `type="button"` on the anchor, or `role="button"` with
+`nativeButton={false}`.
+
 ## Visual snapshots
 
 Baselines are namespaced by platform under `e2e/__screenshots__/<platform>/`,

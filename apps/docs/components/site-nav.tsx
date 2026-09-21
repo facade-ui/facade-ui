@@ -22,6 +22,7 @@ import { cn } from "@registry/lib/utils"
 const GUIDE_LINKS = [
   { href: "/docs/installation", label: "Installation" },
   { href: "/docs/theming", label: "Theming" },
+  { href: "/docs/customise", label: "Theme customiser" },
   { href: "/docs/accessibility", label: "Accessibility" },
 ] as const
 

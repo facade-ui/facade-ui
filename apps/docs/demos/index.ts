@@ -13,6 +13,7 @@
 
 import type { ComponentType } from "react"
 
+import { Demo as AgencyDemo } from "./agency"
 import { Demo as BadgeDemo } from "./badge"
 import { Demo as BannerDemo } from "./banner"
 import { Demo as BentoGridDemo } from "./bento-grid"
@@ -52,6 +53,8 @@ import { Demo as PricingComparisonDemo } from "./pricing-comparison"
 import { Demo as PricingTierDemo } from "./pricing-tier"
 import { Demo as PricingTiersDemo } from "./pricing-tiers"
 import { Demo as PricingTiersMotionDemo } from "./pricing-tiers-motion"
+import { Demo as ProductLaunchDemo } from "./product-launch"
+import { Demo as SaasLandingDemo } from "./saas-landing"
 import { Demo as SectionDemo } from "./section"
 import { Demo as SectionHeaderDemo } from "./section-header"
 import { Demo as StatDemo } from "./stat"
@@ -69,6 +72,7 @@ import { Demo as UspListDemo } from "./usp-list"
 import { Demo as UspListMotionDemo } from "./usp-list-motion"
 
 export const demos: Record<string, ComponentType> = {
+  agency: AgencyDemo,
   badge: BadgeDemo,
   banner: BannerDemo,
   "bento-grid": BentoGridDemo,
@@ -108,6 +112,8 @@ export const demos: Record<string, ComponentType> = {
   "pricing-tier": PricingTierDemo,
   "pricing-tiers": PricingTiersDemo,
   "pricing-tiers-motion": PricingTiersMotionDemo,
+  "product-launch": ProductLaunchDemo,
+  "saas-landing": SaasLandingDemo,
   section: SectionDemo,
   "section-header": SectionHeaderDemo,
   stat: StatDemo,
@@ -159,6 +165,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   newsletter: 520,
   "pricing-comparison": 820,
   "pricing-tier": 620,
+  "product-launch": 3600,
   "pricing-tiers": 820,
   "pricing-tiers-motion": 820,
   stats: 420,

@@ -37,13 +37,31 @@ theme scopes, and `scripts/check-contrast.ts` now **enforces** it rather than
 reporting it. `--border` stays informational, because a hairline divider is
 decoration.
 
-## Not started
-
 ### Phase 3 — Templates and theming
 
-- Templates: `saas-landing`, `agency`, `product-launch`.
-- Theme customiser on facadeui.dev that exports CSS variables.
-- Registry install for whole templates.
+- Templates: `saas-landing`, `agency`, `product-launch`. Each is composition
+  over the existing sections with one content object, and each sets the heading
+  outline explicitly rather than leaning on section defaults — so the page has
+  exactly one `h1` and no skipped levels.
+- Registry install for whole templates works through the derived dependency
+  graph: `shadcn add saas-landing` pulls in sixteen other items without any of
+  them being listed by hand.
+- Theme customiser at `/docs/customise`. It edits in OKLCH, because lightness is
+  the axis contrast depends on, and it scores the palette against the _same_
+  pairs and thresholds `scripts/check-contrast.ts` enforces in CI — so a palette
+  that shows all-green is one the build would accept. Presets are read out of
+  the shipped CSS at build time rather than re-declared.
+
+## Not started
+
+Nothing from the original brief. What follows is what a second pass would
+sensibly cover.
+
+- **More templates.** `docs-site` and `changelog` are the obvious gaps, and
+  `nav-side` and `card-list` already exist for them.
+- **A `Select` and `Textarea`** to go with `Input`, for contact-form sections.
+- **Dark-mode logo swapping** in `LogoMark`. Most brand marks need a different
+  file per theme, and right now that is the caller's problem.
 
 ## Known gaps
 
