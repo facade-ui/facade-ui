@@ -25,6 +25,29 @@ function parseDemoNames(): string[] {
 
 export const PREVIEW_ITEMS = parseDemoNames()
 
+/**
+ * Items the registry classifies as templates.
+ *
+ * Read from the catalogue rather than hard-coded, so adding a template puts it
+ * on the right side of the full-page/viewport split automatically.
+ */
+function parseTemplateNames(): Set<string> {
+  const registry = JSON.parse(
+    readFileSync(
+      resolve(import.meta.dirname, "../packages/registry/registry.json"),
+      "utf8",
+    ),
+  ) as { items: { name: string; categories?: string[] }[] }
+
+  return new Set(
+    registry.items
+      .filter((item) => item.categories?.includes("template"))
+      .map((item) => item.name),
+  )
+}
+
+export const TEMPLATE_ITEMS = parseTemplateNames()
+
 /** Widths the visual suite captures, matching the docs' own breakpoint toggle. */
 export const BREAKPOINTS = [
   { name: "375", width: 375, height: 900 },

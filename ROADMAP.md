@@ -65,15 +65,15 @@ sensibly cover.
 
 ## Known gaps
 
-- **Visual baselines weigh about 21 MB per platform.** Snapshots are namespaced
+- **Visual baselines weigh about 16 MB per platform.** Snapshots are namespaced
   by platform, because macOS and the Linux CI container rasterise text
-  differently, and both sets are committed — roughly 42 MB, growing with every
-  intentional visual change. Most of it is the full-page template snapshots,
-  which are 4,000–6,500 px tall and largely redundant: a template is composition
-  over sections that are already snapshotted individually. Capturing templates
-  at viewport height instead would cut about a third of the weight and make the
-  diffs readable, at the cost of not catching a template-only regression below
-  the fold.
+  differently, and both sets are committed — roughly 32 MB, growing with every
+  intentional visual change. Templates are captured at viewport height rather
+  than full-page, which took the three of them from 6.0 MB to 1.9 MB per
+  platform: a template is composition over sections that are each already
+  snapshotted individually, so a 6,500 px capture was mostly re-photographing
+  covered ground. The gap that leaves is a regression that appears only in a
+  template and only below the fold.
 - **No PR per registry item.** The brief asks for one; the work landed as seven
   phase-scoped commits pushed straight to `main` on
   [facade-ui/facade-ui](https://github.com/facade-ui/facade-ui). Worth turning
