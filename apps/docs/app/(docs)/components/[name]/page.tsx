@@ -105,6 +105,9 @@ export default async function ComponentPage({
             name={name}
             title={item.title ?? name}
             initialHeight={DEMO_INITIAL_HEIGHT[name] ?? 360}
+            // Anything in the motion category animates on mount or on scroll,
+            // which is exactly what Replay exists for.
+            animated={item.categories?.includes("motion") ?? false}
           />
         </section>
       ) : null}

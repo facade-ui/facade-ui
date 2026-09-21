@@ -97,7 +97,15 @@ const CATEGORY_TITLES: Record<string, string> = {
   template: "Templates",
 }
 
-const CATEGORY_ORDER = ["theme", "motion", "atom", "section", "template", "other"]
+/**
+ * Sidebar order, which is not the catalogue order.
+ *
+ * It runs roughly from "decide how it looks" to "assemble a page" to "make it
+ * move": theming, then whole templates, then the atoms and sections they are
+ * built from, then the motion layer, which is opt-in and comes last for that
+ * reason.
+ */
+const CATEGORY_ORDER = ["theme", "template", "atom", "section", "motion", "other"]
 
 /** Groups the catalogue into the sidebar's sections. */
 export function getNavGroups(): NavGroup[] {

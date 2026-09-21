@@ -3,14 +3,23 @@
 /**
  * The docs sidebar.
  *
+ * Groups are Base UI Collapsibles, closed by default so the whole catalogue —
+ * sixty-two items — does not arrive as one unscrollable wall. "Getting started"
+ * opens on load, and so does whichever group holds the current page: landing on
+ * a component from a link or a search result and finding the sidebar unable to
+ * tell you where you are would be worse than the wall.
+ *
  * a11y: a `<nav>` with an accessible name, and the current page marked with
- * `aria-current="page"` so it is announced, not merely highlighted. On small
+ * `aria-current="page"` so it is announced, not merely highlighted. Group
+ * headings are real `<h2>`s containing the disclosure button, so the sidebar can
+ * be navigated by heading and each group's expanded state is announced. On small
  * screens it collapses into a Base UI Dialog — a real modal with the focus trap,
  * Escape handling, scroll lock and focus restoration a drawer needs.
  */
 
+import { Collapsible } from "@base-ui-components/react/collapsible"
 import { Dialog } from "@base-ui-components/react/dialog"
-import { MenuIcon, XIcon } from "lucide-react"
+import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react"
 import type { Route } from "next"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -30,37 +39,93 @@ export interface SiteNavProps {
   groups: NavGroup[]
 }
 
-function NavList({ groups, onNavigate }: SiteNavProps & { onNavigate?: () => void }) {
-  const pathname = usePathname()
+interface NavGroupLink {
+  key: string
+  href: Route
+  label: string
+}
+
+function NavGroupSection({
+  title,
+  links,
+  pathname,
+  startOpen,
+  onNavigate,
+}: {
+  title: string
+  links: NavGroupLink[]
+  pathname: string
+  startOpen: boolean
+  onNavigate?: () => void
+}) {
+  // `defaultOpen` is read once, on mount. That is the behaviour we want: the
+  // group holding the page you arrived on opens, and nothing snaps shut or
+  // springs open underneath you as you navigate.
+  const holdsCurrentPage = links.some((link) => link.href === pathname)
 
   return (
-    <div className="flex flex-col gap-7">
-      <div className="flex flex-col gap-1">
-        <p className="text-foreground px-3 text-sm font-semibold">Getting started</p>
-        {GUIDE_LINKS.map((link) => (
-          <NavLink
-            key={link.href}
-            href={link.href}
-            label={link.label}
-            active={pathname === link.href}
-            onNavigate={onNavigate}
+    <Collapsible.Root
+      defaultOpen={startOpen || holdsCurrentPage}
+      className="flex flex-col"
+    >
+      <h2>
+        <Collapsible.Trigger className="text-foreground hover:bg-accent/60 focus-visible:ring-ring group flex min-h-9 w-full cursor-pointer items-center justify-between gap-2 rounded-md px-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2">
+          {title}
+          <ChevronDownIcon
+            aria-hidden
+            focusable="false"
+            className="text-muted-foreground duration-facade-fast ease-facade-out size-4 transition-transform group-data-[panel-open]:rotate-180"
           />
-        ))}
-      </div>
+        </Collapsible.Trigger>
+      </h2>
 
-      {groups.map((group) => (
-        <div key={group.title} className="flex flex-col gap-1">
-          <p className="text-foreground px-3 text-sm font-semibold">{group.title}</p>
-          {group.items.map((item) => (
+      <Collapsible.Panel className="duration-facade-base ease-facade-out h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] data-[ending-style]:h-0 data-[starting-style]:h-0">
+        <div className="flex flex-col gap-0.5 pt-1">
+          {links.map((link) => (
             <NavLink
-              key={item.name}
-              href={item.href}
-              label={item.title}
-              active={pathname === item.href}
+              key={link.key}
+              href={link.href}
+              label={link.label}
+              active={pathname === link.href}
               onNavigate={onNavigate}
             />
           ))}
         </div>
+      </Collapsible.Panel>
+    </Collapsible.Root>
+  )
+}
+
+function NavList({ groups, onNavigate }: SiteNavProps & { onNavigate?: () => void }) {
+  const pathname = usePathname()
+
+  return (
+    <div className="flex flex-col gap-2">
+      <NavGroupSection
+        title="Getting started"
+        startOpen
+        pathname={pathname}
+        onNavigate={onNavigate}
+        links={GUIDE_LINKS.map((link) => ({
+          key: link.href,
+          href: link.href,
+          label: link.label,
+        }))}
+      />
+
+      {groups.map((group) => (
+        <NavGroupSection
+          key={group.title}
+          title={group.title}
+          startOpen={false}
+          pathname={pathname}
+          onNavigate={onNavigate}
+          links={group.items.map((item) => ({
+            key: item.name,
+            href: item.href,
+            label: item.title,
+          }))}
+        />
       ))}
     </div>
   )
