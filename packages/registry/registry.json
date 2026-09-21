@@ -103,6 +103,11 @@
           "path": "src/motion/collapse.tsx",
           "type": "registry:component",
           "target": "components/motion/collapse.tsx"
+        },
+        {
+          "path": "src/motion/slots.tsx",
+          "type": "registry:component",
+          "target": "components/motion/slots.tsx"
         }
       ],
       "dependencies": [
@@ -384,6 +389,513 @@
       "registryDependencies": [
         "https://facadeui.dev/r/badge.json",
         "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "nav-top",
+      "type": "registry:block",
+      "title": "Top navigation",
+      "description": "Site header with Base UI dropdowns above lg and a focus-trapped drawer below it, from one array of links.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/nav-top.tsx",
+          "type": "registry:component",
+          "target": "components/sections/nav-top.tsx"
+        }
+      ],
+      "dependencies": [
+        "@base-ui-components/react@1.0.0-rc.0",
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "hero-centered",
+      "type": "registry:block",
+      "title": "Hero — centred",
+      "description": "The classic centred landing hero: eyebrow, headline, copy, buttons, and optional media below.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/hero-centered.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-centered.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/cta-group.json",
+        "https://facadeui.dev/r/eyebrow.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "hero-centered-motion",
+      "type": "registry:block",
+      "title": "Hero — centred (motion)",
+      "description": "Centred hero with a staggered entrance played on mount.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/hero-centered-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-centered-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/hero-centered.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "hero-split",
+      "type": "registry:block",
+      "title": "Hero — split",
+      "description": "Copy on one side, media on the other. Reading order stays copy-first on every screen size.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/hero-split.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-split.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/cta-group.json",
+        "https://facadeui.dev/r/eyebrow.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "hero-split-motion",
+      "type": "registry:block",
+      "title": "Hero — split (motion)",
+      "description": "Split hero with a staggered entrance played on mount.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/hero-split-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-split-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/hero-split.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "hero-with-media",
+      "type": "registry:block",
+      "title": "Hero — with media",
+      "description": "Centred copy over a full-bleed background, or above a framed screenshot. The overlay variant always paints a scrim.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/hero-with-media.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-with-media.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/cta-group.json",
+        "https://facadeui.dev/r/eyebrow.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "hero-with-media-motion",
+      "type": "registry:block",
+      "title": "Hero — with media (motion)",
+      "description": "Media hero with a staggered entrance played on mount.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/hero-with-media-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-with-media-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/hero-with-media.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "logo-cloud",
+      "type": "registry:block",
+      "title": "Logo cloud",
+      "description": "A wall of customer logos. Company names are exposed as text, so it reads as a list rather than a run of unlabelled images.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/logo-cloud.tsx",
+          "type": "registry:component",
+          "target": "components/sections/logo-cloud.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/logo-mark.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "logo-cloud-motion",
+      "type": "registry:block",
+      "title": "Logo cloud (motion)",
+      "description": "Logo wall whose marks fade in one after another.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/logo-cloud-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/logo-cloud-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/logo-cloud.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "usp-list",
+      "type": "registry:block",
+      "title": "USP list",
+      "description": "Three or four short value propositions, each an icon and a line of copy.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/usp-list.tsx",
+          "type": "registry:component",
+          "target": "components/sections/usp-list.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/feature-icon.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "usp-list-motion",
+      "type": "registry:block",
+      "title": "USP list (motion)",
+      "description": "USP strip with a staggered entrance.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/usp-list-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/usp-list-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/motion-primitives.json",
+        "https://facadeui.dev/r/usp-list.json"
+      ]
+    },
+    {
+      "name": "feature-grid",
+      "type": "registry:block",
+      "title": "Feature grid",
+      "description": "A grid of feature cards, two to four across, with optional stretched links that keep the accessible name short.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/feature-grid.tsx",
+          "type": "registry:component",
+          "target": "components/sections/feature-grid.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/feature-icon.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "feature-grid-motion",
+      "type": "registry:block",
+      "title": "Feature grid (motion)",
+      "description": "Feature grid whose cards arrive in sequence.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/feature-grid-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/feature-grid-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/feature-grid.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "feature-rows",
+      "type": "registry:block",
+      "title": "Feature rows",
+      "description": "Alternating rows of media and copy. The alternation is visual only — DOM order stays copy-first.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/feature-rows.tsx",
+          "type": "registry:component",
+          "target": "components/sections/feature-rows.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/eyebrow.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "feature-rows-motion",
+      "type": "registry:block",
+      "title": "Feature rows (motion)",
+      "description": "Feature rows revealed one at a time as they scroll in.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/feature-rows-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/feature-rows-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/feature-rows.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "bento-grid",
+      "type": "registry:block",
+      "title": "Bento grid",
+      "description": "A mosaic of feature tiles at mixed sizes, laid out in the order given so reading order matches what you see.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/bento-grid.tsx",
+          "type": "registry:component",
+          "target": "components/sections/bento-grid.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/feature-icon.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "bento-grid-motion",
+      "type": "registry:block",
+      "title": "Bento grid (motion)",
+      "description": "Bento mosaic with a staggered entrance.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/bento-grid-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/bento-grid-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/bento-grid.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "faq-accordion",
+      "type": "registry:block",
+      "title": "FAQ accordion",
+      "description": "Base UI Accordion with real buttons inside headings, find-in-page reachable answers, and optional FAQPage structured data.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/faq-accordion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/faq-accordion.tsx"
+        }
+      ],
+      "dependencies": [
+        "@base-ui-components/react@1.0.0-rc.0",
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "faq-accordion-motion",
+      "type": "registry:block",
+      "title": "FAQ accordion (motion)",
+      "description": "FAQ rows revealed as they scroll in. The open/close animation needs no JavaScript.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/faq-accordion-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/faq-accordion-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/faq-accordion.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "cta-band",
+      "type": "registry:block",
+      "title": "CTA band",
+      "description": "The closing call to action, in a muted, card, plain or inverted-primary surface.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/cta-band.tsx",
+          "type": "registry:component",
+          "target": "components/sections/cta-band.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/cta-group.json",
+        "https://facadeui.dev/r/eyebrow.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "cta-band-motion",
+      "type": "registry:block",
+      "title": "CTA band (motion)",
+      "description": "Closing CTA revealed as it scrolls into view.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/cta-band-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/cta-band-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/cta-band.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "footer",
+      "type": "registry:block",
+      "title": "Footer",
+      "description": "Multi-column link groups with individually named navigation landmarks, a brand block, social links and a legal line.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/footer.tsx",
+          "type": "registry:component",
+          "target": "components/sections/footer.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
         "https://facadeui.dev/r/heading.json",
         "https://facadeui.dev/r/types.json",
         "https://facadeui.dev/r/utils.json"

@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
 
+import type { Route } from "next"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 
@@ -52,6 +54,12 @@ export default async function ComponentPage({
 
   const propsDocs = getPropsDocs(name)
 
+  // Sections come in pairs. Surfacing the other half here saves a hunt through
+  // the sidebar, and makes the static-first design visible rather than implied.
+  const isMotion = name.endsWith("-motion")
+  const counterpart = isMotion ? name.replace(/-motion$/, "") : `${name}-motion`
+  const counterpartItem = getRegistryItem(counterpart)
+
   return (
     <article className="flex max-w-3xl flex-col gap-12 pb-20">
       <header className="flex flex-col gap-4">
@@ -70,6 +78,21 @@ export default async function ComponentPage({
         </h1>
         {item.description ? (
           <p className="text-muted-foreground text-pretty text-lg">{item.description}</p>
+        ) : null}
+
+        {counterpartItem ? (
+          <p className="text-muted-foreground text-sm">
+            {isMotion ? "Wraps the static " : "Also ships a motion variant: "}
+            <Link
+              href={`/components/${counterpart}` as Route}
+              className="text-foreground underline underline-offset-4"
+            >
+              {counterpartItem.title ?? counterpart}
+            </Link>
+            {isMotion
+              ? ", which renders identically with JavaScript disabled."
+              : ". The static one is the default."}
+          </p>
         ) : null}
       </header>
 

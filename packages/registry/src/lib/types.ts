@@ -64,6 +64,15 @@ export type LinkComponent = ElementType<FacadeLinkProps>
  * Any icon component. Structural rather than nominal, so `lucide-react`,
  * `@heroicons/react`, a local SVG component, or anything else that accepts
  * SVG props can be passed without the registry depending on that library.
+ *
+ * One React Server Components caveat, which bites in exactly one place: an icon
+ * component cannot be passed as a prop *across* a server-to-client boundary.
+ * Most icon libraries, `lucide-react` included, do not mark their modules
+ * `"use client"`, so the reference is a plain function that React refuses to
+ * serialise. Static sections are server components and render icons in the same
+ * tree, so they are unaffected. A `-motion` variant *is* a client component, so
+ * whatever renders it must be a client component too. Adding `"use client"` to
+ * the file that passes the icons is the whole fix.
  */
 export type IconComponent = ElementType<{
   className?: string
@@ -97,6 +106,22 @@ export interface ListSlotProps {
   listAs?: ElementType
   /** Wraps each item. Defaults to `"li"`. */
   itemAs?: ElementType
+}
+
+/**
+ * The stack equivalent of `ListSlotProps`, for sections whose content is a
+ * sequence of blocks rather than a list — heroes and CTA bands.
+ *
+ * Defaults to plain `div`s, so the static section is a single flex column with
+ * no wrappers of consequence. The `-motion` variant passes `Stagger` and
+ * `StaggerItem`, which is how the eyebrow, headline, copy and buttons arrive in
+ * sequence without the static file importing anything from `motion`.
+ */
+export interface StackSlotProps {
+  /** Wraps the content stack. Defaults to `"div"`. */
+  stackAs?: ElementType
+  /** Wraps each block in the stack. Defaults to `"div"`. */
+  blockAs?: ElementType
 }
 
 /** Props shared by every section: outline control plus a styling hook. */

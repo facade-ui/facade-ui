@@ -1,0 +1,59 @@
+# Contributing
+
+## Setup
+
+```bash
+pnpm install
+pnpm dev          # docs site on :3000
+```
+
+## Adding a registry item
+
+1. Write the component under `packages/registry/src/` — `ui/` for an atom,
+   `sections/` for a section, `motion/` for a primitive.
+2. Give it a JSDoc header with purpose, a11y notes, and a `Dependencies:` line.
+   The validator enforces all three.
+3. Add it to `packages/registry/registry.json` with `files` and an install
+   `target`. **Do not write `dependencies` or `registryDependencies`** — they
+   are derived from the real import graph by the build and written back in.
+4. Add a demo at `apps/docs/demos/<name>.tsx` exporting `Demo`, and register it
+   in `apps/docs/demos/index.ts`. That one entry gives the item a docs preview,
+   an axe scan in six theme scopes, and visual snapshots.
+5. Run the gate below.
+
+## The gate
+
+```bash
+pnpm lint && pnpm typecheck && pnpm test
+pnpm contrast
+pnpm registry:build && pnpm registry:validate
+pnpm --filter @facade-ui/docs build
+pnpm e2e:a11y
+pnpm e2e:update        # only if the visual change is intended
+```
+
+## Conventions the validator enforces
+
+- Named exports only. No default exports outside the docs app.
+- No `next/*` imports anywhere in the registry.
+- Kebab-case, unprefixed item names — the registry URL already namespaces them.
+- Every file has an install target, and no source file is left unshipped.
+
+## Conventions it cannot enforce
+
+- **Sections take typed data plus slots**, not forty props. If a section is
+  growing a prop per visual detail, it wants composition instead.
+- **`headingLevel` is always a prop**, and visual size is always separate.
+- **Animate `opacity` and `transform` only.** `Collapse` is the one exception,
+  and it is user-initiated.
+- **A `<section>` needs an accessible name.** Render a `div` instead of adding a
+  nameless landmark.
+- **Reading order must match visual order.** Alternating layouts use
+  `lg:order-*`, never a reordered DOM.
+
+## Visual snapshots
+
+Baselines are namespaced by platform under `e2e/__screenshots__/<platform>/`,
+because macOS and the Linux CI container rasterise text differently. Update the
+ones for your own platform with `pnpm e2e:update`; Linux baselines come from the
+CI artifact.
