@@ -1,6 +1,6 @@
 /**
- * The site header: wordmark, primary links, theme controls, and — below `lg` —
- * the trigger for the navigation drawer.
+ * The site header: brand mark and wordmark, primary links, theme controls, and
+ * — below `lg` — the trigger for the navigation drawer.
  *
  * a11y: a `<header>` landmark containing a named `<nav>`, and a skip link that
  * is the first focusable element on the page so keyboard users can jump past the
@@ -12,6 +12,7 @@ import Link from "next/link"
 import type { NavGroup } from "@/lib/registry"
 import { buttonVariants } from "@registry/ui/button"
 import { Container } from "@registry/ui/container"
+import { FacadeMark } from "./facade-mark"
 import { SiteNavMobile } from "./site-nav"
 import { ThemeSwitcher } from "./theme-switcher"
 
@@ -33,8 +34,9 @@ export function SiteHeader({ groups }: SiteHeaderProps) {
 
         <Link
           href="/"
-          className="focus-visible:ring-ring rounded-md text-base font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2"
+          className="focus-visible:ring-ring flex items-center gap-2 rounded-md text-base font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2"
         >
+          <FacadeMark className="size-5 shrink-0" />
           Facade&nbsp;UI
         </Link>
 
