@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "pnpm --filter @facade-ui/docs registry && next build",
+    "build": "pnpm run registry && next build",
     "start": "next start",
-    "registry": "tsx ../../scripts/build-registry.ts",
+    "registry": "tsx ../../scripts/build-registry.ts && tsx ../../scripts/extract-props.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests"

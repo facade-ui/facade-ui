@@ -25,6 +25,15 @@ export const react19 = [
       ...jsxA11y.flatConfigs.strict.rules,
       "react/prop-types": "off",
       "react/jsx-curly-brace-presence": ["error", { props: "never", children: "never" }],
+      /**
+       * A scroll container must be keyboard-focusable or its content is
+       * unreachable without a mouse (WCAG 2.1.1). `role="region"` plus
+       * `tabIndex={0}` is the standard fix, so allow it alongside tabpanel.
+       */
+      "jsx-a11y/no-noninteractive-tabindex": [
+        "error",
+        { tags: [], roles: ["tabpanel", "region"], allowExpressionValues: true },
+      ],
       "react/self-closing-comp": "error",
     },
   },
