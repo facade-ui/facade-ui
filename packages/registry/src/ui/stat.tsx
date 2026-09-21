@@ -7,7 +7,13 @@
  * right trade: the value is meaningless to a screen reader without its label
  * arriving first.
  *
- * Must be rendered inside a `<dl>` — `StatsGrid` does that for you.
+ * Must be rendered inside a `<dl>` — the `Stats` section does that for you.
+ *
+ * `as` exists because of a constraint a `<dl>` actually enforces: it may contain
+ * `dt`/`dd` pairs wrapped in at most **one** level of `div`. Wrapping `Stat` in
+ * another element to style or animate it puts the pair two levels deep, which
+ * is invalid and which axe flags as `definition-list` plus `dlitem`. So the
+ * caller replaces this wrapper instead of adding one around it.
  *
  * a11y: `value` should include its own unit ("99.9%", "$2.4M"). Pass `srValue`
  * when the display form is an abbreviation a screen reader would mangle.
@@ -15,7 +21,7 @@
  * Dependencies: react, @/lib/utils.
  */
 
-import type { ReactNode } from "react"
+import type { ElementType, ReactNode } from "react"
 
 import { cn } from "@registry/lib/utils"
 
@@ -30,6 +36,8 @@ export interface StatItem {
 }
 
 export interface StatProps extends StatItem {
+  /** The group wrapper. Defaults to `"div"`, the only element a `<dl>` allows. */
+  as?: ElementType
   size?: "sm" | "md" | "lg"
   align?: "start" | "center"
   className?: string
@@ -47,13 +55,16 @@ export function Stat({
   label,
   description,
   srValue,
+  as,
   size = "md",
   align = "start",
   className,
   children,
 }: StatProps) {
+  const Root = (as ?? "div") as ElementType
+
   return (
-    <div
+    <Root
       className={cn(
         "flex flex-col-reverse gap-2",
         align === "center" && "items-center text-center",
@@ -81,6 +92,6 @@ export function Stat({
         )}
         {children}
       </dd>
-    </div>
+    </Root>
   )
 }

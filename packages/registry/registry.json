@@ -395,6 +395,28 @@
       ]
     },
     {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A text field on Base UI's Field, so label, description and error are wired to the control. The border clears 3:1.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        }
+      ],
+      "dependencies": [
+        "@base-ui-components/react@1.0.0-rc.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
       "name": "nav-top",
       "type": "registry:block",
       "title": "Top navigation",
@@ -896,6 +918,426 @@
       ],
       "registryDependencies": [
         "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "stats",
+      "type": "registry:block",
+      "title": "Stats",
+      "description": "A row of headline figures as a description list, with a spoken form for abbreviated values.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/stats.tsx",
+          "type": "registry:component",
+          "target": "components/sections/stats.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/stat.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "stats-motion",
+      "type": "registry:block",
+      "title": "Stats (motion)",
+      "description": "Figures revealed in sequence as they scroll in.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/stats-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/stats-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/motion-primitives.json",
+        "https://facadeui.dev/r/stats.json"
+      ]
+    },
+    {
+      "name": "testimonials-grid",
+      "type": "registry:block",
+      "title": "Testimonials grid",
+      "description": "A wall of customer quotes, optionally in masonry columns that still read in document order.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/testimonials-grid.tsx",
+          "type": "registry:component",
+          "target": "components/sections/testimonials-grid.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/testimonial.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "testimonials-grid-motion",
+      "type": "registry:block",
+      "title": "Testimonials grid (motion)",
+      "description": "Quotes arrive one after another as the wall scrolls in.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/testimonials-grid-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/testimonials-grid-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/motion-primitives.json",
+        "https://facadeui.dev/r/testimonials-grid.json"
+      ]
+    },
+    {
+      "name": "testimonial-single",
+      "type": "registry:block",
+      "title": "Testimonial — single",
+      "description": "One quote given the whole band, optionally beside a portrait or over a tinted surface.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/testimonial-single.tsx",
+          "type": "registry:component",
+          "target": "components/sections/testimonial-single.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/testimonial.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "pricing-tiers",
+      "type": "registry:block",
+      "title": "Pricing tiers",
+      "description": "The plan comparison as a row of cards, each with an accessible price and an honest not-included state.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/pricing-tiers.tsx",
+          "type": "registry:component",
+          "target": "components/sections/pricing-tiers.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/pricing-tier.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "pricing-tiers-motion",
+      "type": "registry:block",
+      "title": "Pricing tiers (motion)",
+      "description": "Plans arrive in sequence as the section scrolls in.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/pricing-tiers-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/pricing-tiers-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/motion-primitives.json",
+        "https://facadeui.dev/r/pricing-tiers.json"
+      ]
+    },
+    {
+      "name": "pricing-comparison",
+      "type": "registry:block",
+      "title": "Pricing comparison",
+      "description": "The full feature matrix as a real table: row and column headers, colgroup scopes, and no meaning carried by a tick alone.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/pricing-comparison.tsx",
+          "type": "registry:component",
+          "target": "components/sections/pricing-comparison.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/badge.json",
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "card-list",
+      "type": "registry:block",
+      "title": "Card list",
+      "description": "A grid of linked cards for posts, changelog entries or case studies, with machine-readable dates.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/card-list.tsx",
+          "type": "registry:component",
+          "target": "components/sections/card-list.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/badge.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "card-list-motion",
+      "type": "registry:block",
+      "title": "Card list (motion)",
+      "description": "Cards arrive in sequence as the grid scrolls in.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/card-list-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/card-list-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/card-list.json",
+        "https://facadeui.dev/r/motion-primitives.json"
+      ]
+    },
+    {
+      "name": "feature-tabs",
+      "type": "registry:block",
+      "title": "Feature tabs",
+      "description": "Features behind a Base UI tab strip, activated on Enter rather than on arrow-key focus.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/feature-tabs.tsx",
+          "type": "registry:component",
+          "target": "components/sections/feature-tabs.tsx"
+        }
+      ],
+      "dependencies": [
+        "@base-ui-components/react@1.0.0-rc.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "steps",
+      "type": "registry:block",
+      "title": "Steps",
+      "description": "A numbered sequence as an ordered list, so the order is carried by the markup rather than by the numerals.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/steps.tsx",
+          "type": "registry:component",
+          "target": "components/sections/steps.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/feature-icon.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "steps-motion",
+      "type": "registry:block",
+      "title": "Steps (motion)",
+      "description": "Steps arrive in order, the one place a stagger carries meaning.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/steps-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/steps-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/motion-primitives.json",
+        "https://facadeui.dev/r/steps.json"
+      ]
+    },
+    {
+      "name": "team",
+      "type": "registry:block",
+      "title": "Team",
+      "description": "The people behind the product, with social links named per person rather than per network.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/team.tsx",
+          "type": "registry:component",
+          "target": "components/sections/team.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "team-motion",
+      "type": "registry:block",
+      "title": "Team (motion)",
+      "description": "People arrive one after another as the grid scrolls in.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/sections/team-motion.tsx",
+          "type": "registry:component",
+          "target": "components/sections/team-motion.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/motion-primitives.json",
+        "https://facadeui.dev/r/team.json"
+      ]
+    },
+    {
+      "name": "newsletter",
+      "type": "registry:block",
+      "title": "Newsletter",
+      "description": "An email capture band that reports its own outcome through a live region that is present from first render.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/newsletter.tsx",
+          "type": "registry:component",
+          "target": "components/sections/newsletter.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/input.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "banner",
+      "type": "registry:block",
+      "title": "Banner",
+      "description": "A dismissible announcement bar. A named landmark, and deliberately not a live region unless you ask.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/banner.tsx",
+          "type": "registry:component",
+          "target": "components/sections/banner.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "nav-side",
+      "type": "registry:block",
+      "title": "Side navigation",
+      "description": "Docs-style side nav with collapsible groups, one named landmark, and a drawer below lg.",
+      "categories": [
+        "section"
+      ],
+      "files": [
+        {
+          "path": "src/sections/nav-side.tsx",
+          "type": "registry:component",
+          "target": "components/sections/nav-side.tsx"
+        }
+      ],
+      "dependencies": [
+        "@base-ui-components/react@1.0.0-rc.0",
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/button.json",
         "https://facadeui.dev/r/heading.json",
         "https://facadeui.dev/r/types.json",
         "https://facadeui.dev/r/utils.json"

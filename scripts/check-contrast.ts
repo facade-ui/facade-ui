@@ -81,10 +81,14 @@ const PAIRS: [string, string, number, string][] = [
   ["--primary", "--background", 3, "primary as a surface/icon"],
   ["--ring", "--background", 3, "focus ring"],
   ["--ring", "--card", 3, "focus ring on cards"],
+  // A form field's border is the only thing identifying it as a field, so it is
+  // a UI component boundary under WCAG 1.4.11 rather than decoration.
+  ["--input", "--background", 3, "form field border"],
+  ["--input", "--card", 3, "form field border on cards"],
 ]
 
 /** Reported but not enforced: hairline dividers are decorative, not UI boundaries. */
-const INFORMATIONAL = new Set(["--border", "--input"])
+const INFORMATIONAL = new Set(["--border"])
 
 let failures = 0
 const rows: string[] = []

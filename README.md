@@ -45,9 +45,12 @@ The target is WCAG 2.2 AA, and the point is that it is _checked_:
 - `pnpm contrast` resolves all six theme scopes (light/dark x three presets)
   from the real CSS and fails if a text pair drops below 4.5:1 or the focus ring
   below 3:1. It has already caught two real regressions.
-- `pnpm e2e:a11y` runs axe-core over all 36 previews in all six scopes — 216
-  checks. It found and forced a fix to `LogoMark`'s resting opacity, and an
-  invalid `aria-orientation` Base UI puts on a `<ul>`.
+- `pnpm e2e:a11y` runs axe-core over all 54 previews in all six scopes, plus the
+  docs site itself — 337 checks. It has already caught five real defects:
+  `LogoMark`'s resting opacity dimming text below 4.5:1, an invalid
+  `aria-orientation` Base UI puts on a `<ul>`, a `<dl>` with its `dt`/`dd` pairs
+  nested two `div`s deep, a `<div>` where an `<li>` belongs inside an `<ol>`,
+  and syntax-highlighting themes whose comment colour failed AA.
 - `eslint-plugin-jsx-a11y` runs in **strict** mode across the whole registry.
 - Unit tests pin reading order, accessible names, heading levels, focus return
   and Escape handling.
@@ -88,10 +91,10 @@ through the real shadcn CLI, and typechecks the result.
 
 ## Status
 
-Phases 0 and 1 of the plan are complete: foundations, tooling, CI, tokens,
-motion, 13 atoms, and the 12 core sections with motion variants. Phase 2
-(breadth) and Phase 3 (templates, theme customiser) are not built yet —
-see [ROADMAP.md](./ROADMAP.md).
+Phases 0, 1 and 2 are complete: foundations, tooling, CI, tokens, motion,
+14 atoms, and 24 sections with motion variants — 59 registry items in all.
+Phase 3 (templates, theme customiser) is not built yet. See
+[ROADMAP.md](./ROADMAP.md).
 
 ## Licence
 

@@ -38,7 +38,13 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  /*
+   * `--input` is the border of a form control, not a divider, so it has to
+   * clear 3:1 against the background on its own (WCAG 1.4.11). That is a good
+   * deal darker than `--border`, and deliberately so — a hairline is decorative,
+   * the edge of a text field is the only thing identifying it as one.
+   */
+  --input: oklch(0.78 0 0);
   --ring: oklch(0.45 0 0);
 
   /* ---------------------------------------------------------------- facade */
@@ -93,7 +99,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.145 0 0);
   --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 18%);
+  --input: oklch(0.74 0 0);
   --ring: oklch(0.78 0 0);
 }
 
