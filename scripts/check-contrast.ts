@@ -56,9 +56,15 @@ const scopes: { label: string; tokens: Tokens }[] = [
   { label: "neutral · light", tokens: neutralLight },
   { label: "neutral · dark", tokens: { ...neutralLight, ...neutralDark } },
   { label: "warm · light", tokens: { ...neutralLight, ...preset("warm", false) } },
-  { label: "warm · dark", tokens: { ...neutralLight, ...neutralDark, ...preset("warm", true) } },
+  {
+    label: "warm · dark",
+    tokens: { ...neutralLight, ...neutralDark, ...preset("warm", true) },
+  },
   { label: "vivid · light", tokens: { ...neutralLight, ...preset("vivid", false) } },
-  { label: "vivid · dark", tokens: { ...neutralLight, ...neutralDark, ...preset("vivid", true) } },
+  {
+    label: "vivid · dark",
+    tokens: { ...neutralLight, ...neutralDark, ...preset("vivid", true) },
+  },
 ]
 
 /** `[foreground, background, minimum ratio, what it is]` */
@@ -92,7 +98,15 @@ for (const { label, tokens } of scopes) {
 
   const checks: [string, string, number, string][] = [
     ...PAIRS,
-    ...[...INFORMATIONAL].map((n) => [n, "--background", 3, "hairline (informational)"] as [string, string, number, string]),
+    ...[...INFORMATIONAL].map(
+      (n) =>
+        [n, "--background", 3, "hairline (informational)"] as [
+          string,
+          string,
+          number,
+          string,
+        ],
+    ),
   ]
 
   for (const [fgName, bgName, min, what] of checks) {

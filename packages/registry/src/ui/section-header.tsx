@@ -15,10 +15,10 @@
 
 import type { ReactNode } from "react"
 
-import type { HeadingLevel } from "@/lib/types"
-import { cn, slugId } from "@/lib/utils"
-import { Eyebrow } from "./eyebrow"
-import { Heading } from "./heading"
+import type { HeadingLevel } from "@registry/lib/types"
+import { cn, slugId } from "@registry/lib/utils"
+import { Eyebrow } from "@registry/ui/eyebrow"
+import { Heading } from "@registry/ui/heading"
 
 export interface SectionHeaderProps {
   title: ReactNode
@@ -84,7 +84,12 @@ export function SectionHeader({
         className,
       )}
     >
-      <div className={cn("flex max-w-2xl flex-col gap-4", align === "center" && "items-center")}>
+      <div
+        className={cn(
+          "flex max-w-2xl flex-col gap-4",
+          align === "center" && "items-center",
+        )}
+      >
         {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
         <Heading level={headingLevel} id={resolvedId} className={cn(headingSizes[size])}>
           {title}

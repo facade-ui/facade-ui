@@ -15,14 +15,17 @@ export interface Rgb {
 
 /** Parses `oklch(L C H)` or `oklch(L C H / A%)`. L accepts `0.5` or `50%`. */
 export function parseOklch(input: string): Rgb | null {
-  const match = /^oklch\(\s*([^\s]+)\s+([^\s]+)\s+([^\s/]+)\s*(?:\/\s*([^\s)]+)\s*)?\)$/i.exec(
-    input.trim(),
-  )
+  const match =
+    /^oklch\(\s*([^\s]+)\s+([^\s]+)\s+([^\s/]+)\s*(?:\/\s*([^\s)]+)\s*)?\)$/i.exec(
+      input.trim(),
+    )
   if (!match) return null
 
   const num = (raw: string | undefined, scaleIfPercent: number): number => {
     if (raw === undefined) return Number.NaN
-    return raw.endsWith("%") ? (Number.parseFloat(raw) / 100) * scaleIfPercent : Number.parseFloat(raw)
+    return raw.endsWith("%")
+      ? (Number.parseFloat(raw) / 100) * scaleIfPercent
+      : Number.parseFloat(raw)
   }
 
   const L = num(match[1], 1)
@@ -32,7 +35,14 @@ export function parseOklch(input: string): Rgb | null {
   const a = alphaRaw === undefined ? 1 : num(alphaRaw, 1)
   if ([L, C, H, a].some(Number.isNaN)) return null
 
-  return { ...oklabToSrgb(L, C * Math.cos((H * Math.PI) / 180), C * Math.sin((H * Math.PI) / 180)), a }
+  return {
+    ...oklabToSrgb(
+      L,
+      C * Math.cos((H * Math.PI) / 180),
+      C * Math.sin((H * Math.PI) / 180),
+    ),
+    a,
+  }
 }
 
 function oklabToSrgb(L: number, a: number, b: number): Omit<Rgb, "a"> {
@@ -65,7 +75,8 @@ export function flatten(fg: Rgb, bg: Rgb): Rgb {
 }
 
 function relativeLuminance({ r, g, b }: Rgb): number {
-  const lin = (c: number): number => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)
+  const lin = (c: number): number =>
+    c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
   return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
 }
 

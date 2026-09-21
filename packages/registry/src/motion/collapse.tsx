@@ -20,8 +20,8 @@
 import { AnimatePresence, motion } from "motion/react"
 import type { ReactNode } from "react"
 
-import { facadeDuration, facadeEase } from "@/lib/motion"
-import { cn } from "@/lib/utils"
+import { facadeDuration, facadeEase } from "@registry/lib/motion"
+import { cn } from "@registry/lib/utils"
 
 export interface CollapseProps {
   open: boolean

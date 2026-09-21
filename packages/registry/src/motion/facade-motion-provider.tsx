@@ -17,7 +17,7 @@
 import { MotionConfig } from "motion/react"
 import type { ReactNode } from "react"
 
-import { facadeDuration, facadeEase } from "@/lib/motion"
+import { facadeDuration, facadeEase } from "@registry/lib/motion"
 
 export interface FacadeMotionProviderProps {
   children: ReactNode

@@ -18,9 +18,9 @@
 
 import type { ElementType } from "react"
 
-import type { CtaItem, LinkComponent } from "@/lib/types"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "./button"
+import type { CtaItem, LinkComponent } from "@registry/lib/types"
+import { cn } from "@registry/lib/utils"
+import { buttonVariants } from "@registry/ui/button"
 
 export interface CtaGroupProps {
   items: CtaItem[]
@@ -73,7 +73,9 @@ export function CtaGroup({
             )}
           >
             {item.label}
-            {item.external ? <span className="sr-only"> (opens in a new tab)</span> : null}
+            {item.external ? (
+              <span className="sr-only"> (opens in a new tab)</span>
+            ) : null}
           </Link>
         )
       })}

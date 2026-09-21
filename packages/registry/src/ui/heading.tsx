@@ -17,7 +17,7 @@
 
 import type { ComponentPropsWithoutRef } from "react"
 
-import type { HeadingLevel } from "@/lib/types"
+import type { HeadingLevel } from "@registry/lib/types"
 
 export interface HeadingProps extends ComponentPropsWithoutRef<"h2"> {
   /** 1–6. Reflects the document outline, never the visual size. */

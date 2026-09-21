@@ -27,9 +27,9 @@ import {
   fadeVariants,
   staggerVariants,
   type FadeDirection,
-} from "@/lib/motion"
-import { cn } from "@/lib/utils"
-import type { MotionTag } from "./fade-in"
+} from "@registry/lib/motion"
+import { cn } from "@registry/lib/utils"
+import type { MotionTag } from "@registry/motion/fade-in"
 
 export interface StaggerProps {
   children: ReactNode
@@ -96,7 +96,10 @@ export function StaggerItem({
   const Component = motion[as]
 
   return (
-    <Component className={cn(className)} variants={fadeVariants(direction, distance, duration)}>
+    <Component
+      className={cn(className)}
+      variants={fadeVariants(direction, distance, duration)}
+    >
       {children}
     </Component>
   )

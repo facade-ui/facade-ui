@@ -16,8 +16,8 @@
 import { motion } from "motion/react"
 import type { ReactNode } from "react"
 
-import { facadeDuration, fadeVariants, type FadeDirection } from "@/lib/motion"
-import { cn } from "@/lib/utils"
+import { facadeDuration, fadeVariants, type FadeDirection } from "@registry/lib/motion"
+import { cn } from "@registry/lib/utils"
 
 /** Tags `FadeIn`, `Reveal` and `Stagger` can render as. */
 export type MotionTag =

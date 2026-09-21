@@ -1,0 +1,393 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "facade-ui",
+  "homepage": "https://facadeui.dev",
+  "items": [
+    {
+      "name": "tokens",
+      "type": "registry:file",
+      "title": "Design tokens",
+      "description": "The Facade token layer: shadcn-compatible colour names plus --facade-* display type, section rhythm and motion tokens. Import it from your globals.css.",
+      "categories": [
+        "theme"
+      ],
+      "files": [
+        {
+          "path": "src/tokens/globals.css",
+          "type": "registry:file",
+          "target": "styles/facade-tokens.css"
+        }
+      ]
+    },
+    {
+      "name": "themes",
+      "type": "registry:file",
+      "title": "Theme presets",
+      "description": "Warm and vivid presets applied with data-facade-theme. Neutral is the default and lives in the tokens file.",
+      "categories": [
+        "theme"
+      ],
+      "files": [
+        {
+          "path": "src/tokens/themes.css",
+          "type": "registry:file",
+          "target": "styles/facade-themes.css"
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "cn",
+      "description": "Class merging helper: clsx plus tailwind-merge. Identical to shadcn/ui's, so it overwrites nothing meaningful.",
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        }
+      ],
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.7.0"
+      ]
+    },
+    {
+      "name": "types",
+      "type": "registry:lib",
+      "title": "Section contracts",
+      "description": "Shared types every Facade section speaks: heading levels, pluggable image/link components, CTA items.",
+      "files": [
+        {
+          "path": "src/lib/types.ts",
+          "type": "registry:lib",
+          "target": "lib/types.ts"
+        }
+      ]
+    },
+    {
+      "name": "motion-primitives",
+      "type": "registry:component",
+      "title": "Motion primitives",
+      "description": "FacadeMotionProvider, FadeIn, Reveal, Stagger and Collapse. Opacity and transform only, with reduced motion honoured.",
+      "categories": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "src/lib/motion.ts",
+          "type": "registry:lib",
+          "target": "lib/motion.ts"
+        },
+        {
+          "path": "src/motion/facade-motion-provider.tsx",
+          "type": "registry:component",
+          "target": "components/motion/facade-motion-provider.tsx"
+        },
+        {
+          "path": "src/motion/fade-in.tsx",
+          "type": "registry:component",
+          "target": "components/motion/fade-in.tsx"
+        },
+        {
+          "path": "src/motion/reveal.tsx",
+          "type": "registry:component",
+          "target": "components/motion/reveal.tsx"
+        },
+        {
+          "path": "src/motion/stagger.tsx",
+          "type": "registry:component",
+          "target": "components/motion/stagger.tsx"
+        },
+        {
+          "path": "src/motion/collapse.tsx",
+          "type": "registry:component",
+          "target": "components/motion/collapse.tsx"
+        }
+      ],
+      "dependencies": [
+        "motion@^13.4.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Base UI Button with Facade variants. Every size clears the 44x44 target minimum.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        }
+      ],
+      "dependencies": [
+        "@base-ui-components/react@1.0.0-rc.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Small inline label for status or category, with an optional screen-reader prefix.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "heading",
+      "type": "registry:ui",
+      "title": "Heading",
+      "description": "Renders h1-h6 from a numeric level so visual size and outline level stay independent.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/heading.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/heading.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/types.json"
+      ]
+    },
+    {
+      "name": "eyebrow",
+      "type": "registry:ui",
+      "title": "Eyebrow",
+      "description": "The small label above a section heading. A paragraph, never a heading.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/eyebrow.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/eyebrow.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "container",
+      "type": "registry:ui",
+      "title": "Container",
+      "description": "The horizontal measure every section sits inside, driven by the container tokens.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/container.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/container.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "section",
+      "type": "registry:ui",
+      "title": "Section",
+      "description": "The outer band: landmark element, vertical rhythm token, and the aria-labelledby wiring.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/section.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/section.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "section-header",
+      "type": "registry:ui",
+      "title": "Section header",
+      "description": "Eyebrow, heading and supporting copy, with the heading id every section needs for aria-labelledby.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/section-header.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/section-header.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/eyebrow.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "cta-group",
+      "type": "registry:ui",
+      "title": "CTA group",
+      "description": "A row of calls to action rendered as links, so middle-click and open-in-new-tab keep working.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/cta-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/cta-group.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "stat",
+      "type": "registry:ui",
+      "title": "Stat",
+      "description": "One figure and its label as a description-list group, with a spoken form for abbreviated values.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/stat.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stat.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "logo-mark",
+      "type": "registry:ui",
+      "title": "Logo mark",
+      "description": "One customer logo, optically sized and optionally linked, with the company name exposed as text.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/logo-mark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/logo-mark.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "feature-icon",
+      "type": "registry:ui",
+      "title": "Feature icon",
+      "description": "The tinted container an icon sits in. Takes an icon component and hides it from assistive tech.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/feature-icon.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/feature-icon.tsx"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "testimonial",
+      "type": "registry:ui",
+      "title": "Testimonial",
+      "description": "A quotation with its attribution as blockquote plus figcaption, and an accessible star rating.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/testimonial.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/testimonial.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
+      "name": "pricing-tier",
+      "type": "registry:ui",
+      "title": "Pricing tier",
+      "description": "One plan card with an accessible price, an honest not-included state, and a recommended flag.",
+      "categories": [
+        "atom"
+      ],
+      "files": [
+        {
+          "path": "src/ui/pricing-tier.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pricing-tier.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react@^1.47.0"
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/badge.json",
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    }
+  ]
+}

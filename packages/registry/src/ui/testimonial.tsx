@@ -14,8 +14,8 @@
 import { StarIcon } from "lucide-react"
 import type { ElementType, ReactNode } from "react"
 
-import type { ImageComponent } from "@/lib/types"
-import { cn } from "@/lib/utils"
+import type { ImageComponent } from "@registry/lib/types"
+import { cn } from "@registry/lib/utils"
 
 export interface TestimonialAuthor {
   name: string
@@ -79,7 +79,9 @@ export function Testimonial({
               focusable="false"
               className={cn(
                 "size-4",
-                index < rating ? "fill-current text-foreground" : "text-muted-foreground/40",
+                index < rating
+                  ? "text-foreground fill-current"
+                  : "text-muted-foreground/40",
               )}
             />
           ))}

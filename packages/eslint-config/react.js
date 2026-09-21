@@ -28,6 +28,17 @@ export const react19 = [
       "react/self-closing-comp": "error",
     },
   },
+  {
+    // Tests assert on structure the components guarantee, so a non-null
+    // assertion after a query is a statement of intent rather than a risk. They
+    // also render deliberately incorrect markup to pin upstream behaviour.
+    files: ["**/*.test.{ts,tsx}", "**/vitest.setup.ts"],
+    rules: {
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "jsx-a11y/anchor-has-content": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+    },
+  },
 ]
 
 export default react19
