@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
+import { Analytics } from "@vercel/analytics/next"
 import { themeInitScript } from "@/components/theme-switcher"
 
 export const metadata: Metadata = {
@@ -34,7 +35,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Runs before paint so the page never flashes the wrong theme. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="min-h-dvh antialiased">{children}</body>
+      <body className="min-h-dvh antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
