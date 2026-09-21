@@ -18,10 +18,18 @@
     "registry:validate": "tsx scripts/validate-registry.ts",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "docs:props": "tsx scripts/extract-props.ts",
+    "contrast": "tsx scripts/check-contrast.ts",
+    "e2e": "playwright test",
+    "e2e:a11y": "playwright test e2e/a11y.spec.ts",
+    "e2e:update": "playwright test e2e/visual.spec.ts --update-snapshots",
+    "smoke": "tsx scripts/smoke-install.ts"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@changesets/cli": "^2.29.8",
+    "@playwright/test": "^1.63.0",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
     "prettier": "^3.6.2",

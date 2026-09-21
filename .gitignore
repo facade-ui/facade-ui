@@ -12,3 +12,4 @@ test-results
 playwright-report
 blob-report
 apps/docs/public/r
+e2e/__screenshots__/*/diff
