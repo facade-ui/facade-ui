@@ -125,10 +125,9 @@ test("the customiser panel themes the whole site without covering it", async ({
   const panel = page.getByRole("dialog", { name: "Customise theme" })
   await expect(panel).toBeVisible()
 
-  // Every slider is named for its token and channel, because nineteen controls
-  // called "L" are nineteen controls nobody can tell apart.
-  const lightness = panel.getByRole("slider", { name: "Primary lightness" })
-  await lightness.fill("0.6")
+  // Every field is named for its token and what it edits, because sixty
+  // controls called "L" are sixty controls nobody can tell apart.
+  await panel.getByRole("spinbutton", { name: "Primary lightness" }).fill("0.6")
 
   // The computed value, not the <style> element's text: what is being checked
   // is that the generated rules actually win the cascade.
@@ -158,6 +157,25 @@ test("the customiser panel themes the whole site without covering it", async ({
   await panel.getByRole("button", { name: "Close customiser" }).focus()
   await page.keyboard.press("Tab")
   await expect(panel).toBeVisible()
+
+  // Hex and OKLCH edit the same colour, so a pasted brand hex has to land
+  // exactly — which it only does if the sRGB transfer function is applied on
+  // the way out and the stored value keeps enough precision to come back.
+  const hex = panel.getByRole("textbox", { name: "Primary hex" })
+  await hex.fill("#e7000b")
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        getComputedStyle(document.documentElement).getPropertyValue("--primary").trim(),
+      ),
+    )
+    .toMatch(/^oklch\(0\.5[78]/)
+  // Tab to the next field rather than blurring to nothing: leaving the panel
+  // entirely is what a real user does with a click, and Base UI parks the
+  // panel's tab order while focus is away.
+  await page.keyboard.press("Tab")
+  await expect(hex).toHaveValue("#e7000b")
+  await expect(panel.getByRole("spinbutton", { name: "Primary lightness" })).toBeFocused()
 
   // And the reserved gutter means the page it is theming is never underneath it.
   const main = await page.locator("main#main").boundingBox()
@@ -272,4 +290,31 @@ test("a tampered custom theme is ignored rather than applied", async ({ page }) 
   await expect(page.locator("html")).not.toHaveAttribute("data-facade-theme", "custom")
   expect(await page.locator("#facade-custom-theme").count()).toBe(0)
   await expect(page.locator("body")).toBeVisible()
+})
+
+test("the customiser panel is reachable and scrollable from the keyboard", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto("/components/feature-grid")
+
+  const trigger = page.getByRole("button", { name: "Customise theme" })
+  await trigger.click()
+  const panel = page.getByRole("dialog", { name: "Customise theme" })
+
+  // Base UI takes a non-modal popup out of the tab order while focus is
+  // elsewhere, so the guarantee that matters is that the trigger leads back in.
+  await page
+    .getByRole("navigation", { name: "Documentation" })
+    .getByRole("link", { name: "Installation" })
+    .focus()
+  await trigger.focus()
+  await page.keyboard.press("Tab")
+  await expect(panel.getByRole("button", { name: "Close customiser" })).toBeFocused()
+
+  // And from there every control is a tab stop, which is what makes the
+  // scrolling panel keyboard-operable at all.
+  await page.keyboard.press("Tab")
+  await expect(panel.getByRole("button", { name: "neutral" })).toBeFocused()
 })

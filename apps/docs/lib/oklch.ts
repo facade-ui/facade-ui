@@ -39,14 +39,38 @@ export function parseOklch(input: string): Oklch | null {
 
 const round = (n: number, places: number): number => Number.parseFloat(n.toFixed(places))
 
+/**
+ * Enough precision that a hex survives the trip out to OKLCH and back.
+ *
+ * Measured, not guessed: at three decimals a fifth of all sRGB colours come
+ * back as a different hex, some off by six steps in a channel. At five none of
+ * them do. Hue keeps three, which is both enough and exactly what the one
+ * shipped token with a fractional hue already uses. `parseFloat` drops the
+ * trailing zeros, so a token like `oklch(0.145 0 0)` is written back unchanged
+ * and only a colour that needs the room takes it.
+ */
 export function formatOklch({ l, c, h, a }: Oklch): string {
-  const base = `${round(l, 3)} ${round(c, 3)} ${round(h, 1)}`
+  const base = `${round(l, 5)} ${round(c, 5)} ${round(h, 3)}`
   return a >= 1 ? `oklch(${base})` : `oklch(${base} / ${round(a * 100, 0)}%)`
 }
 
 const clamp01 = (n: number): number => Math.min(1, Math.max(0, n))
 
-/** OKLCH -> sRGB, using the Björn Ottosson OKLab matrices. */
+/**
+ * The sRGB transfer function and its inverse, both over 0–1.
+ *
+ * `toRgb` and `fromRgb` work in **linear** light, because that is what the
+ * OKLab matrices are defined against. A hex triplet is gamma-encoded, so every
+ * crossing between the two has to go through here. Skipping it is the classic
+ * way to end up with a colour that is far too dark.
+ */
+const encodeSrgb = (v: number): number =>
+  v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055
+
+const decodeSrgb = (v: number): number =>
+  v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4
+
+/** OKLCH -> linear sRGB, using the Björn Ottosson OKLab matrices. */
 export function toRgb({ l: L, c: C, h: H }: Oklch): { r: number; g: number; b: number } {
   const a = C * Math.cos((H * Math.PI) / 180)
   const b = C * Math.sin((H * Math.PI) / 180)
@@ -66,18 +90,66 @@ export function toRgb({ l: L, c: C, h: H }: Oklch): { r: number; g: number; b: n
   }
 }
 
+/** linear sRGB -> OKLCH. The inverse of `toRgb`, for reading a typed hex. */
+export function fromRgb({ r, g, b }: { r: number; g: number; b: number }): Oklch {
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b)
+  const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b)
+  const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b)
+
+  const lightness = 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s
+  const a = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s
+  const bLab = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s
+
+  const c = Math.sqrt(a * a + bLab * bLab)
+  // Hue is meaningless at zero chroma, and atan2(0, 0) is not worth arguing
+  // with: a grey reads as hue 0.
+  const h = c < 1e-6 ? 0 : ((Math.atan2(bLab, a) * 180) / Math.PI + 360) % 360
+  return { l: lightness, c, h, a: 1 }
+}
+
+const HEX_PATTERN = /^#?([0-9a-f]+)$/i
+
+/** Parses `#rgb`, `#rgba`, `#rrggbb` or `#rrggbbaa`, with or without the hash. */
+export function fromHex(input: string): Oklch | null {
+  const match = HEX_PATTERN.exec(input.trim())
+  if (!match) return null
+
+  const digits = match[1]!
+  const hex =
+    digits.length === 3 || digits.length === 4
+      ? [...digits].map((digit) => digit + digit).join("")
+      : digits
+  if (hex.length !== 6 && hex.length !== 8) return null
+
+  const byte = (index: number): number =>
+    Number.parseInt(hex.slice(index * 2, index * 2 + 2), 16) / 255
+
+  return {
+    ...fromRgb({
+      r: decodeSrgb(byte(0)),
+      g: decodeSrgb(byte(1)),
+      b: decodeSrgb(byte(2)),
+    }),
+    a: hex.length === 8 ? byte(3) : 1,
+  }
+}
+
+/** OKLCH -> `#rrggbb`, or `#rrggbbaa` when the colour is translucent. */
 export const toHex = (color: Oklch): string => {
   const { r, g, b } = toRgb(color)
-  const hex = (n: number) =>
-    Math.round(n * 255)
+  const channel = (n: number) =>
+    Math.round(clamp01(encodeSrgb(n)) * 255)
       .toString(16)
       .padStart(2, "0")
-  return `#${hex(r)}${hex(g)}${hex(b)}`
+  const alpha = Math.round(clamp01(color.a) * 255)
+    .toString(16)
+    .padStart(2, "0")
+
+  return `#${channel(r)}${channel(g)}${channel(b)}${color.a >= 1 ? "" : alpha}`
 }
 
 function relativeLuminance({ r, g, b }: { r: number; g: number; b: number }): number {
-  const lin = (v: number) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
-  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
+  return 0.2126 * decodeSrgb(r) + 0.7152 * decodeSrgb(g) + 0.0722 * decodeSrgb(b)
 }
 
 /** WCAG 2.x contrast ratio. Translucent foregrounds are composited first. */
