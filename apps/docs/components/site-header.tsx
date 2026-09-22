@@ -1,6 +1,7 @@
 /**
- * The site header: brand mark and wordmark, primary links, theme controls, and
- * — below `lg` — the trigger for the navigation drawer.
+ * The site header: brand mark and wordmark, primary links, theme controls, the
+ * trigger for the theme customiser, and — below `lg` — the trigger for the
+ * navigation drawer.
  *
  * a11y: a `<header>` landmark containing a named `<nav>`, and a skip link that
  * is the first focusable element on the page so keyboard users can jump past the
@@ -14,6 +15,7 @@ import { buttonVariants } from "@registry/ui/button"
 import { Container } from "@registry/ui/container"
 import { FacadeMark } from "./facade-mark"
 import { SiteNavMobile } from "./site-nav"
+import { ThemeCustomiserPanel } from "./theme-customiser-panel"
 import { ThemeSwitcher } from "./theme-switcher"
 
 const STATIC_LINKS = [
@@ -54,6 +56,7 @@ export function SiteHeader({ groups }: SiteHeaderProps) {
 
         <div className="ml-auto flex items-center gap-2">
           <ThemeSwitcher />
+          <ThemeCustomiserPanel />
           <a
             href="https://github.com/facade-ui/facade-ui"
             target="_blank"

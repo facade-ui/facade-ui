@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
+import { CustomThemeStyle } from "@/components/custom-theme-style"
 import { themeInitScript } from "@/components/theme-switcher"
 
 export const metadata: Metadata = {
@@ -34,7 +35,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Runs before paint so the page never flashes the wrong theme. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="min-h-dvh antialiased">{children}</body>
+      <body className="min-h-dvh antialiased">
+        {/* Applies the reader's own palette, on every route including the
+            preview iframes. */}
+        <CustomThemeStyle />
+        {children}
+      </body>
     </html>
   )
 }

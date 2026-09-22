@@ -42,3 +42,15 @@
     background-color: var(--shiki-dark-bg);
   }
 }
+
+/* The theme customiser is fixed to the right edge from `lg`. Reserve the space
+   while it is open so the page it is theming never sits underneath it — the
+   whole point of the panel is watching real content recolour. `:has` keeps this
+   declarative; the alternative is toggling a class on <html> from an effect. */
+@layer components {
+  @media (min-width: 64rem) {
+    body:has([data-facade-customiser]) {
+      padding-right: 21rem;
+    }
+  }
+}

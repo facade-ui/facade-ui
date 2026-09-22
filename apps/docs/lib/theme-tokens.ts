@@ -52,21 +52,6 @@ export const CONTRAST_PAIRS: [TokenName, TokenName, number, string][] = [
   ["--input", "--card", 3, "Form field border on cards"],
 ]
 
-/**
- * Tokens that are lightened or darkened together when the user nudges a single
- * "brand" colour, so the accessible pairing survives the change.
- */
-export const LINKED_FOREGROUNDS: Partial<Record<TokenName, TokenName>> = {
-  "--primary": "--primary-foreground",
-  "--secondary": "--secondary-foreground",
-  "--muted": "--muted-foreground",
-  "--accent": "--accent-foreground",
-  "--destructive": "--destructive-foreground",
-  "--card": "--card-foreground",
-  "--popover": "--popover-foreground",
-  "--background": "--foreground",
-}
-
 export interface PaletteCheck {
   fg: TokenName
   bg: TokenName
@@ -92,10 +77,21 @@ export function checkPalette(
   })
 }
 
-/** Emits a `globals.css`-shaped block the user can paste into their project. */
+/**
+ * Emits a `globals.css`-shaped block the user can paste into their project.
+ *
+ * The dark block is scoped the same way `themes.css` scopes a preset: a bare
+ * `.dark { }` would override every other theme's dark palette, not just this
+ * one. `:root` keeps the plain `.dark` pairing, because that *is* the default.
+ */
 export function toCss(light: Palette, dark: Palette, selector = ":root"): string {
   const block = (tokens: Palette) =>
     EDITABLE_TOKENS.map((token) => `  ${token}: ${tokens[token]};`).join("\n")
 
-  return `${selector} {\n${block(light)}\n}\n\n.dark {\n${block(dark)}\n}\n`
+  const darkSelector =
+    selector === ":root"
+      ? ".dark"
+      : `.dark${selector},\n.dark ${selector},\n${selector} .dark`
+
+  return `${selector} {\n${block(light)}\n}\n\n${darkSelector} {\n${block(dark)}\n}\n`
 }

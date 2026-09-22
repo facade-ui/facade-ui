@@ -4,8 +4,9 @@
     {
       "name": "docs",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "@facade-ui/docs", "dev", "--port", "4321"],
-      "port": 4321
+      "runtimeArgs": ["--filter", "@facade-ui/docs", "dev"],
+      "port": 4321,
+      "autoPort": true
     }
   ]
 }
