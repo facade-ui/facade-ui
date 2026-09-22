@@ -11,10 +11,18 @@
  * no extra render pass is scheduled.
  *
  * Same-tab writes do not fire the `storage` event, so writes are broadcast to
- * local subscribers explicitly.
+ * local subscribers explicitly. Cross-tab and cross-iframe writes arrive through
+ * `storage` on their own, which is what keeps the preview iframes in step with
+ * the chrome.
+ *
+ * `useStoredRaw` deliberately returns the **raw string**: `getSnapshot` must
+ * return a stable value, and a primitive is stable for free. Parsing a string
+ * into an object inside `getSnapshot` would either hand React a new reference
+ * every read or need a cache mutated during render. Callers parse with
+ * `useMemo` on the raw value instead.
  */
 
-import { useCallback, useSyncExternalStore } from "react"
+import { useCallback, useMemo, useSyncExternalStore } from "react"
 
 const listeners = new Set<() => void>()
 
@@ -27,34 +35,30 @@ function subscribe(onChange: () => void): () => void {
   }
 }
 
-/** Reads a key, falling back when storage is unavailable or the value is unknown. */
-function read<T extends string>(key: string, allowed: readonly T[], fallback: T): T {
+function readRaw(key: string): string | null {
   try {
-    const stored = localStorage.getItem(key)
-    return stored && (allowed as readonly string[]).includes(stored)
-      ? (stored as T)
-      : fallback
+    return localStorage.getItem(key)
   } catch {
-    // Private mode, or storage disabled by policy. The fallback is correct.
-    return fallback
+    // Private mode, or storage disabled by policy.
+    return null
   }
 }
 
-export function useStoredState<T extends string>(
+/** The stored string for a key, and a setter. `null` clears the key. */
+export function useStoredRaw(
   key: string,
-  allowed: readonly T[],
-  fallback: T,
-): [T, (next: T) => void] {
+): [string | null, (next: string | null) => void] {
   const value = useSyncExternalStore(
     subscribe,
-    () => read(key, allowed, fallback),
-    () => fallback,
+    () => readRaw(key),
+    () => null,
   )
 
   const set = useCallback(
-    (next: T) => {
+    (next: string | null) => {
       try {
-        localStorage.setItem(key, next)
+        if (next === null) localStorage.removeItem(key)
+        else localStorage.setItem(key, next)
       } catch {
         // Still notify, so the UI reflects the choice for this session.
       }
@@ -64,4 +68,30 @@ export function useStoredState<T extends string>(
   )
 
   return [value, set]
+}
+
+/** A stored value constrained to a known set of strings. */
+export function useStoredState<T extends string>(
+  key: string,
+  allowed: readonly T[],
+  fallback: T,
+): [T, (next: T) => void] {
+  const [raw, setRaw] = useStoredRaw(key)
+
+  const value =
+    raw !== null && (allowed as readonly string[]).includes(raw) ? (raw as T) : fallback
+
+  const set = useCallback((next: T) => setRaw(next), [setRaw])
+
+  return [value, set]
+}
+
+/** A stored value parsed by a module-level function. */
+export function useStoredJson<T>(
+  key: string,
+  parse: (raw: string | null) => T,
+): [T, (next: string | null) => void] {
+  const [raw, setRaw] = useStoredRaw(key)
+  const value = useMemo(() => parse(raw), [raw, parse])
+  return [value, setRaw]
 }

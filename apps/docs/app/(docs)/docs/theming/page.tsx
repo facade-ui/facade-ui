@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 import { CodeBlock } from "@/components/code-block"
 import { Prose } from "@/components/prose"
@@ -113,6 +114,13 @@ export default function ThemingPage() {
       <p>
         Override the shadcn-named tokens in one block and every section re-themes. Nothing
         else needs to change.
+      </p>
+      <p>
+        To find the numbers, open the customiser with the palette button in the header and
+        drag: it edits the tokens below in OKLCH and applies them to this whole site as
+        you go, so you are judging a real page rather than a swatch. The{" "}
+        <Link href="/docs/customise">theme customiser</Link> page has the contrast table
+        and the CSS to paste back here.
       </p>
       <CodeBlock
         lang="css"

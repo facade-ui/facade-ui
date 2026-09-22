@@ -46,11 +46,14 @@ decoration.
 - Registry install for whole templates works through the derived dependency
   graph: `shadcn add saas-landing` pulls in sixteen other items without any of
   them being listed by hand.
-- Theme customiser at `/docs/customise`. It edits in OKLCH, because lightness is
-  the axis contrast depends on, and it scores the palette against the _same_
-  pairs and thresholds `scripts/check-contrast.ts` enforces in CI — so a palette
-  that shows all-green is one the build would accept. Presets are read out of
-  the shipped CSS at build time rather than re-declared.
+- Theme customiser, in a panel that opens from the header on any page. It edits
+  in OKLCH, because lightness is the axis contrast depends on, and it scores the
+  palette against the _same_ pairs and thresholds `scripts/check-contrast.ts`
+  enforces in CI — so a palette that shows all-green is one the build would
+  accept. Presets are read out of the shipped CSS at build time rather than
+  re-declared. The palette applies to the whole docs site as a fourth theme
+  preset, previews included, so there is no preview pane to disagree with the
+  real thing; `/docs/customise` keeps the contrast table and the CSS export.
 
 ## Not started
 
