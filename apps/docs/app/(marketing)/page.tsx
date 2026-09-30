@@ -120,6 +120,12 @@ export default function HomePage() {
       <footer className="border-t py-10">
         <Container className="text-muted-foreground flex flex-wrap items-center justify-between gap-4 text-sm">
           <p>MIT licensed. Developed in the open.</p>
+          <Link
+            href="/docs/agents"
+            className="hover:text-foreground focus-visible:ring-ring rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2"
+          >
+            For AI agents
+          </Link>
           <a
             href="/llms.txt"
             className="hover:text-foreground focus-visible:ring-ring rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2"
