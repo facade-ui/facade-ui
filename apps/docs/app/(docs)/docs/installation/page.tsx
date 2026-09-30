@@ -24,6 +24,18 @@ export default function InstallationPage() {
         and you can edit every file.
       </p>
 
+      <h2>Shortest route: the starter</h2>
+      <p>
+        The <a href="https://github.com/facade-ui/starter">starter</a> is a Next.js app
+        with the tokens, a complete landing page and sample content already in place. Skip
+        the steps below if you use it.
+      </p>
+      <CodeBlock
+        lang="bash"
+        filename="terminal"
+        code="npx create-next-app@latest my-site -e https://github.com/facade-ui/starter"
+      />
+
       <h2>1. Set up a project with shadcn</h2>
       <p>
         You need a project where you have run <code>shadcn init</code>. To create a new
