@@ -23,6 +23,8 @@ const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]
 const PAGES = [
   "/",
   "/components",
+  "/templates",
+  "/templates/saas-landing",
   "/docs/installation",
   "/docs/theming",
   "/docs/customise",
