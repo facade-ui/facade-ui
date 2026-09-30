@@ -64,6 +64,9 @@ decoration.
   dark-on-light pairs scored better than they are. The light `--input` borders
   were really 2:1 and are now 3:1. The maths is tested against published WCAG
   ratios.
+- **Customiser basic mode.** Brand colour, neutral and corners generate every
+  token for both modes, always passing contrast. Every token is still editable
+  under Advanced, and the panel floats instead of pushing the page aside.
 
 ## Not started
 

@@ -18,6 +18,7 @@
  */
 
 import { parseOklch } from "./oklch"
+import { parseRecipe, type Recipe } from "./theme-generator"
 import { EDITABLE_TOKENS, toCss, type Palette } from "./theme-tokens"
 import { useStoredJson } from "./use-stored-state"
 
@@ -25,9 +26,28 @@ export const CUSTOM_THEME_STORAGE_KEY = "facade-docs-custom-theme"
 export const CUSTOM_THEME_SELECTOR = '[data-facade-theme="custom"]'
 const STYLE_ELEMENT_ID = "facade-custom-theme"
 
+/** A closed list: the radius is written into a stylesheet from storage. */
+export const RADII = [
+  { value: "0rem", label: "None" },
+  { value: "0.375rem", label: "Small" },
+  { value: "0.625rem", label: "Medium" },
+  { value: "1rem", label: "Large" },
+] as const
+
+export type Radius = (typeof RADII)[number]["value"]
+
+/** What `globals.css` ships as `--radius` (tested). */
+export const DEFAULT_RADIUS: Radius = "0.625rem"
+
+const isRadius = (value: unknown): value is Radius =>
+  RADII.some((radius) => radius.value === value)
+
 export interface CustomTheme {
   light: Palette
   dark: Palette
+  radius?: Radius
+  /** What the palettes were generated from; cleared once a token is hand-edited. */
+  recipe?: Recipe
 }
 
 const isPalette = (value: unknown): value is Palette => {
@@ -39,7 +59,10 @@ const isPalette = (value: unknown): value is Palette => {
   })
 }
 
-/** Parses stored JSON, returning `null` for anything that is not a full palette pair. */
+/**
+ * Parses stored JSON, returning `null` for anything that is not a full palette
+ * pair. A malformed radius or recipe is dropped rather than fatal.
+ */
 export function parseCustomTheme(raw: string | null): CustomTheme | null {
   if (!raw) return null
   let parsed: unknown
@@ -49,14 +72,19 @@ export function parseCustomTheme(raw: string | null): CustomTheme | null {
     return null
   }
   if (typeof parsed !== "object" || parsed === null) return null
-  const { light, dark } = parsed as Record<string, unknown>
+  const { light, dark, radius, recipe } = parsed as Record<string, unknown>
   if (!isPalette(light) || !isPalette(dark)) return null
-  return { light, dark }
+
+  const theme: CustomTheme = { light, dark }
+  if (isRadius(radius)) theme.radius = radius
+  const parsedRecipe = parseRecipe(recipe)
+  if (parsedRecipe) theme.recipe = parsedRecipe
+  return theme
 }
 
 /** The stylesheet for a custom theme, also what the Copy CSS button hands over. */
 export const customThemeCss = (theme: CustomTheme): string =>
-  toCss(theme.light, theme.dark, CUSTOM_THEME_SELECTOR)
+  toCss(theme.light, theme.dark, CUSTOM_THEME_SELECTOR, theme.radius)
 
 /**
  * Upserts the custom theme's stylesheet in `<head>`.

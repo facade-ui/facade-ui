@@ -18,6 +18,7 @@ import { useEffect, useSyncExternalStore } from "react"
 import {
   CUSTOM_THEME_SELECTOR,
   CUSTOM_THEME_STORAGE_KEY,
+  RADII,
   useCustomTheme,
 } from "@/lib/custom-theme"
 import { EDITABLE_TOKENS } from "@/lib/theme-tokens"
@@ -70,8 +71,7 @@ function subscribeToSystem(onChange: () => void): () => void {
 /**
  * Which palette the site is actually showing, with `system` resolved.
  *
- * The customiser edits this one: you should never be dragging sliders for a
- * palette you cannot see.
+ * The customiser's advanced mode edits this one.
  */
 export function useResolvedMode(): "light" | "dark" {
   const [mode] = useStoredState<Mode>(THEME_STORAGE_KEY, MODE_VALUES, "system")
@@ -174,10 +174,9 @@ export function ThemeSwitcher() {
  *
  * For `custom` it is the stand-in for `applyCustomTheme`, writing the same
  * stylesheet from the same stored palette; the React side replaces the
- * element's text once it hydrates. Every value is checked against the shape
- * `parseCustomTheme` accepts, so nothing in storage can become arbitrary CSS,
- * and a palette that fails the check leaves the attribute unset rather than
- * theming the page with half of it.
+ * element's text once it hydrates. Only `oklch(…)` colours and a listed radius
+ * are accepted, so nothing in storage can become arbitrary CSS, and a palette
+ * that fails the check leaves the attribute unset.
  */
 export const themeInitScript = `
 (function () {
@@ -202,6 +201,9 @@ export const themeInitScript = `
       var light = block(theme.light);
       var night = block(theme.dark);
       if (!light || !night) return;
+      if (${JSON.stringify(RADII.map((radius) => radius.value))}.indexOf(theme.radius) !== -1) {
+        light = "--radius:" + theme.radius + ";" + light;
+      }
       var sel = ${JSON.stringify(CUSTOM_THEME_SELECTOR)};
       var style = document.createElement("style");
       style.id = "facade-custom-theme";

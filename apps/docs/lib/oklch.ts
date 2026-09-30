@@ -54,7 +54,7 @@ export function formatOklch({ l, c, h, a }: Oklch): string {
   return a >= 1 ? `oklch(${base})` : `oklch(${base} / ${round(a * 100, 0)}%)`
 }
 
-const clamp01 = (n: number): number => Math.min(1, Math.max(0, n))
+export const clamp01 = (n: number): number => Math.min(1, Math.max(0, n))
 
 /**
  * The sRGB transfer function and its inverse, both over 0–1.
