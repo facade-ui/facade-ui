@@ -72,7 +72,7 @@ for (const file of readdirSync(OUTPUT_DIR).filter((f) => f.endsWith(".json"))) {
     string,
     unknown
   >
-  const validator = file === "index.json" ? validateRegistry : validateItem
+  const validator = file === "registry.json" ? validateRegistry : validateItem
   if (!validator(json)) {
     for (const issue of validator.errors ?? []) {
       fail(`${file}${issue.instancePath} ${issue.message ?? "is invalid"}`)
