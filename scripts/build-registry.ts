@@ -26,12 +26,12 @@
  */
 
 import {
+  existsSync,
   mkdirSync,
   readFileSync,
+  readdirSync,
   rmSync,
   writeFileSync,
-  existsSync,
-  readdirSync,
 } from "node:fs"
 import { resolve } from "node:path"
 
@@ -45,6 +45,7 @@ import {
   REGISTRY_JSON,
   REGISTRY_ROOT,
   REGISTRY_SCHEMA,
+  REPO_ROOT,
   importsOf,
   itemUrl,
   packageNameOf,
@@ -121,12 +122,21 @@ interface Built {
 const built: Built[] = []
 const problems: string[] = []
 
-for (const item of registry.items) {
+/**
+ * Reads an item's files from `root`, rewrites aliases, and derives its
+ * dependencies from the imports. `extraRegistryDeps` covers imports the scan
+ * cannot see, such as a demo's relative `./content`.
+ */
+function buildItem(
+  item: RegistryItem,
+  root: string,
+  extraRegistryDeps: string[] = [],
+): Built {
   const npmDeps = new Set<string>()
-  const registryDeps = new Set<string>()
+  const registryDeps = new Set<string>(extraRegistryDeps)
 
   const files = item.files.map((file) => {
-    const absolute = resolve(REGISTRY_ROOT, file.path)
+    const absolute = resolve(root, file.path)
     if (!existsSync(absolute)) {
       problems.push(`${item.name}: missing source file ${file.path}`)
       return { ...file, content: "" }
@@ -171,13 +181,78 @@ for (const item of registry.items) {
     ...(item.meta ? { meta: item.meta } : {}),
   }
 
-  built.push({ item, json })
-
   // Keep the checked-in source of truth in step with what was derived.
   if (dependencies.length) item.dependencies = dependencies
   else delete item.dependencies
   if (registryDependencies.length) item.registryDependencies = registryDependencies
   else delete item.registryDependencies
+
+  return { item, json }
+}
+
+for (const item of registry.items) built.push(buildItem(item, REGISTRY_ROOT))
+
+// ------------------------------------------------------------- examples
+// One installable item per docs demo, named `<name>-demo`, so the shadcn
+// MCP's example tool has real usage to show. Generated, never written back
+// to registry.json.
+const DEMOS_ROOT = resolve(REPO_ROOT, "apps/docs/demos")
+const CONTENT_ITEM = "examples-content"
+
+const demoNames = readdirSync(DEMOS_ROOT)
+  .filter((file) => file.endsWith(".tsx") && file !== "content.tsx")
+  .map((file) => file.replace(/\.tsx$/, ""))
+  .filter((name) => registry.items.some((item) => item.name === name))
+
+built.push(
+  buildItem(
+    {
+      name: CONTENT_ITEM,
+      type: "registry:component",
+      title: "Example content",
+      description:
+        "Sample content and placeholders shared by the Facade UI examples. Installed with any *-demo item.",
+      categories: ["example"],
+      files: [
+        {
+          path: "content.tsx",
+          type: "registry:component",
+          target: "components/examples/content.tsx",
+        },
+      ],
+      docs: "Sample data for the examples. Replace it with your own content.",
+    },
+    DEMOS_ROOT,
+  ),
+)
+
+for (const name of demoNames) {
+  const source = registry.items.find((item) => item.name === name)!
+  const title = source.title ?? name
+  const usesContent = /from "\.\/content"/.test(
+    readFileSync(resolve(DEMOS_ROOT, `${name}.tsx`), "utf8"),
+  )
+  built.push(
+    buildItem(
+      {
+        name: `${name}-demo`,
+        type: "registry:component",
+        title: `${title} example`,
+        description: `Usage example (demo) for ${title}: the code behind the preview on ${REGISTRY_HOMEPAGE}/components/${name}. Installs the items it uses.`,
+        categories: ["example"],
+        files: [
+          {
+            path: `${name}.tsx`,
+            type: "registry:component",
+            target: `components/examples/${name}-demo.tsx`,
+          },
+        ],
+        docs: `Example only: components/examples/${name}-demo.tsx renders ${title} with sample content from components/examples/content.tsx. Copy what you need into your page. Docs: ${REGISTRY_HOMEPAGE}/components/${name}`,
+      },
+      DEMOS_ROOT,
+      usesContent ? [CONTENT_ITEM] : [],
+    ),
+  )
 }
 
 if (problems.length) {
