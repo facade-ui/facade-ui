@@ -27,6 +27,7 @@ const PAGES = [
   "/docs/theming",
   "/docs/customise",
   "/docs/accessibility",
+  "/docs/agents",
   // One item page, which exercises the props table, code blocks and preview frame.
   "/components/feature-grid",
   // A motion item, which additionally renders the Replay control.
