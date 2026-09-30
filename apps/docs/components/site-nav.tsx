@@ -35,6 +35,7 @@ const GUIDE_LINKS = [
   { href: "/docs/theming", label: "Theming" },
   { href: "/docs/customise", label: "Theme customiser" },
   { href: "/docs/accessibility", label: "Accessibility" },
+  { href: "/docs/agents", label: "For AI agents" },
 ] as const
 
 export interface SiteNavProps {

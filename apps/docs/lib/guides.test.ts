@@ -8,7 +8,7 @@ import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { describe, expect, it } from "vitest"
 
-const GUIDES = ["installation", "theming", "customise", "accessibility"]
+const GUIDES = ["installation", "theming", "customise", "accessibility", "agents"]
 
 const headings = (source: string, pattern: RegExp): string[] =>
   [...source.matchAll(pattern)].map((match) => match[1]!.replace(/&apos;/g, "'").trim())

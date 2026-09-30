@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next"
 import { getRegistryItems } from "@/lib/registry"
 import { REGISTRY_URL } from "@/lib/registry-shared"
 
-const GUIDES = ["installation", "theming", "customise", "accessibility"]
+const GUIDES = ["installation", "theming", "customise", "accessibility", "agents"]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string) => `${REGISTRY_URL}${path}`
