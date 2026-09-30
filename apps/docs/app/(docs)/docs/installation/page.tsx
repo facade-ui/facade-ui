@@ -8,6 +8,10 @@ import { installCommands } from "@/lib/registry-shared"
 export const metadata: Metadata = {
   title: "Installation",
   description: "Add Facade UI to a Next.js project in four steps.",
+  alternates: {
+    canonical: "/docs/installation",
+    types: { "text/markdown": "/docs/installation.md" },
+  },
 }
 
 export default function InstallationPage() {

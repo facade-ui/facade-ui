@@ -121,6 +121,12 @@ export default function HomePage() {
         <Container className="text-muted-foreground flex flex-wrap items-center justify-between gap-4 text-sm">
           <p>MIT licensed. Developed in the open.</p>
           <a
+            href="/llms.txt"
+            className="hover:text-foreground focus-visible:ring-ring rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2"
+          >
+            llms.txt
+          </a>
+          <a
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"

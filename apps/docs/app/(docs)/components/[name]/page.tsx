@@ -41,7 +41,14 @@ export async function generateMetadata({
   const { name } = await params
   const item = getRegistryItem(name)
   if (!item) return {}
-  return { title: item.title ?? item.name, description: item.description }
+  return {
+    title: item.title ?? item.name,
+    description: item.description,
+    alternates: {
+      canonical: `/components/${name}`,
+      types: { "text/markdown": `/components/${name}.md` },
+    },
+  }
 }
 
 export default async function ComponentPage({

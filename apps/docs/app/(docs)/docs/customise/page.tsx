@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "Theme customiser",
   description:
     "Build a Facade UI theme from a brand colour and a neutral, adjust any colour, check its contrast, and copy the CSS.",
+  alternates: {
+    canonical: "/docs/customise",
+    types: { "text/markdown": "/docs/customise.md" },
+  },
 }
 
 export default function CustomisePage() {
