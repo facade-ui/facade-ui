@@ -7,17 +7,17 @@ import { themeInitScript } from "@/components/theme-switcher"
 export const metadata: Metadata = {
   metadataBase: new URL("https://facadeui.dev"),
   title: {
-    default: "Facade UI — marketing sections for React",
+    default: "Facade UI — sections for marketing websites",
     template: "%s — Facade UI",
   },
   description:
-    "Free, open-source marketing sections and components for React. Install one with the shadcn CLI, and its source code is copied into your project.",
+    "Sections and page templates for marketing websites: heroes, feature grids, pricing tables, FAQs and footers. Free and open source. Install them with the shadcn CLI.",
   openGraph: {
     type: "website",
     siteName: "Facade UI",
-    title: "Facade UI — marketing sections for React",
+    title: "Facade UI — sections for marketing websites",
     description:
-      "Marketing sections and components you install with the shadcn CLI. Built with React, Base UI and Tailwind v4, and tested against WCAG 2.2 AA.",
+      "Sections and page templates for marketing websites, installed with the shadcn CLI. Built with React, Base UI and Tailwind v4, and tested against WCAG 2.2 AA.",
   },
 }
 

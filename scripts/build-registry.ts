@@ -9,7 +9,8 @@
  *     ranges this repo builds against;
  *  3. derives `registryDependencies` by resolving cross-item imports to their
  *     owning item's public URL;
- *  4. writes `<name>.json` plus an `index.json` listing.
+ *  4. writes `<name>.json` plus the `registry.json` index the shadcn directory
+ *     expects beside them.
  *
  * It also writes the derived dependency arrays back into `registry.json`, so the
  * checked-in source of truth stays reviewable. `--check` makes the script fail
@@ -206,7 +207,7 @@ for (const { item, json } of built) {
   )
 }
 writeFileSync(
-  resolve(OUTPUT_DIR, "index.json"),
+  resolve(OUTPUT_DIR, "registry.json"),
   JSON.stringify(indexJson, null, 2) + "\n",
 )
 

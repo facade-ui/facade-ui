@@ -59,7 +59,7 @@ let cachedIndex: RegistryItem[] | undefined
 export function getRegistryItems(): RegistryItem[] {
   if (cachedIndex) return cachedIndex
   const index = readJson<{ items: { name: string }[] }>(
-    join(process.cwd(), "public/r", "index.json"),
+    join(process.cwd(), "public/r", "registry.json"),
   )
   cachedIndex = index.items.map((entry) => getRegistryItem(entry.name)!)
   return cachedIndex

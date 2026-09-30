@@ -25,7 +25,7 @@ import { OUTPUT_DIR, REGISTRY_BASE_URL, readRegistry } from "./lib/registry.ts"
 const only = process.argv.slice(2).filter((arg) => !arg.startsWith("-"))
 const keepDir = process.env.KEEP_SMOKE_DIR === "1"
 
-if (!existsSync(join(OUTPUT_DIR, "index.json"))) {
+if (!existsSync(join(OUTPUT_DIR, "registry.json"))) {
   console.error("No registry output. Run `pnpm registry:build` first.")
   process.exit(1)
 }
