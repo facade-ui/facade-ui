@@ -155,8 +155,8 @@ export const BENTO: BentoItem[] = [
   {
     icon: PaletteIcon,
     span: "sm",
-    title: "Three presets",
-    description: "Neutral, warm and vivid, light and dark.",
+    title: "Four palettes",
+    description: "Orange by default, then neutral, warm and vivid.",
   },
   {
     icon: GaugeIcon,
@@ -461,7 +461,7 @@ export const TABS = [
     description:
       "Sections reference only shadcn's token names, so your existing theme already fits.",
     icon: PaletteIcon,
-    bullets: ["Three presets, light and dark", "Contrast verified in CI"],
+    bullets: ["Four palettes, light and dark", "Contrast verified in CI"],
     media: <MediaPlaceholder label="Theme tokens" ratio="aspect-[16/10]" />,
   },
 ]

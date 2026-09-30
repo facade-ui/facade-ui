@@ -54,6 +54,7 @@ import {
   type TokenName,
 } from "@/lib/theme-tokens"
 import {
+  DEFAULT_PRESET,
   SHIPPED_PRESETS,
   useActivePreset,
   useResolvedMode,
@@ -143,7 +144,7 @@ export function ThemeCustomiser() {
   // Until something is stored, the starting point is whatever the site is
   // already showing, so the first drag moves the palette in front of you.
   const theme =
-    stored ?? seedFrom(preset === "custom" ? "neutral" : (preset as ShippedPreset))
+    stored ?? seedFrom(preset === "custom" ? DEFAULT_PRESET : (preset as ShippedPreset))
   const palette = theme[mode]
 
   /**
@@ -169,13 +170,17 @@ export function ThemeCustomiser() {
         <span id="customiser-seed" className="text-sm font-medium">
           Start from
         </span>
-        <div role="group" aria-labelledby="customiser-seed" className="flex gap-1.5">
+        <div
+          role="group"
+          aria-labelledby="customiser-seed"
+          className="grid grid-cols-2 gap-1.5"
+        >
           {SHIPPED_PRESETS.map((value) => (
             <Button
               key={value}
               variant="outline"
               size="sm"
-              className="flex-1 capitalize"
+              className="capitalize"
               onClick={() => commit(seedFrom(value))}
             >
               {value === preset ? (

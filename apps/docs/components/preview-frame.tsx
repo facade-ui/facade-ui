@@ -87,7 +87,9 @@ export function PreviewFrame({
       {
         type: "facade:theme",
         dark: document.documentElement.classList.contains("dark"),
-        preset: document.documentElement.dataset.facadeTheme ?? "neutral",
+        // No attribute is the default preset; the bridge treats a missing
+        // value the same way.
+        preset: document.documentElement.dataset.facadeTheme ?? null,
       },
       window.location.origin,
     )

@@ -90,7 +90,7 @@ export function SectionHeader({
           align === "center" && "items-center",
         )}
       >
-        {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+        {eyebrow ? <Eyebrow tone="primary">{eyebrow}</Eyebrow> : null}
         <Heading level={headingLevel} id={resolvedId} className={cn(headingSizes[size])}>
           {title}
         </Heading>

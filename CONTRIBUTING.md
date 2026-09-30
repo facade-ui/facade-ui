@@ -18,7 +18,7 @@ pnpm dev          # docs site on :3000
    are derived from the real import graph by the build and written back in.
 4. Add a demo at `apps/docs/demos/<name>.tsx` exporting `Demo`, and register it
    in `apps/docs/demos/index.ts`. That one entry gives the item a docs preview,
-   an axe scan in six theme scopes, and visual snapshots.
+   an axe scan in eight theme scopes, and visual snapshots.
 5. Run the gate below.
 
 ## The gate

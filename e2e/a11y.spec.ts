@@ -1,9 +1,9 @@
 /**
- * axe-core scan of every registry preview, in light and dark, across all three
- * theme presets.
+ * axe-core scan of every registry preview, in light and dark, across the
+ * default theme and all three presets.
  *
- * Six theme scopes rather than two: a contrast regression usually shows up in
- * one preset only, and scanning just the default would let the other two rot.
+ * Eight theme scopes rather than two: a contrast regression usually shows up in
+ * one preset only, and scanning just the default would let the others rot.
  * The colour-contrast rule is the reason this runs against a real browser at all
  * — it needs computed styles, which jsdom cannot give.
  *
@@ -14,9 +14,11 @@
 import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 
+import { DEFAULT_PRESET, THEME_PRESETS } from "../scripts/lib/css-tokens.ts"
 import { PREVIEW_ITEMS } from "./items"
 
-const PRESETS = ["neutral", "warm", "vivid"] as const
+/** The default preset is the absence of the attribute. */
+const PRESETS = [DEFAULT_PRESET, ...THEME_PRESETS]
 const MODES = ["light", "dark"] as const
 
 /** WCAG 2.2 AA, plus the best-practice rules that catch real structural slips. */
@@ -31,15 +33,15 @@ for (const item of PREVIEW_ITEMS) {
           await page.goto(`/preview/${item}`)
 
           await page.evaluate(
-            ([dark, themePreset]) => {
+            ([dark, themePreset, defaultPreset]) => {
               document.documentElement.classList.toggle("dark", dark === "true")
-              if (themePreset === "neutral") {
+              if (themePreset === defaultPreset) {
                 document.documentElement.removeAttribute("data-facade-theme")
               } else {
                 document.documentElement.setAttribute("data-facade-theme", themePreset!)
               }
             },
-            [String(mode === "dark"), preset],
+            [String(mode === "dark"), preset, DEFAULT_PRESET],
           )
 
           // Motion primitives start at opacity 0; wait for the entrance to settle

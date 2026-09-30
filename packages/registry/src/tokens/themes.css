@@ -1,9 +1,9 @@
 /**
  * Facade UI — theme presets.
  *
- * Three presets ship with the registry: `neutral` (the default, defined in
- * globals.css and active when no attribute is set), `warm`, and `vivid`.
- * Apply with `data-facade-theme` on <html> or on any subtree:
+ * The default palette is in globals.css and needs no attribute. Three more
+ * ship here: `neutral` (monochrome), `warm` and `vivid`. Apply one with
+ * `data-facade-theme` on <html> or on any subtree:
  *
  *   <html data-facade-theme="warm">        light warm
  *   <html class="dark" data-facade-theme="warm">  dark warm
@@ -12,6 +12,52 @@
  * a11y: every foreground/background pair below is verified at build time by
  * `scripts/check-contrast.ts` against the WCAG 2.2 AA thresholds.
  */
+
+[data-facade-theme="neutral"] {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.505 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.66 0 0);
+  --ring: oklch(0.45 0 0);
+}
+
+.dark[data-facade-theme="neutral"],
+.dark [data-facade-theme="neutral"],
+[data-facade-theme="neutral"] .dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.269 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.782 0 0);
+  --accent: oklch(0.371 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.145 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(0.74 0 0);
+  --ring: oklch(0.78 0 0);
+}
 
 [data-facade-theme="warm"] {
   --background: oklch(0.99 0.005 85);

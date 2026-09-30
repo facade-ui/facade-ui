@@ -45,20 +45,26 @@ export const globalsCss = (): string =>
 export const themesCss = (): string =>
   readFileSync(resolve(tokensDir, "themes.css"), "utf8")
 
+/** The presets `themes.css` defines, in the order it defines them. */
+export const THEME_PRESETS = ["neutral", "warm", "vivid"] as const
+
+/** `orange` is the default: the palette in `globals.css`, with no attribute set. */
+export const DEFAULT_PRESET = "orange"
+
 export interface Scope {
-  preset: "neutral" | "warm" | "vivid"
+  preset: typeof DEFAULT_PRESET | (typeof THEME_PRESETS)[number]
   mode: "light" | "dark"
   label: string
   tokens: Tokens
 }
 
-/** All six theme scopes, each fully resolved through its inheritance chain. */
+/** All eight theme scopes, each fully resolved through its inheritance chain. */
 export function readScopes(): Scope[] {
   const globals = globalsCss()
   const themes = themesCss()
 
-  const neutralLight = readBlock(globals, (s) => s === ":root")
-  const neutralDark = readBlock(globals, (s) => s === ".dark")
+  const defaultLight = readBlock(globals, (s) => s === ":root")
+  const defaultDark = readBlock(globals, (s) => s === ".dark")
 
   const preset = (name: string, dark: boolean): Tokens =>
     readBlock(themes, (s) =>
@@ -69,36 +75,31 @@ export function readScopes(): Scope[] {
     )
 
   return [
-    { preset: "neutral", mode: "light", label: "neutral · light", tokens: neutralLight },
     {
-      preset: "neutral",
-      mode: "dark",
-      label: "neutral · dark",
-      tokens: { ...neutralLight, ...neutralDark },
-    },
-    {
-      preset: "warm",
+      preset: DEFAULT_PRESET,
       mode: "light",
-      label: "warm · light",
-      tokens: { ...neutralLight, ...preset("warm", false) },
+      label: `${DEFAULT_PRESET} · light`,
+      tokens: defaultLight,
     },
     {
-      preset: "warm",
+      preset: DEFAULT_PRESET,
       mode: "dark",
-      label: "warm · dark",
-      tokens: { ...neutralLight, ...neutralDark, ...preset("warm", true) },
+      label: `${DEFAULT_PRESET} · dark`,
+      tokens: { ...defaultLight, ...defaultDark },
     },
-    {
-      preset: "vivid",
-      mode: "light",
-      label: "vivid · light",
-      tokens: { ...neutralLight, ...preset("vivid", false) },
-    },
-    {
-      preset: "vivid",
-      mode: "dark",
-      label: "vivid · dark",
-      tokens: { ...neutralLight, ...neutralDark, ...preset("vivid", true) },
-    },
+    ...THEME_PRESETS.flatMap((name): Scope[] => [
+      {
+        preset: name,
+        mode: "light",
+        label: `${name} · light`,
+        tokens: { ...defaultLight, ...preset(name, false) },
+      },
+      {
+        preset: name,
+        mode: "dark",
+        label: `${name} · dark`,
+        tokens: { ...defaultLight, ...defaultDark, ...preset(name, true) },
+      },
+    ]),
   ]
 }

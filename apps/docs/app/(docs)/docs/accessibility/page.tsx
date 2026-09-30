@@ -22,9 +22,14 @@ export default function AccessibilityPage() {
       <h2>Contrast</h2>
       <p>
         <code>scripts/check-contrast.ts</code> parses the real token values out of{" "}
-        <code>globals.css</code> and <code>themes.css</code>, resolves all six theme
+        <code>globals.css</code> and <code>themes.css</code>, resolves all eight theme
         scopes, and checks every pair a section can put on screen. Text pairs must clear
         4.5:1 and the focus ring 3:1. It runs in CI and fails the build.
+      </p>
+      <p>
+        The default theme shows the rule at work. White on its orange primary is 3.6:1, so
+        button labels are ink at 5.5:1. And because the orange only clears 3:1 against the
+        page, it is used for fills, icons and rings, never for text.
       </p>
       <p>
         Hairline borders are reported but not enforced. A divider is decorative; a control
@@ -113,7 +118,7 @@ export default function AccessibilityPage() {
 
       <h2>What is checked automatically</h2>
       <ul>
-        <li>Token contrast, across all six theme scopes.</li>
+        <li>Token contrast, across all eight theme scopes.</li>
         <li>
           <code>eslint-plugin-jsx-a11y</code> in strict mode across the whole registry.
         </li>

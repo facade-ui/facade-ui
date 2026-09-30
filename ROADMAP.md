@@ -14,8 +14,8 @@
   toggles, code tabs, copy buttons, install commands, generated props tables.
 - Atoms: Button, Badge, Heading, Eyebrow, Container, Section, SectionHeader,
   CtaGroup, Stat, LogoMark, FeatureIcon, Testimonial, PricingTier.
-- CI: lint, typecheck, unit tests, contrast, registry validation, axe across six
-  theme scopes, visual regression, and a fresh-install smoke test.
+- CI: lint, typecheck, unit tests, contrast, registry validation, axe across
+  every theme scope, visual regression, and a fresh-install smoke test.
 
 ### Phase 1 — Core sections
 
@@ -32,8 +32,8 @@ something the static version cannot do.
 
 The form-field contrast gap flagged here earlier is closed. shadcn already
 separates `--border` (dividers) from `--input` (control boundaries), so
-`--input` was darkened until it clears 3:1 against the background in all six
-theme scopes, and `scripts/check-contrast.ts` now **enforces** it rather than
+`--input` was darkened until it clears 3:1 against the background in every
+theme scope, and `scripts/check-contrast.ts` now **enforces** it rather than
 reporting it. `--border` stays informational, because a hairline divider is
 decoration.
 
@@ -51,9 +51,19 @@ decoration.
   palette against the _same_ pairs and thresholds `scripts/check-contrast.ts`
   enforces in CI — so a palette that shows all-green is one the build would
   accept. Presets are read out of the shipped CSS at build time rather than
-  re-declared. The palette applies to the whole docs site as a fourth theme
+  re-declared. The palette applies to the whole docs site as one more theme
   preset, previews included, so there is no preview pane to disagree with the
   real thing; `/docs/customise` keeps the contrast table and the CSS export.
+
+### Phase 4 — An identity of its own
+
+- **Default theme.** Tailwind's orange on stone; the monochrome palette is now
+  the `neutral` preset. Primary buttons carry an ink label, because white on
+  orange 600 is 3.6:1, and `--primary` is never used for text.
+- **Contrast checker fix.** Both implementations decoded sRGB twice, so
+  dark-on-light pairs scored better than they are. The light `--input` borders
+  were really 2:1 and are now 3:1. The maths is tested against published WCAG
+  ratios.
 
 ## Not started
 

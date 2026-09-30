@@ -29,10 +29,15 @@ export function PreviewBridge({ name, children }: PreviewBridgeProps) {
 
     const onMessage = (event: MessageEvent) => {
       if (event.origin !== window.location.origin) return
-      const data = event.data as { type?: string; dark?: boolean; preset?: string }
+      const data = event.data as {
+        type?: string
+        dark?: boolean
+        preset?: string | null
+      }
       if (data.type !== "facade:theme") return
       document.documentElement.classList.toggle("dark", Boolean(data.dark))
-      if (!data.preset || data.preset === "neutral") {
+      // The default preset is the absence of the attribute, in both documents.
+      if (!data.preset) {
         document.documentElement.removeAttribute("data-facade-theme")
       } else {
         document.documentElement.setAttribute("data-facade-theme", data.preset)

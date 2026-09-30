@@ -22,15 +22,16 @@ import { customThemeCss, useCustomTheme, type CustomTheme } from "@/lib/custom-t
 import { contrastRatio } from "@/lib/oklch"
 import { checkPalette, type Palette } from "@/lib/theme-tokens"
 import { CopyButton } from "./copy-button"
+import { DEFAULT_PRESET } from "./theme-switcher"
 import { cn } from "@registry/lib/utils"
 
 const shipped = palettes as Record<string, Palette>
 
 // Nothing customised yet still has something worth reading: the shipped
 // default, scored by the very same checks.
-const NEUTRAL: CustomTheme = {
-  light: shipped["neutral-light"]!,
-  dark: shipped["neutral-dark"]!,
+const DEFAULT: CustomTheme = {
+  light: shipped[`${DEFAULT_PRESET}-light`]!,
+  dark: shipped[`${DEFAULT_PRESET}-dark`]!,
 }
 
 function ContrastTable({ palette, mode }: { palette: Palette; mode: "light" | "dark" }) {
@@ -89,7 +90,7 @@ function ContrastTable({ palette, mode }: { palette: Palette; mode: "light" | "d
 
 export function ThemeCustomiserExport() {
   const [stored] = useCustomTheme()
-  const theme = stored ?? NEUTRAL
+  const theme = stored ?? DEFAULT
   const css = customThemeCss(theme)
 
   return (
@@ -101,7 +102,7 @@ export function ThemeCustomiserExport() {
         <p className="text-muted-foreground text-pretty text-sm">
           {stored
             ? "Your palette, against the same pairs and thresholds "
-            : "The shipped neutral palette, against the same pairs and thresholds "}
+            : "The shipped default palette, against the same pairs and thresholds "}
           <code>scripts/check-contrast.ts</code> enforces in CI.
         </p>
         {(["light", "dark"] as const).map((mode) => (
