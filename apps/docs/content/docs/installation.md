@@ -2,6 +2,14 @@
 
 Facade UI is not an npm package. You add each component with the shadcn CLI, which copies its source files into your project. There is no package to upgrade later, and you can edit every file.
 
+## Shortest route: the starter
+
+The [starter](https://github.com/facade-ui/starter) is a Next.js app with the tokens, a complete landing page and sample content already in place. Skip the steps below if you use it.
+
+```bash
+npx create-next-app@latest my-site -e https://github.com/facade-ui/starter
+```
+
 ## 1. Set up a project with shadcn
 
 You need a project where you have run `shadcn init`. To create a new one:
