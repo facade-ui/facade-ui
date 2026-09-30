@@ -355,7 +355,7 @@
       "name": "nav-top",
       "type": "registry:block",
       "title": "Top navigation",
-      "description": "A site header built from one list of links. Large screens get dropdown menus. Small screens get a drawer that keeps keyboard focus inside it.",
+      "description": "A site header and navigation bar built from one list of links. Large screens get dropdown menus. Small screens get a drawer that keeps keyboard focus inside it.",
       "categories": ["section"],
       "files": [
         {
@@ -376,7 +376,7 @@
       "name": "hero-centered",
       "type": "registry:block",
       "title": "Hero — centred",
-      "description": "A centred hero: eyebrow, headline, text and buttons, with optional media below.",
+      "description": "A centred landing page hero: eyebrow, headline, text and buttons, with optional media below.",
       "categories": ["section"],
       "files": [
         {
@@ -417,7 +417,7 @@
       "name": "hero-split",
       "type": "registry:block",
       "title": "Hero — split",
-      "description": "A hero with text on one side and media on the other. The text comes first in reading order on every screen size.",
+      "description": "A landing page hero with text on one side and media on the other. The text comes first in reading order on every screen size.",
       "categories": ["section"],
       "files": [
         {
@@ -458,7 +458,7 @@
       "name": "hero-with-media",
       "type": "registry:block",
       "title": "Hero — with media",
-      "description": "A hero with centred text over a full-width background, or above a framed screenshot. Over a background, a dark layer keeps the text readable.",
+      "description": "A landing page hero with centred text over a full-width background image, or above a framed screenshot. Over a background, a dark layer keeps the text readable.",
       "categories": ["section"],
       "files": [
         {
@@ -499,7 +499,7 @@
       "name": "logo-cloud",
       "type": "registry:block",
       "title": "Logo cloud",
-      "description": "A group of customer logos. Company names are available as text, so screen readers announce a list of names, not unlabelled images.",
+      "description": "A \"trusted by\" row of customer logos. Company names are available as text, so screen readers announce a list of names, not unlabelled images.",
       "categories": ["section"],
       "files": [
         {
@@ -539,7 +539,7 @@
       "name": "usp-list",
       "type": "registry:block",
       "title": "USP list",
-      "description": "Three or four short selling points, each with an icon and a line of text.",
+      "description": "Three or four short selling points or benefits, each with an icon and a line of text.",
       "categories": ["section"],
       "files": [
         {
@@ -580,7 +580,7 @@
       "name": "feature-grid",
       "type": "registry:block",
       "title": "Feature grid",
-      "description": "A grid of feature cards, two to four per row. A whole card can be a link while its accessible name stays short.",
+      "description": "A features section: a grid of feature cards, two to four per row. A whole card can be a link while its accessible name stays short.",
       "categories": ["section"],
       "files": [
         {
@@ -706,7 +706,7 @@
       "name": "faq-accordion",
       "type": "registry:block",
       "title": "FAQ accordion",
-      "description": "Questions and answers built on Base UI's Accordion. Each question is a button inside a heading, browser search finds text in closed answers, and you can add FAQPage structured data.",
+      "description": "A FAQ section: questions and answers built on Base UI's Accordion. Each question is a button inside a heading, browser search finds text in closed answers, and you can add FAQPage structured data.",
       "categories": ["section"],
       "files": [
         {
@@ -747,7 +747,7 @@
       "name": "cta-band",
       "type": "registry:block",
       "title": "CTA band",
-      "description": "A closing call to action. Choose a muted, card, plain or primary-coloured background.",
+      "description": "A closing call to action band. Choose a muted, card, plain or primary-coloured background.",
       "categories": ["section"],
       "files": [
         {
@@ -788,7 +788,7 @@
       "name": "footer",
       "type": "registry:block",
       "title": "Footer",
-      "description": "A footer with link groups in columns, a brand area, social links and a legal line. Each link group is a separately named navigation landmark.",
+      "description": "A site footer with link groups in columns, a brand area, social links and a legal line. Each link group is a separately named navigation landmark.",
       "categories": ["section"],
       "files": [
         {
@@ -808,7 +808,7 @@
       "name": "stats",
       "type": "registry:block",
       "title": "Stats",
-      "description": "A row of key numbers as a description list. You can give a spoken form for abbreviated values.",
+      "description": "A row of key numbers or metrics as a description list. You can give a spoken form for abbreviated values.",
       "categories": ["section"],
       "files": [
         {
@@ -848,7 +848,7 @@
       "name": "testimonials-grid",
       "type": "registry:block",
       "title": "Testimonials grid",
-      "description": "A grid of customer quotes. It can use columns of uneven height and still be read in the order you give.",
+      "description": "A social proof section: a grid of customer quotes and reviews. It can use columns of uneven height and still be read in the order you give.",
       "categories": ["section"],
       "files": [
         {
@@ -888,7 +888,7 @@
       "name": "testimonial-single",
       "type": "registry:block",
       "title": "Testimonial — single",
-      "description": "One large quote, with an optional portrait beside it or a tinted background.",
+      "description": "One large customer quote, with an optional portrait beside it or a tinted background.",
       "categories": ["section"],
       "files": [
         {
@@ -909,7 +909,7 @@
       "name": "pricing-tiers",
       "type": "registry:block",
       "title": "Pricing tiers",
-      "description": "Pricing plans as a row of cards. Each price has a spoken form, and a feature that is not included says so in words.",
+      "description": "A pricing table: plans as a row of cards. Each price has a spoken form, and a feature that is not included says so in words.",
       "categories": ["section"],
       "files": [
         {
@@ -949,7 +949,7 @@
       "name": "pricing-comparison",
       "type": "registry:block",
       "title": "Pricing comparison",
-      "description": "A full feature comparison as a table, with row and column headers. Each cell states its value in text, not only with a tick.",
+      "description": "A pricing comparison table with row and column headers. Each cell states its value in text, not only with a tick.",
       "categories": ["section"],
       "files": [
         {
@@ -1037,7 +1037,7 @@
       "name": "steps",
       "type": "registry:block",
       "title": "Steps",
-      "description": "A numbered sequence as an ordered list, so the order is in the markup and not only in the visible numbers.",
+      "description": "A \"how it works\" sequence as an ordered list, so the order is in the markup and not only in the visible numbers.",
       "categories": ["section"],
       "files": [
         {
@@ -1078,7 +1078,7 @@
       "name": "team",
       "type": "registry:block",
       "title": "Team",
-      "description": "The people on a team. Each social link names the person as well as the network.",
+      "description": "An \"about us\" team section. Each social link names the person as well as the network.",
       "categories": ["section"],
       "files": [
         {
@@ -1118,7 +1118,7 @@
       "name": "newsletter",
       "type": "registry:block",
       "title": "Newsletter",
-      "description": "An email sign-up form. It announces the result to screen readers through a live region that is on the page from the start.",
+      "description": "An email sign-up (newsletter subscribe) form. It announces the result to screen readers through a live region that is on the page from the start.",
       "categories": ["section"],
       "files": [
         {
@@ -1141,7 +1141,7 @@
       "name": "banner",
       "type": "registry:block",
       "title": "Banner",
-      "description": "An announcement bar that people can dismiss. It is a named landmark, and it is announced to screen readers only if you turn that on.",
+      "description": "An announcement bar at the top of the page that people can dismiss. It is a named landmark, and it is announced to screen readers only if you turn that on.",
       "categories": ["section"],
       "files": [
         {
@@ -1183,7 +1183,7 @@
       "name": "saas-landing",
       "type": "registry:block",
       "title": "SaaS landing page",
-      "description": "A complete SaaS marketing page built from Facade UI sections. You supply one content object.",
+      "description": "A complete SaaS landing page built from Facade UI sections. You supply one content object.",
       "categories": ["template"],
       "files": [
         {
@@ -1215,7 +1215,7 @@
       "name": "agency",
       "type": "registry:block",
       "title": "Agency site",
-      "description": "An agency website: a hero over an image, a grid of work, process steps, a featured quote and the team.",
+      "description": "An agency or studio website: a hero over an image, a grid of work, process steps, a featured quote and the team.",
       "categories": ["template"],
       "files": [
         {
@@ -1245,7 +1245,7 @@
       "name": "product-launch",
       "type": "registry:block",
       "title": "Product launch",
-      "description": "A launch page for one product: an announcement banner, a bento grid of highlights, details in tabs and an email sign-up.",
+      "description": "A product launch landing page: an announcement banner, a bento grid of highlights, details in tabs and an email sign-up.",
       "categories": ["template"],
       "files": [
         {
