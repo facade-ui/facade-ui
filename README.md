@@ -1,5 +1,10 @@
 # Facade UI
 
+[![CI](https://github.com/facade-ui/facade-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/facade-ui/facade-ui/actions/workflows/ci.yml)
+[![Registry](https://img.shields.io/badge/shadcn_registry-%40facade-f54900)](https://facadeui.dev/r/registry.json)
+[![WCAG 2.2 AA](https://img.shields.io/badge/WCAG_2.2-AA_tested-0c0a09)](https://facadeui.dev/docs/accessibility)
+[![MIT](https://img.shields.io/badge/licence-MIT-0c0a09)](./LICENSE)
+
 **Sections and templates for marketing websites.**
 
 Facade UI gives you the parts a marketing website needs: heroes, feature grids,
@@ -8,8 +13,16 @@ source (MIT). You install each part with the shadcn CLI, and its **source code
 is copied into your project**. There is no package to depend on.
 
 ```bash
-pnpm dlx shadcn@latest add https://facadeui.dev/r/hero-split.json
+npx shadcn@latest add @facade/saas-landing
 ```
+
+That installs a complete landing page and the sixteen sections it is made of. Any single piece works the same way: `npx shadcn@latest add @facade/hero-split`. Until `@facade` is in the shadcn directory, add it to `components.json` first:
+
+```json
+{ "registries": { "@facade": "https://facadeui.dev/r/{name}.json" } }
+```
+
+Building with an AI agent? Point it at [facadeui.dev/docs/agents](https://facadeui.dev/docs/agents) or [facadeui.dev/llms.txt](https://facadeui.dev/llms.txt).
 
 ---
 
