@@ -116,6 +116,13 @@ function componentPage(item: BuiltItem): string {
     ...(item.docs ? ["", item.docs] : []),
   ]
 
+  if (registry.items.some((other) => other.name === `${item.name}-demo`)) {
+    lines.push(
+      "",
+      `Usage example as an installable item: \`npx shadcn@latest add @facade/${item.name}-demo\` (lands in components/examples/).`,
+    )
+  }
+
   if (demo) {
     lines.push(
       "",
@@ -139,10 +146,10 @@ for (const dir of ["components", "docs"]) {
   mkdirSync(resolve(PUBLIC, dir), { recursive: true })
 }
 
-const componentPages = registry.items.map((item) => ({
-  item,
-  markdown: componentPage(item),
-}))
+// Examples are installable but not pages; each component page names its own.
+const componentPages = registry.items
+  .filter((item) => !item.categories?.includes("example"))
+  .map((item) => ({ item, markdown: componentPage(item) }))
 for (const { item, markdown } of componentPages) {
   writeFileSync(resolve(PUBLIC, "components", `${item.name}.md`), markdown)
 }
