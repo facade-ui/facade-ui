@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Theming",
   description:
     "How Facade UI's colours and other design tokens are organised, and how to change the theme in one place.",
+  alternates: {
+    canonical: "/docs/theming",
+    types: { "text/markdown": "/docs/theming.md" },
+  },
 }
 
 const TOKENS: [string, string, string][] = [

@@ -21,9 +21,18 @@
       "inputs": [
         "../../packages/registry/**",
         "../../scripts/**",
-        "../../pnpm-lock.yaml"
+        "../../pnpm-lock.yaml",
+        "demos/**",
+        "content/**"
       ],
-      "outputs": ["public/r/**", ".generated/**"]
+      "outputs": [
+        "public/r/**",
+        "public/llms.txt",
+        "public/llms-full.txt",
+        "public/components/**",
+        "public/docs/**",
+        ".generated/**"
+      ]
     },
 
     "@facade-ui/docs#typecheck": { "dependsOn": ["^build", "registry"] },
@@ -33,7 +42,16 @@
     },
     "@facade-ui/docs#build": {
       "dependsOn": ["^build", "registry"],
-      "outputs": [".next/**", "!.next/cache/**", "public/r/**", ".generated/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "public/r/**",
+        "public/llms.txt",
+        "public/llms-full.txt",
+        "public/components/**",
+        "public/docs/**",
+        ".generated/**"
+      ]
     }
   }
 }

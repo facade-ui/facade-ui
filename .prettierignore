@@ -14,3 +14,7 @@ apps/docs/next-env.d.ts
 
 # Binary.
 e2e/__screenshots__
+apps/docs/public/components
+apps/docs/public/docs
+apps/docs/public/llms.txt
+apps/docs/public/llms-full.txt

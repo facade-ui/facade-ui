@@ -6,6 +6,10 @@ import { Prose } from "@/components/prose"
 export const metadata: Metadata = {
   title: "Accessibility",
   description: "How Facade UI meets WCAG 2.2 AA, and how each requirement is tested.",
+  alternates: {
+    canonical: "/docs/accessibility",
+    types: { "text/markdown": "/docs/accessibility.md" },
+  },
 }
 
 export default function AccessibilityPage() {
