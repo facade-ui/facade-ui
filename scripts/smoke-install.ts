@@ -20,7 +20,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 
-import { OUTPUT_DIR, REGISTRY_BASE_URL, readRegistry } from "./lib/registry.ts"
+import { OUTPUT_DIR, REGISTRY_BASE_URL } from "./lib/registry.ts"
 
 const only = process.argv.slice(2).filter((arg) => !arg.startsWith("-"))
 const keepDir = process.env.KEEP_SMOKE_DIR === "1"
@@ -90,7 +90,10 @@ function run(command: string, args: string[], cwd: string, label: string): Promi
   })
 }
 
-const registry = readRegistry()
+// The built index, not registry.json: it also holds the generated examples.
+const registry = JSON.parse(readFileSync(join(OUTPUT_DIR, "registry.json"), "utf8")) as {
+  items: { name: string }[]
+}
 const items = registry.items
   .map((item) => item.name)
   .filter((name) => only.length === 0 || only.includes(name))

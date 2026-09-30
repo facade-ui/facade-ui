@@ -194,7 +194,11 @@ export default async function ComponentPage({
             Usage
           </h2>
           <p className="text-muted-foreground text-pretty text-sm">
-            This is the code for the preview above.
+            This is the code for the preview above. To install it as a file, run{" "}
+            <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-xs">
+              npx shadcn@latest add @facade/{name}-demo
+            </code>
+            .
           </p>
           <CodeBlock
             code={demoSource}
