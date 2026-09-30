@@ -1,0 +1,26 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Facade UI",
+  "description": "Accessible sections and page templates for marketing websites, installed with the shadcn CLI. React 19, Base UI, Tailwind CSS v4, WCAG 2.2 AA.",
+  "folders": [
+    "apps/docs/app/(docs)/docs",
+    "packages/registry/src",
+    "apps/docs/demos",
+    "README.md"
+  ],
+  "excludeFolders": [
+    "apps/docs/public",
+    "e2e",
+    "scripts",
+    "packages/eslint-config",
+    "packages/tsconfig"
+  ],
+  "excludeFiles": ["pnpm-lock.yaml"],
+  "rules": [
+    "Install items with the shadcn CLI: npx shadcn@latest add @facade/<name>, or by URL https://facadeui.dev/r/<name>.json",
+    "Import styles/facade-tokens.css in your global stylesheet after tailwindcss; every section needs it",
+    "Use the page's outline: one h1, then pass headingLevel={2} to sections; visual size is a separate prop",
+    "Pass next/link and next/image through the link and image props; sections import nothing from next/*",
+    "The -motion variant of a section needs FacadeMotionProvider near the root and a client boundary when passing icons"
+  ]
+}

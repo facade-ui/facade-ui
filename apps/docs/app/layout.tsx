@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   },
   description:
     "Sections and page templates for marketing websites: heroes, feature grids, pricing tables, FAQs and footers. Free and open source. Install them with the shadcn CLI.",
+  // Every page's canonical URL is its own; the default image comes from
+  // `opengraph-image.tsx`.
+  alternates: { canonical: "./" },
+  twitter: { card: "summary_large_image" },
   openGraph: {
     type: "website",
     siteName: "Facade UI",

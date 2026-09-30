@@ -6,6 +6,8 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 
+import { ExternalLinkIcon } from "lucide-react"
+
 import { CodeBlock } from "@/components/code-block"
 import { InstallCommand } from "@/components/install-command"
 import { PreviewFrame } from "@/components/preview-frame"
@@ -17,9 +19,15 @@ import {
   getRegistryItems,
   installCommands,
 } from "@/lib/registry"
+import { GITHUB_URL, REGISTRY_URL } from "@/lib/registry-shared"
 import { Badge } from "@registry/ui/badge"
+import { buttonVariants } from "@registry/ui/button"
+import { cn } from "@registry/lib/utils"
 
 export const dynamicParams = false
+
+/** Item types v0 can open; a stylesheet or a helper is not a component to it. */
+const V0_TYPES = new Set(["registry:ui", "registry:block", "registry:component"])
 
 export function generateStaticParams() {
   return getRegistryItems().map((item) => ({ name: item.name }))
@@ -60,8 +68,26 @@ export default async function ComponentPage({
   const counterpart = isMotion ? name.replace(/-motion$/, "") : `${name}-motion`
   const counterpartItem = getRegistryItem(counterpart)
 
+  const itemUrl = `${REGISTRY_URL}/r/${name}.json`
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: item.title ?? item.name,
+    description: item.description,
+    url: `${REGISTRY_URL}/components/${name}`,
+    codeRepository: GITHUB_URL,
+    programmingLanguage: "TypeScript",
+    runtimePlatform: "React",
+    license: "https://opensource.org/licenses/MIT",
+    isPartOf: { "@type": "SoftwareApplication", name: "Facade UI", url: REGISTRY_URL },
+  }
+
   return (
     <article className="flex max-w-3xl flex-col gap-12 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="muted" size="sm">
@@ -78,6 +104,24 @@ export default async function ComponentPage({
         </h1>
         {item.description ? (
           <p className="text-muted-foreground text-pretty text-lg">{item.description}</p>
+        ) : null}
+
+        {V0_TYPES.has(item.type) ? (
+          <p>
+            <a
+              href={`https://v0.dev/chat/api/open?url=${encodeURIComponent(itemUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "h-8 px-2.5 text-xs",
+              )}
+            >
+              Open in v0
+              <ExternalLinkIcon aria-hidden className="size-3.5" />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </p>
         ) : null}
 
         {counterpartItem ? (
