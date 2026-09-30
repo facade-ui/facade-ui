@@ -44,7 +44,7 @@
    * deal darker than `--border`, and deliberately so — a hairline is decorative,
    * the edge of a text field is the only thing identifying it as one.
    */
-  --input: oklch(0.78 0 0);
+  --input: oklch(0.66 0 0);
   --ring: oklch(0.45 0 0);
 
   /* ---------------------------------------------------------------- facade */
