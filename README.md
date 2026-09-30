@@ -11,9 +11,6 @@ is copied into your project**. There is no package to depend on.
 pnpm dlx shadcn@latest add https://facadeui.dev/r/hero-split.json
 ```
 
-Every section is tested against WCAG 2.2 AA and uses your existing shadcn
-theme.
-
 ---
 
 ## What is in here
