@@ -103,6 +103,55 @@ test("replaying a motion preview reloads the frame and keeps it labelled", async
   )
 })
 
+test("a phone-width header keeps to the essentials", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce", colorScheme: "light" })
+  await page.setViewportSize({ width: 390, height: 780 })
+  await page.goto("/components/feature-grid")
+
+  const header = page.getByRole("banner")
+
+  // Three segments become one button, whose name states the mode and the next.
+  await expect(header.getByRole("radio", { name: "Light" })).toBeHidden()
+  const mode = header.getByRole("button", { name: /^Colour mode/ })
+  await expect(mode).toHaveAccessibleName("Colour mode: System. Switch to Light")
+  await expect(page.locator("html")).not.toHaveClass(/dark/)
+
+  await mode.click()
+  await expect(mode).toHaveAccessibleName("Colour mode: Light. Switch to Dark")
+  await mode.click()
+  await expect(mode).toHaveAccessibleName("Colour mode: Dark. Switch to System")
+  await expect(page.locator("html")).toHaveClass(/dark/)
+  // Also announced: a label changing under focus is not read out everywhere.
+  await expect(header.getByText("Dark colour mode")).toBeAttached()
+  await mode.click()
+  await expect(mode).toHaveAccessibleName("Colour mode: System. Switch to Light")
+  await expect(page.locator("html")).not.toHaveClass(/dark/)
+
+  // The GitHub link is in exactly one place: the drawer, wherever there is one.
+  await expect(header.getByRole("link", { name: /GitHub/ })).toBeHidden()
+  await page.getByRole("button", { name: "Open navigation" }).click()
+  await expect(
+    page.getByRole("dialog").getByRole("link", { name: "GitHub (opens in a new tab)" }),
+  ).toBeVisible()
+
+  // And nothing in the row pushes the page sideways.
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+    ),
+  ).toBe(true)
+})
+
+test("a desktop header has the full controls and the GitHub link", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto("/components/feature-grid")
+
+  const header = page.getByRole("banner")
+  await expect(header.getByRole("radio", { name: "System" })).toBeChecked()
+  await expect(header.getByRole("button", { name: /^Colour mode/ })).toBeHidden()
+  await expect(header.getByRole("link", { name: /GitHub/ })).toBeVisible()
+})
+
 test("the docs navigation drawer has no axe violations while open", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" })
   await page.setViewportSize({ width: 390, height: 780 })

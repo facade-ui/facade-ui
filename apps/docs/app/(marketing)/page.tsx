@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { InstallCommand } from "@/components/install-command"
 import { getRegistryItems, installCommands } from "@/lib/registry"
+import { GITHUB_URL } from "@/lib/registry-shared"
 import { buttonVariants } from "@registry/ui/button"
 import { Container } from "@registry/ui/container"
 import { Eyebrow } from "@registry/ui/eyebrow"
@@ -120,7 +121,7 @@ export default function HomePage() {
         <Container className="text-muted-foreground flex flex-wrap items-center justify-between gap-4 text-sm">
           <p>MIT licensed. Built in the open.</p>
           <a
-            href="https://github.com/facade-ui/facade-ui"
+            href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-foreground focus-visible:ring-ring rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2"

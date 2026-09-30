@@ -7,6 +7,7 @@
  */
 
 export const REGISTRY_URL = "https://facadeui.dev"
+export const GITHUB_URL = "https://github.com/facade-ui/facade-ui"
 
 export const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const
 export type PackageManager = (typeof PACKAGE_MANAGERS)[number]

@@ -3,6 +3,9 @@
  * trigger for the theme customiser, and — below `lg` — the trigger for the
  * navigation drawer.
  *
+ * Below `lg` the GitHub link moves into the drawer; below `md` the colour mode
+ * collapses to one cycling button.
+ *
  * a11y: a `<header>` landmark containing a named `<nav>`, and a skip link that
  * is the first focusable element on the page so keyboard users can jump past the
  * whole chrome in one keystroke.
@@ -11,8 +14,10 @@
 import Link from "next/link"
 
 import type { NavGroup } from "@/lib/registry"
+import { GITHUB_URL } from "@/lib/registry-shared"
 import { buttonVariants } from "@registry/ui/button"
 import { Container } from "@registry/ui/container"
+import { cn } from "@registry/lib/utils"
 import { FacadeMark } from "./facade-mark"
 import { SiteNavMobile } from "./site-nav"
 import { ThemeCustomiserPanel } from "./theme-customiser-panel"
@@ -58,10 +63,13 @@ export function SiteHeader({ groups }: SiteHeaderProps) {
           <ThemeSwitcher />
           <ThemeCustomiserPanel />
           <a
-            href="https://github.com/facade-ui/facade-ui"
+            href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={buttonVariants({ variant: "ghost", size: "sm" })}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "hidden lg:inline-flex",
+            )}
           >
             GitHub
             <span className="sr-only"> (opens in a new tab)</span>
