@@ -29,8 +29,8 @@ const palettes = JSON.parse(
 const scopes = Object.entries(palettes)
 
 describe("OKLCH parity between the browser and Node implementations", () => {
-  it("covers all six shipped theme scopes", () => {
-    expect(scopes).toHaveLength(6)
+  it("covers all eight shipped theme scopes", () => {
+    expect(scopes).toHaveLength(8)
   })
 
   it.each(scopes)("parses every token identically — %s", (_scope, palette) => {
@@ -67,6 +67,36 @@ describe("OKLCH parity between the browser and Node implementations", () => {
       nodeContrast(nodeParse(fg)!, nodeParse(bg)!),
       6,
     )
+  })
+})
+
+/**
+ * Parity proves the two implementations agree; it says nothing about whether
+ * what they agree on is right. They once agreed on a luminance that decoded
+ * the sRGB curve twice, and every figure was confidently wrong in both places.
+ * So these are anchored outside the repo: the pairs every WCAG reference
+ * quotes, given as hex so no OKLCH of ours is on either side of the sum.
+ */
+describe("contrast against known WCAG figures", () => {
+  const CASES: [string, string, number][] = [
+    ["#000000", "#ffffff", 21],
+    ["#ffffff", "#ffffff", 1],
+    // The lightest grey that passes AA on white, and the one just beyond it.
+    ["#767676", "#ffffff", 4.54],
+    ["#777777", "#ffffff", 4.48],
+    ["#595959", "#ffffff", 7.0],
+    ["#ff0000", "#ffffff", 4.0],
+    ["#0000ff", "#ffffff", 8.59],
+  ]
+
+  it.each(CASES)("%s on %s is %s:1", (fg, bg, ratio) => {
+    expect(browserContrast(fromHex(fg)!, fromHex(bg)!)).toBeCloseTo(ratio, 1)
+    expect(
+      nodeContrast(
+        nodeParse(formatOklch(fromHex(fg)!))!,
+        nodeParse(formatOklch(fromHex(bg)!))!,
+      ),
+    ).toBeCloseTo(ratio, 1)
   })
 })
 

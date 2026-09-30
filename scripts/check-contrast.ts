@@ -2,16 +2,17 @@
  * Verifies every Facade UI theme preset against the WCAG 2.2 AA bar.
  *
  * Reads the real token values out of `globals.css` and `themes.css` through
- * `lib/css-tokens.ts`, resolving each theme scope (light/dark x neutral/warm/
- * vivid), then checks the pairs that sections actually put on screen. Text pairs must clear 4.5:1; the focus ring
- * must clear 3:1 against its background. Failures exit non-zero, so CI blocks a
- * palette change that quietly breaks contrast.
+ * `lib/css-tokens.ts`, resolving each theme scope (light/dark x the default and
+ * the three presets), then checks the pairs that sections actually put on
+ * screen. Text pairs must clear 4.5:1; the focus ring and the edge of a form
+ * field must clear 3:1 against their background. Failures exit non-zero, so CI
+ * blocks a palette change that quietly breaks contrast.
  */
 
 import { contrastRatio, parseOklch, type Rgb } from "./lib/color.ts"
 import { readScopes, type Tokens } from "./lib/css-tokens.ts"
 
-// The six theme scopes, resolved from the real stylesheets. Shared with
+// The eight theme scopes, resolved from the real stylesheets. Shared with
 // `extract-palettes.ts`, so the customiser scores exactly what CI enforces.
 const scopes: { label: string; tokens: Tokens }[] = readScopes()
 

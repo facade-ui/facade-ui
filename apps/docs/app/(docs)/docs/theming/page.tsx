@@ -54,10 +54,28 @@ export default function ThemingPage() {
         project&apos;s theme with no edits at all.
       </p>
       <p>
-        One deliberate difference: Facade&apos;s default <code>--ring</code> is darker
-        than shadcn&apos;s. The stock value sits at roughly 2.2:1 against a white
-        background, below the 3:1 that WCAG 2.2 requires for a non-text indicator. If you
-        keep your own ring colour, check it.
+        Two deliberate differences from shadcn&apos;s stock values, both about contrast.{" "}
+        <code>--ring</code> is the primary colour rather than a pale grey: the stock ring
+        sits at roughly 2.2:1 against a white background, below the 3:1 that WCAG 2.2
+        requires for a non-text indicator. And <code>--input</code> is a good deal darker
+        than <code>--border</code>, for the same 3:1 — the edge of a text field is the
+        only thing identifying it as one. If you keep your own values for either, check
+        them.
+      </p>
+
+      <h2>The default palette</h2>
+      <p>
+        Out of the box, Facade is Tailwind&apos;s <strong>orange</strong> on its{" "}
+        <strong>stone</strong> greys, step for step: orange 600 for the primary, orange
+        100 and 800 for the accent, stone 50 to 950 for every surface and line of copy.
+        Dark mode moves the primary up to orange 500.
+      </p>
+      <p>
+        The one thing that is not the obvious step is the label on a primary button. It is
+        ink rather than white, because white on orange 600 is 3.6:1 and ink is 5.5:1. The
+        same reasoning is why nothing in the registry sets <em>text</em> in{" "}
+        <code>--primary</code>: a bright brand colour clears 3:1 as a fill, an icon or a
+        focus ring long before it clears the 4.5:1 that text needs.
       </p>
 
       <h2>Facade names</h2>
@@ -97,11 +115,12 @@ export default function ThemingPage() {
 
       <h2>Presets</h2>
       <p>
-        Three presets ship with the registry. <em>Neutral</em> is the default and needs no
-        attribute; <em>warm</em> and <em>vivid</em> are applied with{" "}
-        <code>data-facade-theme</code> on <code>&lt;html&gt;</code> or on any subtree.
-        Light and dark are an independent axis, set by the <code>dark</code> class — try
-        both switches in the header.
+        Three more palettes ship with the registry, in <code>themes.css</code>.{" "}
+        <em>Neutral</em> is the monochrome shadcn starts from, <em>warm</em> is a brown on
+        cream and <em>vivid</em> an indigo; each is applied with{" "}
+        <code>data-facade-theme</code> on <code>&lt;html&gt;</code> or on any subtree. The
+        orange default needs no attribute. Light and dark are an independent axis, set by
+        the <code>dark</code> class — try both switches in the header.
       </p>
       <CodeBlock
         lang="html"
@@ -116,9 +135,10 @@ export default function ThemingPage() {
         else needs to change.
       </p>
       <p>
-        To find the numbers, open the customiser with the palette button in the header and
-        drag: it edits the tokens below in OKLCH and applies them to this whole site as
-        you go, so you are judging a real page rather than a swatch. The{" "}
+        The quick way is the customiser, behind the palette button in the header. Pick a
+        brand colour and a neutral and it generates all of the tokens below, for both
+        modes, with every contrast pair already passing — and applies them to this whole
+        site as you go, so you are judging a real page rather than a swatch. The{" "}
         <Link href="/docs/customise">theme customiser</Link> page has the contrast table
         and the CSS to paste back here.
       </p>

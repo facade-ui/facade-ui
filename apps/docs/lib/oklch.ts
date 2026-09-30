@@ -148,8 +148,14 @@ export const toHex = (color: Oklch): string => {
   return `#${channel(r)}${channel(g)}${channel(b)}${color.a >= 1 ? "" : alpha}`
 }
 
+/**
+ * Takes the **linear** channels `toRgb` returns, which are already what the
+ * WCAG formula sums. Decoding them a second time is the classic mistake in the
+ * other direction: every colour scores darker than it is, so dark text on a
+ * light page looks safer than it is and light text on a dark page looks worse.
+ */
 function relativeLuminance({ r, g, b }: { r: number; g: number; b: number }): number {
-  return 0.2126 * decodeSrgb(r) + 0.7152 * decodeSrgb(g) + 0.0722 * decodeSrgb(b)
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
 
 /** WCAG 2.x contrast ratio. Translucent foregrounds are composited first. */

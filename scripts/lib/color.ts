@@ -1,11 +1,13 @@
 /**
- * Minimal OKLCH -> sRGB conversion plus WCAG 2.x relative-luminance contrast.
+ * Minimal OKLCH -> linear sRGB conversion plus WCAG 2.x relative-luminance
+ * contrast.
  *
  * Exists so the accessibility claims in the README are verified from the real
  * token values in `globals.css` / `themes.css` rather than asserted by hand.
  * Implements the Björn Ottosson OKLab matrices; no colour library dependency.
  */
 
+/** Linear-light sRGB, 0–1 per channel. Not a gamma-encoded hex triplet. */
 export interface Rgb {
   r: number
   g: number
@@ -74,10 +76,15 @@ export function flatten(fg: Rgb, bg: Rgb): Rgb {
   }
 }
 
+/**
+ * `oklabToSrgb` hands back **linear** light — that is what the OKLab matrices
+ * are defined against — and relative luminance is a weighted sum of exactly
+ * those linear channels. Running them through the sRGB decode again, as though
+ * they were a gamma-encoded hex triplet, squares the curve: it reported a
+ * mid-grey on white at 16:1 when the real figure is 6:1.
+ */
 function relativeLuminance({ r, g, b }: Rgb): number {
-  const lin = (c: number): number =>
-    c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
 
 /** WCAG 2.x contrast ratio, 1–21. Translucent foregrounds are composited first. */

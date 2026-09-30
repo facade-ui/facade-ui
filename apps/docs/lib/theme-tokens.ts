@@ -83,8 +83,15 @@ export function checkPalette(
  * The dark block is scoped the same way `themes.css` scopes a preset: a bare
  * `.dark { }` would override every other theme's dark palette, not just this
  * one. `:root` keeps the plain `.dark` pairing, because that *is* the default.
+ *
+ * `radius` goes in the first block only: corners do not change with the mode.
  */
-export function toCss(light: Palette, dark: Palette, selector = ":root"): string {
+export function toCss(
+  light: Palette,
+  dark: Palette,
+  selector = ":root",
+  radius?: string,
+): string {
   const block = (tokens: Palette) =>
     EDITABLE_TOKENS.map((token) => `  ${token}: ${tokens[token]};`).join("\n")
 
@@ -93,5 +100,7 @@ export function toCss(light: Palette, dark: Palette, selector = ":root"): string
       ? ".dark"
       : `.dark${selector},\n.dark ${selector},\n${selector} .dark`
 
-  return `${selector} {\n${block(light)}\n}\n\n${darkSelector} {\n${block(dark)}\n}\n`
+  const corners = radius ? `  --radius: ${radius};\n` : ""
+
+  return `${selector} {\n${corners}${block(light)}\n}\n\n${darkSelector} {\n${block(dark)}\n}\n`
 }

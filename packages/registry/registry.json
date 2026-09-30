@@ -7,7 +7,7 @@
       "name": "tokens",
       "type": "registry:file",
       "title": "Design tokens",
-      "description": "The Facade token layer: shadcn-compatible colour names plus --facade-* display type, section rhythm and motion tokens. Import it from your globals.css.",
+      "description": "The Facade token layer: shadcn-compatible colour names plus --facade-* display type, section rhythm and motion tokens. The default palette is Tailwind's orange on stone. Import it from your globals.css.",
       "categories": ["theme"],
       "files": [
         {
@@ -21,7 +21,7 @@
       "name": "themes",
       "type": "registry:file",
       "title": "Theme presets",
-      "description": "Warm and vivid presets applied with data-facade-theme. Neutral is the default and lives in the tokens file.",
+      "description": "Neutral, warm and vivid presets applied with data-facade-theme. The orange default lives in the tokens file.",
       "categories": ["theme"],
       "files": [
         {

@@ -7,14 +7,22 @@
 
 import { describe, expect, it } from "vitest"
 
+import { readFileSync } from "node:fs"
+import { resolve } from "node:path"
+
 import palettes from "../.generated/palettes.json"
-import { customThemeCss, parseCustomTheme, type CustomTheme } from "./custom-theme"
+import {
+  DEFAULT_RADIUS,
+  customThemeCss,
+  parseCustomTheme,
+  type CustomTheme,
+} from "./custom-theme"
 import { EDITABLE_TOKENS, toCss, type Palette } from "./theme-tokens"
 
 const shipped = palettes as Record<string, Palette>
 const theme: CustomTheme = {
-  light: shipped["neutral-light"]!,
-  dark: shipped["neutral-dark"]!,
+  light: shipped["orange-light"]!,
+  dark: shipped["orange-dark"]!,
 }
 
 describe("parseCustomTheme", () => {
@@ -42,6 +50,26 @@ describe("parseCustomTheme", () => {
     expect(
       parseCustomTheme(JSON.stringify({ light: incomplete, dark: theme.dark })),
     ).toBeNull()
+  })
+
+  it("keeps a radius and a recipe it recognises", () => {
+    const full: CustomTheme = {
+      ...theme,
+      radius: "1rem",
+      recipe: { brand: "orange", neutral: "stone" },
+    }
+    expect(parseCustomTheme(JSON.stringify(full))).toEqual(full)
+  })
+
+  it("drops a radius or a recipe it does not, and keeps the palette", () => {
+    // Both reach a stylesheet or a control, so neither is taken on trust — but
+    // neither is worth losing a whole palette over.
+    for (const radius of ["2rem", "0.5rem;} body{display:none", 1, null]) {
+      expect(parseCustomTheme(JSON.stringify({ ...theme, radius }))).toEqual(theme)
+    }
+    for (const recipe of ["orange", { brand: "orange", neutral: "beige" }, 7]) {
+      expect(parseCustomTheme(JSON.stringify({ ...theme, recipe }))).toEqual(theme)
+    }
   })
 
   it("rejects values that are not OKLCH", () => {
@@ -74,5 +102,25 @@ describe("customThemeCss", () => {
 
   it("keeps the plain .dark pairing for :root", () => {
     expect(toCss(theme.light, theme.dark)).toMatch(/^\.dark \{/m)
+  })
+
+  it("leaves the radius alone until one is chosen", () => {
+    expect(css).not.toContain("--radius")
+  })
+
+  it("writes a chosen radius once, in the block both modes inherit", () => {
+    const rounded = customThemeCss({ ...theme, radius: "1rem" })
+    expect(rounded.split("--radius: 1rem;").length - 1).toBe(1)
+    expect(rounded.indexOf("--radius")).toBeLessThan(rounded.indexOf(".dark"))
+  })
+})
+
+describe("DEFAULT_RADIUS", () => {
+  it("is the radius globals.css ships", () => {
+    const globals = readFileSync(
+      resolve(import.meta.dirname, "../../../packages/registry/src/tokens/globals.css"),
+      "utf8",
+    )
+    expect(/--radius:\s*([^;]+);/.exec(globals)?.[1]).toBe(DEFAULT_RADIUS)
   })
 })

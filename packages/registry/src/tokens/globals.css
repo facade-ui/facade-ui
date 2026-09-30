@@ -9,8 +9,21 @@
  * 2. Marketing-specific tokens under a `--facade-` prefix (display type, section
  *    rhythm, motion) that shadcn does not define and that would otherwise collide.
  *
- * a11y: `--ring` is deliberately darker than shadcn's default so the focus ring
- * clears 3:1 against `--background` (WCAG 2.2 AA, non-text contrast).
+ * The default palette is Tailwind's orange on its stone greys, step for step:
+ * each value below is annotated with the step it is. Two are not a step at all,
+ * and both for the same reason — contrast:
+ *
+ *  - `--primary-foreground` is ink, not white. White on orange 600 is 3.6:1;
+ *    ink is 5.5:1. The label on a primary button is text, so it gets the pair
+ *    that clears 4.5:1 (WCAG 1.4.3) rather than the one convention expects.
+ *  - `--input` sits between stone 400 and 500, where it first clears 3:1
+ *    against the background (WCAG 1.4.11).
+ *
+ * Because `--primary` clears 3:1 but not 4.5:1 against the background, it is a
+ * colour for fills, icons, rings and marks — never for running text. Nothing in
+ * the registry sets type in it.
+ *
+ * A monochrome palette, and two other presets, live in `themes.css`.
  */
 
 @import "tailwindcss";
@@ -22,30 +35,30 @@
   --radius: 0.625rem;
 
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: oklch(0.147 0.004 49.25); /* stone 950 */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.147 0.004 49.25);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.505 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.922 0 0);
+  --popover-foreground: oklch(0.147 0.004 49.25);
+  --primary: oklch(0.646 0.222 41.116); /* orange 600 */
+  --primary-foreground: oklch(0.147 0.004 49.25); /* ink — see the header */
+  --secondary: oklch(0.97 0.001 106.424); /* stone 100 */
+  --secondary-foreground: oklch(0.216 0.006 56.043); /* stone 900 */
+  --muted: oklch(0.97 0.001 106.424);
+  --muted-foreground: oklch(0.444 0.011 73.639); /* stone 600 */
+  --accent: oklch(0.954 0.038 75.164); /* orange 100 */
+  --accent-foreground: oklch(0.47 0.157 37.304); /* orange 800 */
+  --destructive: oklch(0.577 0.245 27.325); /* red 600 */
+  --destructive-foreground: oklch(0.985 0.001 106.423); /* stone 50 */
+  --border: oklch(0.923 0.003 48.717); /* stone 200 */
   /*
    * `--input` is the border of a form control, not a divider, so it has to
    * clear 3:1 against the background on its own (WCAG 1.4.11). That is a good
    * deal darker than `--border`, and deliberately so — a hairline is decorative,
    * the edge of a text field is the only thing identifying it as one.
    */
-  --input: oklch(0.78 0 0);
-  --ring: oklch(0.45 0 0);
+  --input: oklch(0.664 0.01 56.259);
+  --ring: oklch(0.646 0.222 41.116);
 
   /* ---------------------------------------------------------------- facade */
   --facade-font-sans:
@@ -82,25 +95,25 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.269 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.782 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.145 0 0);
+  --background: oklch(0.147 0.004 49.25); /* stone 950 */
+  --foreground: oklch(0.985 0.001 106.423); /* stone 50 */
+  --card: oklch(0.216 0.006 56.043); /* stone 900 */
+  --card-foreground: oklch(0.985 0.001 106.423);
+  --popover: oklch(0.268 0.007 34.298); /* stone 800 */
+  --popover-foreground: oklch(0.985 0.001 106.423);
+  --primary: oklch(0.705 0.213 47.604); /* orange 500 */
+  --primary-foreground: oklch(0.147 0.004 49.25);
+  --secondary: oklch(0.268 0.007 34.298);
+  --secondary-foreground: oklch(0.985 0.001 106.423);
+  --muted: oklch(0.268 0.007 34.298);
+  --muted-foreground: oklch(0.709 0.01 56.259); /* stone 400 */
+  --accent: oklch(0.266 0.079 36.259); /* orange 950 */
+  --accent-foreground: oklch(0.837 0.128 66.29); /* orange 300 */
+  --destructive: oklch(0.704 0.191 22.216); /* red 400 */
+  --destructive-foreground: oklch(0.147 0.004 49.25);
   --border: oklch(1 0 0 / 12%);
-  --input: oklch(0.74 0 0);
-  --ring: oklch(0.78 0 0);
+  --input: oklch(0.553 0.013 58.071); /* stone 500 */
+  --ring: oklch(0.705 0.213 47.604);
 }
 
 @theme inline {

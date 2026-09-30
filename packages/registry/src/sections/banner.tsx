@@ -174,8 +174,10 @@ export function Banner({
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon" }),
             "absolute right-2 top-1/2 size-9 -translate-y-1/2",
+            // Ghost paints its icon in `--foreground`, which on the primary
+            // surface is the wrong half of the pair in one mode or the other.
             variant === "primary" &&
-              "hover:bg-primary-foreground/15 hover:text-primary-foreground",
+              "text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground",
           )}
         >
           <XIcon aria-hidden focusable="false" className="size-4" />

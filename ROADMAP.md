@@ -14,8 +14,8 @@
   toggles, code tabs, copy buttons, install commands, generated props tables.
 - Atoms: Button, Badge, Heading, Eyebrow, Container, Section, SectionHeader,
   CtaGroup, Stat, LogoMark, FeatureIcon, Testimonial, PricingTier.
-- CI: lint, typecheck, unit tests, contrast, registry validation, axe across six
-  theme scopes, visual regression, and a fresh-install smoke test.
+- CI: lint, typecheck, unit tests, contrast, registry validation, axe across
+  every theme scope, visual regression, and a fresh-install smoke test.
 
 ### Phase 1 — Core sections
 
@@ -32,8 +32,8 @@ something the static version cannot do.
 
 The form-field contrast gap flagged here earlier is closed. shadcn already
 separates `--border` (dividers) from `--input` (control boundaries), so
-`--input` was darkened until it clears 3:1 against the background in all six
-theme scopes, and `scripts/check-contrast.ts` now **enforces** it rather than
+`--input` was darkened until it clears 3:1 against the background in every
+theme scope, and `scripts/check-contrast.ts` now **enforces** it rather than
 reporting it. `--border` stays informational, because a hairline divider is
 decoration.
 
@@ -51,9 +51,32 @@ decoration.
   palette against the _same_ pairs and thresholds `scripts/check-contrast.ts`
   enforces in CI — so a palette that shows all-green is one the build would
   accept. Presets are read out of the shipped CSS at build time rather than
-  re-declared. The palette applies to the whole docs site as a fourth theme
+  re-declared. The palette applies to the whole docs site as one more theme
   preset, previews included, so there is no preview pane to disagree with the
   real thing; `/docs/customise` keeps the contrast table and the CSS export.
+
+### Phase 4 — An identity of its own
+
+- **The default is no longer monochrome.** It is Tailwind's orange on stone,
+  step for step, and the old black-and-white palette is a preset (`neutral`)
+  alongside `warm` and `vivid`. The label on a primary button is ink rather than
+  white, because white on orange 600 is 3.6:1; and nothing sets text in
+  `--primary` any more — an eyebrow carries the brand in a tick beside the
+  label, which only has to clear 3:1.
+- **The contrast checker was wrong, and is fixed.** Both implementations ran
+  linear-light values through the sRGB decode a second time, so every colour
+  scored darker than it is: dark-on-light pairs looked safer than they were,
+  light-on-dark ones worse. Text pairs had enough headroom that nothing visible
+  changed. The light `--input` borders did not — they sat at 2:1 while reporting
+  4.3:1 — and have been darkened to a real 3:1. The arithmetic is now tested
+  against the ratios every WCAG reference quotes, not just against itself.
+- **The customiser has a basic mode.** Brand colour, neutral, corners; the
+  nineteen tokens are generated, for both modes, by the same recipe that
+  produces the default theme, and a test holds that no choice the swatches
+  offer — nor any of a sweep of arbitrary hex colours — produces a pair CI would
+  reject. Every token is still there, under Advanced. The panel floats over the
+  page instead of reserving a gutter, so opening it no longer reflows what it
+  is there to restyle.
 
 ## Not started
 

@@ -107,7 +107,7 @@ export function CtaBand({
               {eyebrow ? (
                 <Eyebrow
                   tone={inverted ? "foreground" : "primary"}
-                  className={inverted ? "text-primary-foreground/80" : undefined}
+                  className={inverted ? "text-primary-foreground" : undefined}
                 >
                   {eyebrow}
                 </Eyebrow>
@@ -125,7 +125,10 @@ export function CtaBand({
                 <p
                   className={cn(
                     "text-pretty text-lg",
-                    inverted ? "text-primary-foreground/85" : "text-muted-foreground",
+                    // Full strength, not a tint of it: a bright primary and
+                    // its label can sit as close as 4.5:1, which leaves no
+                    // room to fade the text and still read it.
+                    inverted ? "text-primary-foreground" : "text-muted-foreground",
                     centered && "max-w-2xl",
                   )}
                 >
@@ -147,9 +150,12 @@ export function CtaBand({
                       ? actions.map((action, index) => ({
                           ...action,
                           // On an inverted band the theme's primary button would
-                          // disappear into the surface it sits on.
+                          // disappear into the surface it sits on — and so
+                          // would a ghost, whose label is `--foreground` with
+                          // nothing behind it. Both replacements bring their
+                          // own surface.
                           variant:
-                            action.variant ?? (index === 0 ? "secondary" : "ghost"),
+                            action.variant ?? (index === 0 ? "secondary" : "outline"),
                         }))
                       : actions
                   }
@@ -162,7 +168,7 @@ export function CtaBand({
                   <p
                     className={cn(
                       "text-pretty text-sm",
-                      inverted ? "text-primary-foreground/75" : "text-muted-foreground",
+                      inverted ? "text-primary-foreground" : "text-muted-foreground",
                       centered && "text-center",
                     )}
                   >
