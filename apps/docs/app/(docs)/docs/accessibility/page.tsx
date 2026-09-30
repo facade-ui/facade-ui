@@ -137,9 +137,8 @@ export default function AccessibilityPage() {
         </li>
       </ul>
       <p>
-        Automated checks find only some accessibility problems, perhaps a third. The
-        keyboard walkthrough on each section&apos;s page covers the rest, and it is
-        written by hand.
+        Automated checks find only some accessibility problems, perhaps a third. Test your
+        finished page with a keyboard and a screen reader as well.
       </p>
     </Prose>
   )

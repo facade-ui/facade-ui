@@ -40,9 +40,8 @@ npx shadcn@latest init`}
       <h2>2. Add the tokens</h2>
       <p>
         The tokens file defines the <code>--facade-*</code> CSS variables that sections
-        use for heading sizes, spacing and animation. It also defines the shadcn colour
-        names. If your project already has a theme, you can skip this step and the
-        sections will use your colours.
+        use for heading sizes, spacing and animation. Every section needs it, so do not
+        skip this step.
       </p>
       <InstallCommand commands={installCommands("tokens")} />
       <p>Then import the file in your stylesheet, after Tailwind:</p>
@@ -52,6 +51,11 @@ npx shadcn@latest init`}
         code={`@import "tailwindcss";
 @import "../styles/facade-tokens.css";`}
       />
+      <p>
+        The file also sets the shadcn colour names to Facade&apos;s default colours. If
+        your project already has a theme, keep your own colour variables below the import.
+        They override the defaults, and the sections use your colours.
+      </p>
 
       <h2>3. Add a component</h2>
       <p>

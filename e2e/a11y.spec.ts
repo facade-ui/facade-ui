@@ -8,7 +8,7 @@
  * — it needs computed styles, which jsdom cannot give.
  *
  * Zero violations is the bar. Automated scanning catches roughly a third of real
- * accessibility problems; the keyboard walkthroughs cover what it cannot.
+ * accessibility problems; manual keyboard and screen-reader testing covers the rest.
  */
 
 import AxeBuilder from "@axe-core/playwright"
