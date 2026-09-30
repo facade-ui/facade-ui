@@ -42,11 +42,11 @@ export interface HeroWithMediaProps extends StackSlotProps {
   actions?: CtaItem[]
   link?: LinkComponent
   note?: ReactNode
-  /** The media. Decorative in `overlay` mode, so give it `alt=""`. */
+  /** The media. In `overlay` mode it is decorative, so give it `alt=""`. */
   media: ReactNode
   /** `overlay` puts media behind the copy; `below` puts it underneath. */
   placement?: "overlay" | "below"
-  /** Tunes the scrim. Applied over the media, under the copy. */
+  /** Classes for the dark layer between the media and the text. */
   overlayClassName?: string
   headingLevel?: HeadingLevel
   size?: "md" | "lg" | "xl"

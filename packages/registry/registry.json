@@ -7,7 +7,7 @@
       "name": "tokens",
       "type": "registry:file",
       "title": "Design tokens",
-      "description": "The Facade token layer: shadcn-compatible colour names plus --facade-* display type, section rhythm and motion tokens. The default palette is Tailwind's orange on stone. Import it from your globals.css.",
+      "description": "The design tokens Facade UI needs: shadcn colour names, plus --facade-* variables for heading sizes, section spacing and animation. The default colours are Tailwind's orange and stone. Import the file in your globals.css.",
       "categories": ["theme"],
       "files": [
         {
@@ -21,7 +21,7 @@
       "name": "themes",
       "type": "registry:file",
       "title": "Theme presets",
-      "description": "Neutral, warm and vivid presets applied with data-facade-theme. The orange default lives in the tokens file.",
+      "description": "Three more colour themes: neutral, warm and vivid. Apply one with the data-facade-theme attribute. The default orange theme is in the tokens file.",
       "categories": ["theme"],
       "files": [
         {
@@ -35,7 +35,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "cn",
-      "description": "Class merging helper: clsx plus tailwind-merge. Identical to shadcn/ui's, so it overwrites nothing meaningful.",
+      "description": "A helper that merges class names, using clsx and tailwind-merge. It is the same as the one in shadcn/ui, so installing it changes nothing if you already have it.",
       "files": [
         {
           "path": "src/lib/utils.ts",
@@ -48,8 +48,8 @@
     {
       "name": "types",
       "type": "registry:lib",
-      "title": "Section contracts",
-      "description": "Shared types every Facade section speaks: heading levels, pluggable image/link components, CTA items.",
+      "title": "Shared types",
+      "description": "Types that every section uses: heading levels, image and link components you can replace, and call-to-action items.",
       "files": [
         {
           "path": "src/lib/types.ts",
@@ -62,7 +62,7 @@
       "name": "motion-primitives",
       "type": "registry:component",
       "title": "Motion primitives",
-      "description": "FacadeMotionProvider, FadeIn, Reveal, Stagger and Collapse. Opacity and transform only, with reduced motion honoured.",
+      "description": "Animation building blocks: FacadeMotionProvider, FadeIn, Reveal, Stagger and Collapse. They animate only opacity and transform, and follow the reduced-motion setting.",
       "categories": ["motion"],
       "files": [
         {
@@ -108,7 +108,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Base UI Button with Facade variants. Every size clears the 44x44 target minimum.",
+      "description": "A button built on Base UI, with Facade styles. Every size is at least 44 by 44 pixels.",
       "categories": ["atom"],
       "files": [
         {
@@ -128,7 +128,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Small inline label for status or category, with an optional screen-reader prefix.",
+      "description": "A small label for a status or category. You can add a prefix that only screen readers announce.",
       "categories": ["atom"],
       "files": [
         {
@@ -144,7 +144,7 @@
       "name": "heading",
       "type": "registry:ui",
       "title": "Heading",
-      "description": "Renders h1-h6 from a numeric level so visual size and outline level stay independent.",
+      "description": "Renders an h1 to h6 from a number, so you set the heading level and the visual size separately.",
       "categories": ["atom"],
       "files": [
         {
@@ -159,7 +159,7 @@
       "name": "eyebrow",
       "type": "registry:ui",
       "title": "Eyebrow",
-      "description": "The small label above a section heading. A paragraph, never a heading.",
+      "description": "The small label above a section heading. It is a paragraph, not a heading.",
       "categories": ["atom"],
       "files": [
         {
@@ -174,7 +174,7 @@
       "name": "container",
       "type": "registry:ui",
       "title": "Container",
-      "description": "The horizontal measure every section sits inside, driven by the container tokens.",
+      "description": "Sets the maximum width and side padding that every section uses. Both come from the container tokens.",
       "categories": ["atom"],
       "files": [
         {
@@ -189,7 +189,7 @@
       "name": "section",
       "type": "registry:ui",
       "title": "Section",
-      "description": "The outer band: landmark element, vertical rhythm token, and the aria-labelledby wiring.",
+      "description": "The outer wrapper of a section. It sets the element, the vertical spacing, and the link to the heading that names the section.",
       "categories": ["atom"],
       "files": [
         {
@@ -207,7 +207,7 @@
       "name": "section-header",
       "type": "registry:ui",
       "title": "Section header",
-      "description": "Eyebrow, heading and supporting copy, with the heading id every section needs for aria-labelledby.",
+      "description": "An eyebrow, a heading and a description. It also sets the heading id that a section uses for its accessible name.",
       "categories": ["atom"],
       "files": [
         {
@@ -227,7 +227,7 @@
       "name": "cta-group",
       "type": "registry:ui",
       "title": "CTA group",
-      "description": "A row of calls to action rendered as links, so middle-click and open-in-new-tab keep working.",
+      "description": "A row of call-to-action links styled as buttons. Because they are links, people can open them in a new tab.",
       "categories": ["atom"],
       "files": [
         {
@@ -246,7 +246,7 @@
       "name": "stat",
       "type": "registry:ui",
       "title": "Stat",
-      "description": "One figure and its label as a description-list group, with a spoken form for abbreviated values.",
+      "description": "One number with its label, as part of a description list. You can give a spoken form for abbreviated values.",
       "categories": ["atom"],
       "files": [
         {
@@ -261,7 +261,7 @@
       "name": "logo-mark",
       "type": "registry:ui",
       "title": "Logo mark",
-      "description": "One customer logo, optically sized and optionally linked, with the company name exposed as text.",
+      "description": "One customer logo, with an optional link. Logos get the same visual height, and the company name is available to screen readers.",
       "categories": ["atom"],
       "files": [
         {
@@ -279,7 +279,7 @@
       "name": "feature-icon",
       "type": "registry:ui",
       "title": "Feature icon",
-      "description": "The tinted container an icon sits in. Takes an icon component and hides it from assistive tech.",
+      "description": "A tinted box that holds an icon. You pass an icon component, and it is hidden from screen readers.",
       "categories": ["atom"],
       "files": [
         {
@@ -298,7 +298,7 @@
       "name": "testimonial",
       "type": "registry:ui",
       "title": "Testimonial",
-      "description": "A quotation with its attribution as blockquote plus figcaption, and an accessible star rating.",
+      "description": "A quote with the name of the person who said it, and an optional star rating that screen readers announce as text.",
       "categories": ["atom"],
       "files": [
         {
@@ -317,7 +317,7 @@
       "name": "pricing-tier",
       "type": "registry:ui",
       "title": "Pricing tier",
-      "description": "One plan card with an accessible price, an honest not-included state, and a recommended flag.",
+      "description": "One pricing plan as a card. The price has a spoken form, a feature that is not included says so in words, and you can mark a plan as recommended.",
       "categories": ["atom"],
       "files": [
         {
@@ -339,7 +339,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "A text field on Base UI's Field, so label, description and error are wired to the control. The border clears 3:1.",
+      "description": "A text field built on Base UI's Field, which connects the label, help text and error message to the input. The border has a contrast of at least 3:1.",
       "categories": ["atom"],
       "files": [
         {
@@ -355,7 +355,7 @@
       "name": "nav-top",
       "type": "registry:block",
       "title": "Top navigation",
-      "description": "Site header with Base UI dropdowns above lg and a focus-trapped drawer below it, from one array of links.",
+      "description": "A site header built from one list of links. Large screens get dropdown menus. Small screens get a drawer that keeps keyboard focus inside it.",
       "categories": ["section"],
       "files": [
         {
@@ -376,7 +376,7 @@
       "name": "hero-centered",
       "type": "registry:block",
       "title": "Hero — centred",
-      "description": "The classic centred landing hero: eyebrow, headline, copy, buttons, and optional media below.",
+      "description": "A centred hero: eyebrow, headline, text and buttons, with optional media below.",
       "categories": ["section"],
       "files": [
         {
@@ -399,7 +399,7 @@
       "name": "hero-centered-motion",
       "type": "registry:block",
       "title": "Hero — centred (motion)",
-      "description": "Centred hero with a staggered entrance played on mount.",
+      "description": "The centred hero, with its parts appearing one after another when the page loads.",
       "categories": ["motion"],
       "files": [
         {
@@ -417,7 +417,7 @@
       "name": "hero-split",
       "type": "registry:block",
       "title": "Hero — split",
-      "description": "Copy on one side, media on the other. Reading order stays copy-first on every screen size.",
+      "description": "A hero with text on one side and media on the other. The text comes first in reading order on every screen size.",
       "categories": ["section"],
       "files": [
         {
@@ -440,7 +440,7 @@
       "name": "hero-split-motion",
       "type": "registry:block",
       "title": "Hero — split (motion)",
-      "description": "Split hero with a staggered entrance played on mount.",
+      "description": "The split hero, with its parts appearing one after another when the page loads.",
       "categories": ["motion"],
       "files": [
         {
@@ -458,7 +458,7 @@
       "name": "hero-with-media",
       "type": "registry:block",
       "title": "Hero — with media",
-      "description": "Centred copy over a full-bleed background, or above a framed screenshot. The overlay variant always paints a scrim.",
+      "description": "A hero with centred text over a full-width background, or above a framed screenshot. Over a background, a dark layer keeps the text readable.",
       "categories": ["section"],
       "files": [
         {
@@ -481,7 +481,7 @@
       "name": "hero-with-media-motion",
       "type": "registry:block",
       "title": "Hero — with media (motion)",
-      "description": "Media hero with a staggered entrance played on mount.",
+      "description": "The media hero, with its parts appearing one after another when the page loads.",
       "categories": ["motion"],
       "files": [
         {
@@ -499,7 +499,7 @@
       "name": "logo-cloud",
       "type": "registry:block",
       "title": "Logo cloud",
-      "description": "A wall of customer logos. Company names are exposed as text, so it reads as a list rather than a run of unlabelled images.",
+      "description": "A group of customer logos. Company names are available as text, so screen readers announce a list of names, not unlabelled images.",
       "categories": ["section"],
       "files": [
         {
@@ -521,7 +521,7 @@
       "name": "logo-cloud-motion",
       "type": "registry:block",
       "title": "Logo cloud (motion)",
-      "description": "Logo wall whose marks fade in one after another.",
+      "description": "The logo cloud, with logos fading in one after another.",
       "categories": ["motion"],
       "files": [
         {
@@ -539,7 +539,7 @@
       "name": "usp-list",
       "type": "registry:block",
       "title": "USP list",
-      "description": "Three or four short value propositions, each an icon and a line of copy.",
+      "description": "Three or four short selling points, each with an icon and a line of text.",
       "categories": ["section"],
       "files": [
         {
@@ -562,7 +562,7 @@
       "name": "usp-list-motion",
       "type": "registry:block",
       "title": "USP list (motion)",
-      "description": "USP strip with a staggered entrance.",
+      "description": "The USP list, with items appearing one after another.",
       "categories": ["motion"],
       "files": [
         {
@@ -580,7 +580,7 @@
       "name": "feature-grid",
       "type": "registry:block",
       "title": "Feature grid",
-      "description": "A grid of feature cards, two to four across, with optional stretched links that keep the accessible name short.",
+      "description": "A grid of feature cards, two to four per row. A whole card can be a link while its accessible name stays short.",
       "categories": ["section"],
       "files": [
         {
@@ -604,7 +604,7 @@
       "name": "feature-grid-motion",
       "type": "registry:block",
       "title": "Feature grid (motion)",
-      "description": "Feature grid whose cards arrive in sequence.",
+      "description": "The feature grid, with cards appearing one after another.",
       "categories": ["motion"],
       "files": [
         {
@@ -622,7 +622,7 @@
       "name": "feature-rows",
       "type": "registry:block",
       "title": "Feature rows",
-      "description": "Alternating rows of media and copy. The alternation is visual only — DOM order stays copy-first.",
+      "description": "Rows of media and text that alternate sides. Only the layout alternates: in reading order, the text always comes first.",
       "categories": ["section"],
       "files": [
         {
@@ -647,7 +647,7 @@
       "name": "feature-rows-motion",
       "type": "registry:block",
       "title": "Feature rows (motion)",
-      "description": "Feature rows revealed one at a time as they scroll in.",
+      "description": "The feature rows, each appearing as you scroll to it.",
       "categories": ["motion"],
       "files": [
         {
@@ -665,7 +665,7 @@
       "name": "bento-grid",
       "type": "registry:block",
       "title": "Bento grid",
-      "description": "A mosaic of feature tiles at mixed sizes, laid out in the order given so reading order matches what you see.",
+      "description": "Feature tiles in mixed sizes. Tiles are placed in the order you give, so reading order matches what you see.",
       "categories": ["section"],
       "files": [
         {
@@ -688,7 +688,7 @@
       "name": "bento-grid-motion",
       "type": "registry:block",
       "title": "Bento grid (motion)",
-      "description": "Bento mosaic with a staggered entrance.",
+      "description": "The bento grid, with tiles appearing one after another.",
       "categories": ["motion"],
       "files": [
         {
@@ -706,7 +706,7 @@
       "name": "faq-accordion",
       "type": "registry:block",
       "title": "FAQ accordion",
-      "description": "Base UI Accordion with real buttons inside headings, find-in-page reachable answers, and optional FAQPage structured data.",
+      "description": "Questions and answers built on Base UI's Accordion. Each question is a button inside a heading, browser search finds text in closed answers, and you can add FAQPage structured data.",
       "categories": ["section"],
       "files": [
         {
@@ -729,7 +729,7 @@
       "name": "faq-accordion-motion",
       "type": "registry:block",
       "title": "FAQ accordion (motion)",
-      "description": "FAQ rows revealed as they scroll in. The open/close animation needs no JavaScript.",
+      "description": "The FAQ accordion, with rows appearing as you scroll to them. The open and close animation works without JavaScript.",
       "categories": ["motion"],
       "files": [
         {
@@ -747,7 +747,7 @@
       "name": "cta-band",
       "type": "registry:block",
       "title": "CTA band",
-      "description": "The closing call to action, in a muted, card, plain or inverted-primary surface.",
+      "description": "A closing call to action. Choose a muted, card, plain or primary-coloured background.",
       "categories": ["section"],
       "files": [
         {
@@ -770,7 +770,7 @@
       "name": "cta-band-motion",
       "type": "registry:block",
       "title": "CTA band (motion)",
-      "description": "Closing CTA revealed as it scrolls into view.",
+      "description": "The CTA band, appearing as you scroll to it.",
       "categories": ["motion"],
       "files": [
         {
@@ -788,7 +788,7 @@
       "name": "footer",
       "type": "registry:block",
       "title": "Footer",
-      "description": "Multi-column link groups with individually named navigation landmarks, a brand block, social links and a legal line.",
+      "description": "A footer with link groups in columns, a brand area, social links and a legal line. Each link group is a separately named navigation landmark.",
       "categories": ["section"],
       "files": [
         {
@@ -808,7 +808,7 @@
       "name": "stats",
       "type": "registry:block",
       "title": "Stats",
-      "description": "A row of headline figures as a description list, with a spoken form for abbreviated values.",
+      "description": "A row of key numbers as a description list. You can give a spoken form for abbreviated values.",
       "categories": ["section"],
       "files": [
         {
@@ -830,7 +830,7 @@
       "name": "stats-motion",
       "type": "registry:block",
       "title": "Stats (motion)",
-      "description": "Figures revealed in sequence as they scroll in.",
+      "description": "The stats, with numbers appearing one after another as you scroll to them.",
       "categories": ["motion"],
       "files": [
         {
@@ -848,7 +848,7 @@
       "name": "testimonials-grid",
       "type": "registry:block",
       "title": "Testimonials grid",
-      "description": "A wall of customer quotes, optionally in masonry columns that still read in document order.",
+      "description": "A grid of customer quotes. It can use columns of uneven height and still be read in the order you give.",
       "categories": ["section"],
       "files": [
         {
@@ -870,7 +870,7 @@
       "name": "testimonials-grid-motion",
       "type": "registry:block",
       "title": "Testimonials grid (motion)",
-      "description": "Quotes arrive one after another as the wall scrolls in.",
+      "description": "The testimonials grid, with quotes appearing one after another as you scroll to it.",
       "categories": ["motion"],
       "files": [
         {
@@ -888,7 +888,7 @@
       "name": "testimonial-single",
       "type": "registry:block",
       "title": "Testimonial — single",
-      "description": "One quote given the whole band, optionally beside a portrait or over a tinted surface.",
+      "description": "One large quote, with an optional portrait beside it or a tinted background.",
       "categories": ["section"],
       "files": [
         {
@@ -909,7 +909,7 @@
       "name": "pricing-tiers",
       "type": "registry:block",
       "title": "Pricing tiers",
-      "description": "The plan comparison as a row of cards, each with an accessible price and an honest not-included state.",
+      "description": "Pricing plans as a row of cards. Each price has a spoken form, and a feature that is not included says so in words.",
       "categories": ["section"],
       "files": [
         {
@@ -931,7 +931,7 @@
       "name": "pricing-tiers-motion",
       "type": "registry:block",
       "title": "Pricing tiers (motion)",
-      "description": "Plans arrive in sequence as the section scrolls in.",
+      "description": "The pricing tiers, with plans appearing one after another as you scroll to them.",
       "categories": ["motion"],
       "files": [
         {
@@ -949,7 +949,7 @@
       "name": "pricing-comparison",
       "type": "registry:block",
       "title": "Pricing comparison",
-      "description": "The full feature matrix as a real table: row and column headers, colgroup scopes, and no meaning carried by a tick alone.",
+      "description": "A full feature comparison as a table, with row and column headers. Each cell states its value in text, not only with a tick.",
       "categories": ["section"],
       "files": [
         {
@@ -973,7 +973,7 @@
       "name": "card-list",
       "type": "registry:block",
       "title": "Card list",
-      "description": "A grid of linked cards for posts, changelog entries or case studies, with machine-readable dates.",
+      "description": "A grid of linked cards for blog posts, changelog entries or case studies. Dates are marked up so that software can read them.",
       "categories": ["section"],
       "files": [
         {
@@ -996,7 +996,7 @@
       "name": "card-list-motion",
       "type": "registry:block",
       "title": "Card list (motion)",
-      "description": "Cards arrive in sequence as the grid scrolls in.",
+      "description": "The card list, with cards appearing one after another as you scroll to it.",
       "categories": ["motion"],
       "files": [
         {
@@ -1014,7 +1014,7 @@
       "name": "feature-tabs",
       "type": "registry:block",
       "title": "Feature tabs",
-      "description": "Features behind a Base UI tab strip, activated on Enter rather than on arrow-key focus.",
+      "description": "Features shown in tabs, built on Base UI. A tab opens when you press Enter, not when you move to it with the arrow keys.",
       "categories": ["section"],
       "files": [
         {
@@ -1037,7 +1037,7 @@
       "name": "steps",
       "type": "registry:block",
       "title": "Steps",
-      "description": "A numbered sequence as an ordered list, so the order is carried by the markup rather than by the numerals.",
+      "description": "A numbered sequence as an ordered list, so the order is in the markup and not only in the visible numbers.",
       "categories": ["section"],
       "files": [
         {
@@ -1060,7 +1060,7 @@
       "name": "steps-motion",
       "type": "registry:block",
       "title": "Steps (motion)",
-      "description": "Steps arrive in order, the one place a stagger carries meaning.",
+      "description": "The steps, appearing in order. Here the order of the animation matches the meaning.",
       "categories": ["motion"],
       "files": [
         {
@@ -1078,7 +1078,7 @@
       "name": "team",
       "type": "registry:block",
       "title": "Team",
-      "description": "The people behind the product, with social links named per person rather than per network.",
+      "description": "The people on a team. Each social link names the person as well as the network.",
       "categories": ["section"],
       "files": [
         {
@@ -1100,7 +1100,7 @@
       "name": "team-motion",
       "type": "registry:block",
       "title": "Team (motion)",
-      "description": "People arrive one after another as the grid scrolls in.",
+      "description": "The team grid, with people appearing one after another as you scroll to it.",
       "categories": ["motion"],
       "files": [
         {
@@ -1118,7 +1118,7 @@
       "name": "newsletter",
       "type": "registry:block",
       "title": "Newsletter",
-      "description": "An email capture band that reports its own outcome through a live region that is present from first render.",
+      "description": "An email sign-up form. It announces the result to screen readers through a live region that is on the page from the start.",
       "categories": ["section"],
       "files": [
         {
@@ -1141,7 +1141,7 @@
       "name": "banner",
       "type": "registry:block",
       "title": "Banner",
-      "description": "A dismissible announcement bar. A named landmark, and deliberately not a live region unless you ask.",
+      "description": "An announcement bar that people can dismiss. It is a named landmark, and it is announced to screen readers only if you turn that on.",
       "categories": ["section"],
       "files": [
         {
@@ -1162,7 +1162,7 @@
       "name": "nav-side",
       "type": "registry:block",
       "title": "Side navigation",
-      "description": "Docs-style side nav with collapsible groups, one named landmark, and a drawer below lg.",
+      "description": "Side navigation for documentation, with collapsible groups and one named landmark. On small screens it becomes a drawer.",
       "categories": ["section"],
       "files": [
         {
@@ -1183,7 +1183,7 @@
       "name": "saas-landing",
       "type": "registry:block",
       "title": "SaaS landing page",
-      "description": "A complete SaaS marketing page assembled from registry sections, driven by one content object.",
+      "description": "A complete SaaS marketing page built from Facade UI sections. You supply one content object.",
       "categories": ["template"],
       "files": [
         {
@@ -1215,7 +1215,7 @@
       "name": "agency",
       "type": "registry:block",
       "title": "Agency site",
-      "description": "A studio site: overlay hero, work grid, process steps, a featured quote and the team.",
+      "description": "An agency website: a hero over an image, a grid of work, process steps, a featured quote and the team.",
       "categories": ["template"],
       "files": [
         {
@@ -1245,7 +1245,7 @@
       "name": "product-launch",
       "type": "registry:block",
       "title": "Product launch",
-      "description": "A single-product launch page: announcement banner, bento highlights, tabbed detail and one email capture.",
+      "description": "A launch page for one product: an announcement banner, a bento grid of highlights, details in tabs and an email sign-up.",
       "categories": ["template"],
       "files": [
         {

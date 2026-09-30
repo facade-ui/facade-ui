@@ -41,9 +41,9 @@ export interface HeroSplitProps extends StackSlotProps {
   banner?: ReactNode
   /** The right-hand column. Pass `<Image />`, a video, or anything else. */
   media?: ReactNode
-  /** Extra content under the buttons — a logo strip, a stat row. */
+  /** Extra content under the buttons, such as a logo strip or a stat row. */
   children?: ReactNode
-  /** Puts the media on the left at `lg` and up. Does not change DOM order. */
+  /** Puts the media on the left from `lg` up. Does not change DOM order. */
   reverse?: boolean
   headingLevel?: HeadingLevel
   size?: "md" | "lg"

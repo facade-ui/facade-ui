@@ -22,8 +22,8 @@ import { facadeDuration, facadeEase } from "@registry/lib/motion"
 export interface FacadeMotionProviderProps {
   children: ReactNode
   /**
-   * `"user"` (default) honours the OS setting. `"always"` is useful for taking
-   * reduced-motion screenshots; `"never"` should only be used in tests.
+   * `"user"` (default) follows the OS setting. Use `"always"` for reduced-motion
+   * screenshots, and `"never"` only in tests.
    */
   reducedMotion?: "user" | "always" | "never"
   /** Disables `nonce`-less inline style injection in strict CSP setups. */

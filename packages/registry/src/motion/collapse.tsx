@@ -30,11 +30,11 @@ export interface CollapseProps {
   duration?: number
   className?: string
   /**
-   * Keep the panel mounted and hide it with `hidden` instead of removing it.
-   * Costs nothing visually but lets browser find-in-page reach the content.
+   * Keeps the panel in the DOM and hides it with `hidden`. This lets browser find-in-page
+   * reach the content.
    */
   keepMounted?: boolean
-  /** Forwarded to the panel element — set this to the trigger's `aria-controls`. */
+  /** Set on the panel element. Use the same value as the trigger's `aria-controls`. */
   id?: string
 }
 

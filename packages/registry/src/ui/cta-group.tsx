@@ -24,11 +24,11 @@ import { buttonVariants } from "@registry/ui/button"
 
 export interface CtaGroupProps {
   items: CtaItem[]
-  /** Drop-in for `next/link`. Defaults to `"a"`. */
+  /** Your link component, such as `next/link`. Defaults to `"a"`. */
   link?: LinkComponent
   size?: "sm" | "md" | "lg"
   align?: "start" | "center" | "end"
-  /** Stack full-width on small screens — the usual choice inside a hero. */
+  /** Stacks the buttons at full width on small screens. Common inside a hero. */
   stackOnMobile?: boolean
   className?: string
 }

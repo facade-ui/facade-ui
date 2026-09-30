@@ -39,7 +39,7 @@ export interface StaggerProps {
   delayChildren?: number
   as?: MotionTag
   className?: string
-  /** `"view"` (default) waits for scroll; `"mount"` plays immediately. */
+  /** `"view"` (default) waits until it is scrolled into view. `"mount"` plays at once. */
   trigger?: "view" | "mount"
   repeat?: boolean
   amount?: number

@@ -51,15 +51,15 @@ export interface FooterProps {
   groups?: FooterGroup[]
   /** Wordmark, logo, or a short pitch. */
   brand?: ReactNode
-  /** Rendered under the brand — a newsletter form, a status badge. */
+  /** Shown under the brand, such as a newsletter form or a status badge. */
   children?: ReactNode
   social?: FooterSocial[]
   /** The full line, e.g. `© 2026 Acme, Inc.` Rendered as given. */
   copyright?: ReactNode
-  /** Privacy, terms, and similar. Rendered inline at the bottom. */
+  /** Links such as privacy and terms. Shown in a row at the bottom. */
   legal?: FooterLink[]
   link?: LinkComponent
-  /** Outline level of the column headings. Defaults to `2`. */
+  /** Heading level of the column headings. Defaults to `2`. */
   headingLevel?: HeadingLevel
   className?: string
   id?: string

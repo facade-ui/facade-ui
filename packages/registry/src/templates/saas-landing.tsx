@@ -117,7 +117,7 @@ export interface SaasLandingProps {
   link?: LinkComponent
   /** Marks the active nav item. */
   currentPath?: string
-  /** Rendered above the header — a `Banner`, usually. */
+  /** Shown above the header. Usually a `Banner`. */
   banner?: ReactNode
 }
 

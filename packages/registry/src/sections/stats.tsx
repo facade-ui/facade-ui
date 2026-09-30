@@ -28,7 +28,7 @@ export interface StatsProps extends SectionBaseProps, ListSlotProps {
   description?: string
   size?: "sm" | "md" | "lg"
   align?: "start" | "center"
-  /** `plain` sits on the background; `card` gives each figure a surface. */
+  /** `plain` has no background. `card` gives each number a border and background. */
   variant?: "plain" | "card" | "divided"
 }
 

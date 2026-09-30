@@ -33,7 +33,10 @@ export interface CtaBandProps extends StackSlotProps {
   actions?: CtaItem[]
   link?: LinkComponent
   note?: ReactNode
-  /** `muted` and `card` sit inside the container; `primary` inverts the band. */
+  /**
+   * `muted` and `card` sit inside the container. `primary` uses the primary colour as the
+   * background.
+   */
   variant?: "muted" | "card" | "primary" | "plain"
   /** `center` stacks everything; `split` puts the buttons beside the copy. */
   layout?: "center" | "split"

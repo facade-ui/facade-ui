@@ -62,13 +62,13 @@ export interface BannerProps {
   dismissible?: boolean
   /** Remembers the dismissal under this localStorage key. */
   storageKey?: string
-  /** What the dismiss button says it is closing. */
+  /** The accessible label of the dismiss button. */
   dismissLabel?: string
   variant?: "primary" | "muted" | "card"
   onDismiss?: () => void
   /**
-   * Announce the banner when it appears. Only for banners that show in response
-   * to an action — never for one that is present on load.
+   * Announces the banner to screen readers when it appears. Use this only for banners
+   * shown in response to an action, never for one that is there when the page loads.
    */
   announce?: boolean
   className?: string

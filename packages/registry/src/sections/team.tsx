@@ -55,7 +55,7 @@ export interface TeamProps extends SectionBaseProps, ListSlotProps {
   image?: ImageComponent
   link?: LinkComponent
   columns?: 2 | 3 | 4
-  /** `square` crops to a card; `circle` is the classic avatar row. */
+  /** `square` crops photos to a card. `circle` shows round avatars. */
   shape?: "square" | "circle"
   itemHeadingLevel?: HeadingLevel
   align?: "start" | "center"

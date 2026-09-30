@@ -40,7 +40,7 @@ export interface UspListProps extends SectionBaseProps, ListSlotProps {
   title?: string
   eyebrow?: string
   description?: string
-  /** Outline level of each item's title. Defaults to one below the section. */
+  /** Heading level of each item's title. Defaults to one below the section's. */
   itemHeadingLevel?: HeadingLevel
   /** `stacked` puts the icon above the copy; `inline` puts it beside. */
   layout?: "inline" | "stacked"

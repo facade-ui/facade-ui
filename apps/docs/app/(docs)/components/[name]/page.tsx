@@ -82,7 +82,9 @@ export default async function ComponentPage({
 
         {counterpartItem ? (
           <p className="text-muted-foreground text-sm">
-            {isMotion ? "Wraps the static " : "Also ships a motion variant: "}
+            {isMotion
+              ? "This is the animated version of "
+              : "An animated version is also available: "}
             <Link
               href={`/components/${counterpart}` as Route}
               className="text-foreground underline underline-offset-4"
@@ -90,8 +92,8 @@ export default async function ComponentPage({
               {counterpartItem.title ?? counterpart}
             </Link>
             {isMotion
-              ? ", which renders identically with JavaScript disabled."
-              : ". The static one is the default."}
+              ? ". The static version looks the same with JavaScript turned off."
+              : ". This static version is the default."}
           </p>
         ) : null}
       </header>
@@ -119,7 +121,7 @@ export default async function ComponentPage({
         <InstallCommand commands={commands} />
         {item.dependencies?.length || item.registryDependencies?.length ? (
           <p className="text-muted-foreground text-pretty text-sm">
-            Pulls in{" "}
+            This component needs{" "}
             {[
               ...(item.dependencies ?? []),
               ...(item.registryDependencies ?? []).map(
@@ -141,7 +143,7 @@ export default async function ComponentPage({
             Usage
           </h2>
           <p className="text-muted-foreground text-pretty text-sm">
-            The exact source of the preview above.
+            This is the code for the preview above.
           </p>
           <CodeBlock
             code={demoSource}
@@ -156,7 +158,7 @@ export default async function ComponentPage({
           Source
         </h2>
         <p className="text-muted-foreground text-pretty text-sm">
-          What the CLI copies into your project, byte for byte.
+          These are the files the CLI copies into your project.
         </p>
         {item.files.map((file) => (
           <CodeBlock

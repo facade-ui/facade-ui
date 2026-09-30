@@ -81,9 +81,9 @@ export type ButtonVariantProps = VariantProps<typeof buttonVariants>
 
 export type ButtonProps = BaseButtonProps &
   ButtonVariantProps & {
-    /** Shows a spinner, sets `aria-busy`, and disables activation. */
+    /** Shows a spinner, sets `aria-busy`, and stops the button from being activated. */
     loading?: boolean
-    /** Screen-reader-only status text shown beside the spinner. */
+    /** Status text for screen readers, announced with the spinner. */
     loadingLabel?: string
   }
 

@@ -24,19 +24,19 @@ export interface SectionHeaderProps {
   title: ReactNode
   /** Small label above the heading. */
   eyebrow?: ReactNode
-  /** Supporting copy below the heading. */
+  /** Text below the heading. */
   description?: ReactNode
-  /** Outline level. Defaults to `2`. Independent of `size`. */
+  /** Heading level. Defaults to `2`. Does not affect `size`. */
   headingLevel?: HeadingLevel
-  /** Visual scale. Defaults to `md`. Independent of `headingLevel`. */
+  /** Visual size. Defaults to `md`. Does not affect `headingLevel`. */
   size?: "sm" | "md" | "lg" | "xl"
   align?: "start" | "center"
   /**
-   * The heading's DOM id, for the parent's `aria-labelledby`. Derived from the
-   * title when omitted; pass one explicitly if two headings would collide.
+   * The heading's id, for the parent's `aria-labelledby`. Made from the title when
+   * omitted. Pass one if two headings would get the same id.
    */
   titleId?: string
-  /** Buttons or links rendered beside (or under) the heading block. */
+  /** Buttons or links shown beside or under the heading. */
   actions?: ReactNode
   className?: string
   children?: ReactNode

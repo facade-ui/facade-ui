@@ -7,33 +7,41 @@ import { Prose } from "@/components/prose"
 export const metadata: Metadata = {
   title: "Theming",
   description:
-    "How Facade UI's tokens are organised, and how to retheme everything from one file.",
+    "How Facade UI's colours and other design tokens are organised, and how to change the theme in one place.",
 }
 
 const TOKENS: [string, string, string][] = [
   [
     "--facade-text-display-sm/md/lg/xl",
-    "Fluid display scale",
-    "clamp() based, so headlines need no breakpoint juggling",
+    "Heading sizes",
+    "They scale with the screen width, so headings need no breakpoints",
   ],
-  ["--facade-section-y-sm/–/lg", "Vertical rhythm", "Consumed by Section's spacing prop"],
-  ["--facade-container-max", "Measure", 'Drives Container size="lg" and max-w-facade'],
   [
-    "--facade-container-gutter",
-    "Horizontal padding",
-    "The gutter Container applies below sm",
+    "--facade-section-y-sm/–/lg",
+    "Space above and below a section",
+    "Set with the spacing prop on Section",
   ],
+  [
+    "--facade-container-max",
+    "Maximum content width",
+    'Used by Container size="lg" and the max-w-facade class',
+  ],
+  ["--facade-container-gutter", "Side padding", "Applied by Container on small screens"],
   [
     "--facade-duration-fast/base/slow",
-    "Motion durations",
-    "Mirrored in lib/motion.ts and checked by a test",
+    "Animation durations",
+    "Also defined in lib/motion.ts; a test keeps the two equal",
   ],
   [
     "--facade-ease-out/in-out/spring",
-    "Motion easings",
-    "Exposed as ease-facade-* utilities",
+    "Animation easing curves",
+    "Available as ease-facade-* classes",
   ],
-  ["--facade-motion-distance", "Travel distance", "How far FadeIn and Reveal translate"],
+  [
+    "--facade-motion-distance",
+    "Animation distance",
+    "How far FadeIn and Reveal move an element",
+  ],
 ]
 
 export default function ThemingPage() {
@@ -41,48 +49,56 @@ export default function ThemingPage() {
     <Prose>
       <h1 className="text-display-sm font-semibold">Theming</h1>
       <p>
-        Facade UI has two token families, and knowing which one you are touching is most
-        of the story.
+        Facade UI is styled with design tokens, which are CSS variables. There are two
+        groups of tokens. This page explains each group and how to change them.
       </p>
 
-      <h2>shadcn names</h2>
+      <h2>Colour and radius: shadcn names</h2>
       <p>
-        Colour and radius use shadcn&apos;s own names — <code>--background</code>,{" "}
-        <code>--primary</code>, <code>--muted</code>, <code>--border</code>,{" "}
-        <code>--ring</code>, <code>--radius</code>. Sections reference nothing else, which
-        is why a section dropped into an existing shadcn project inherits that
-        project&apos;s theme with no edits at all.
+        Colours and corner radius use the same variable names as shadcn/ui:{" "}
+        <code>--background</code>, <code>--primary</code>, <code>--muted</code>,{" "}
+        <code>--border</code>, <code>--ring</code> and <code>--radius</code>. Sections use
+        only these names for colour. If you add a section to a project that already has a
+        shadcn theme, the section uses that theme without any changes.
       </p>
+      <p>Two values differ from shadcn&apos;s defaults, both to meet contrast rules:</p>
+      <ul>
+        <li>
+          <code>--ring</code> is the primary colour, not a pale grey. The default shadcn
+          ring has a contrast of about 2.2:1 on white. WCAG 2.2 requires 3:1 for a focus
+          indicator.
+        </li>
+        <li>
+          <code>--input</code> is much darker than <code>--border</code>, also to reach
+          3:1. The border of a text field is the only thing that shows where the field is.
+        </li>
+      </ul>
+      <p>If you use your own values for these two tokens, check their contrast.</p>
+
+      <h2>The default colours</h2>
       <p>
-        Two deliberate differences from shadcn&apos;s stock values, both about contrast.{" "}
-        <code>--ring</code> is the primary colour rather than a pale grey: the stock ring
-        sits at roughly 2.2:1 against a white background, below the 3:1 that WCAG 2.2
-        requires for a non-text indicator. And <code>--input</code> is a good deal darker
-        than <code>--border</code>, for the same 3:1 — the edge of a text field is the
-        only thing identifying it as one. If you keep your own values for either, check
-        them.
+        By default, Facade UI uses Tailwind&apos;s <strong>orange</strong> with its{" "}
+        <strong>stone</strong> greys:
+      </p>
+      <ul>
+        <li>Primary: orange 600 in light mode, orange 500 in dark mode.</li>
+        <li>Accent: orange 100 and orange 800.</li>
+        <li>Backgrounds, borders and text: stone.</li>
+      </ul>
+      <p>
+        The label on a primary button is near-black, not white, because white on orange
+        600 has a contrast of only 3.6:1. For the same reason, no component uses{" "}
+        <code>--primary</code> as a text colour. Use it for fills, icons and focus rings.
       </p>
 
-      <h2>The default palette</h2>
+      <h2>Type, spacing and animation: Facade names</h2>
       <p>
-        Out of the box, Facade is Tailwind&apos;s <strong>orange</strong> on its{" "}
-        <strong>stone</strong> greys: orange 600 for the primary (500 in dark mode),
-        orange 100 and 800 for the accent, stone for every surface and line of copy.
-      </p>
-      <p>
-        The label on a primary button is ink rather than white, because white on orange
-        600 is 3.6:1. For the same reason nothing in the registry sets text in{" "}
-        <code>--primary</code>: it is a colour for fills, icons and focus rings.
-      </p>
-
-      <h2>Facade names</h2>
-      <p>
-        Everything marketing-specific is prefixed <code>--facade-</code> so it can never
-        collide with a token shadcn might add later.
+        Tokens for heading sizes, spacing and animation start with <code>--facade-</code>.
+        The prefix stops them from clashing with any name shadcn adds later.
       </p>
       <div className="overflow-x-auto rounded-lg border">
         <table className="w-full border-collapse text-left text-sm">
-          <caption className="sr-only">Facade-prefixed design tokens</caption>
+          <caption className="sr-only">Design tokens that start with --facade-</caption>
           <thead className="bg-muted/40">
             <tr>
               <th scope="col" className="px-4 py-2 font-medium">
@@ -112,32 +128,44 @@ export default function ThemingPage() {
 
       <h2>Presets</h2>
       <p>
-        Three more palettes ship with the registry, in <code>themes.css</code>.{" "}
-        <em>Neutral</em> is the monochrome shadcn starts from, <em>warm</em> is a brown on
-        cream and <em>vivid</em> an indigo; each is applied with{" "}
-        <code>data-facade-theme</code> on <code>&lt;html&gt;</code> or on any subtree. The
-        orange default needs no attribute. Light and dark are an independent axis, set by
-        the <code>dark</code> class — try both switches in the header.
+        The registry includes three more colour themes, in <code>themes.css</code>:
+      </p>
+      <ul>
+        <li>
+          <em>Neutral</em>: black, white and grey, the same as shadcn&apos;s default.
+        </li>
+        <li>
+          <em>Warm</em>: brown on cream.
+        </li>
+        <li>
+          <em>Vivid</em>: indigo.
+        </li>
+      </ul>
+      <p>
+        To use one, set <code>data-facade-theme</code> on <code>&lt;html&gt;</code> or on
+        any element in the page. The orange default needs no attribute. Light and dark
+        mode are set separately, with the <code>dark</code> class. You can try both with
+        the switches in the header.
       </p>
       <CodeBlock
         lang="html"
-        filename="Applying a preset"
+        filename="Using a preset"
         code={`<html data-facade-theme="warm">        <!-- warm, light -->
 <html class="dark" data-facade-theme="warm">  <!-- warm, dark -->`}
       />
 
-      <h2>Making your own</h2>
+      <h2>Create your own theme</h2>
       <p>
-        Override the shadcn-named tokens in one block and every section re-themes. Nothing
-        else needs to change.
+        To create a theme, set the shadcn-named tokens in one CSS block. Every section
+        then uses your colours. You do not need to change anything else.
       </p>
       <p>
-        The quick way is the customiser, behind the palette button in the header. Pick a
-        brand colour and a neutral and it generates all of the tokens below, for both
-        modes, with every contrast pair already passing — and applies them to this whole
-        site as you go, so you are judging a real page rather than a swatch. The{" "}
-        <Link href="/docs/customise">theme customiser</Link> page has the contrast table
-        and the CSS to paste back here.
+        The fastest way is the theme customiser. Open it with the palette button in the
+        header, then choose a brand colour and a neutral. It generates all the tokens
+        shown below, for light and dark mode, and they already pass the contrast checks.
+        The whole site changes as you choose, so you see the result on real pages. The{" "}
+        <Link href="/docs/customise">theme customiser</Link> page shows the contrast
+        results and the CSS to copy.
       </p>
       <CodeBlock
         lang="css"
@@ -154,10 +182,10 @@ export default function ThemingPage() {
 }`}
       />
       <p>
-        Check the result rather than trusting it. Every preset in this repo is verified by{" "}
-        <code>scripts/check-contrast.ts</code>, which resolves each theme scope from the
-        real CSS and fails the build if a text pair drops below 4.5:1 or the focus ring
-        below 3:1. Point it at your own preset before you ship it.
+        Check the contrast of your theme before you use it. Every preset in this
+        repository is tested by <code>scripts/check-contrast.ts</code>. It reads the
+        colours from the CSS and fails the build if text contrast is below 4.5:1 or focus
+        ring contrast is below 3:1. Run it on your own preset too.
       </p>
     </Prose>
   )

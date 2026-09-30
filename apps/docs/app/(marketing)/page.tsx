@@ -14,23 +14,23 @@ import { SectionHeader } from "@registry/ui/section-header"
 const PILLARS = [
   {
     icon: BlocksIcon,
-    title: "Sections, not snippets",
-    body: "Content-driven sections that take typed data and slots. Composition over a hundred props.",
+    title: "Complete sections",
+    body: "Each section is a full part of a page, such as a hero or a pricing table. You pass in your content as typed data.",
   },
   {
     icon: AccessibilityIcon,
-    title: "WCAG 2.2 AA, checked",
-    body: "Contrast is verified from the real tokens in CI, and every section is scanned with axe in light and dark.",
+    title: "Accessibility is tested",
+    body: "Every section is tested against WCAG 2.2 AA. Colour contrast is checked on every change, and each section is scanned with axe in light and dark mode.",
   },
   {
     icon: PaletteIcon,
-    title: "Inherits your theme",
-    body: "shadcn-compatible token names, so a section dropped into an existing project looks like it belongs.",
+    title: "Uses your theme",
+    body: "Sections use the same colour names as shadcn/ui. If your project already has a shadcn theme, the sections use it without changes.",
   },
   {
     icon: ZapIcon,
-    title: "Motion, optional",
-    body: "Every section ships static first. The motion variant wraps it, and reduced motion is honoured throughout.",
+    title: "Animation is optional",
+    body: "Every section works without animation. To add it, install the motion version. It follows the reduced-motion setting on the reader's device.",
   },
 ]
 
@@ -50,9 +50,9 @@ export default function HomePage() {
             The front of every great website
           </h1>
           <p className="text-muted-foreground max-w-2xl text-pretty text-lg sm:text-xl">
-            A shadcn-style registry of marketing sections, atoms and a design system.
-            Install a piece, and its source lands in your project — yours to read, change
-            and own.
+            Facade UI is a set of marketing sections and components for React. You install
+            each one with the shadcn CLI, which copies its source code into your project.
+            You can read it, change it and keep it.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/docs/installation" className={buttonVariants({ size: "lg" })}>
@@ -75,7 +75,7 @@ export default function HomePage() {
             align="center"
             eyebrow="Why"
             title="What you get"
-            description="Code quality, accessibility and composability are the product. There is nothing to buy and nothing gated."
+            description="Everything is free and open source. There is no paid version."
           />
           <ul className="grid gap-8 sm:grid-cols-2">
             {PILLARS.map((pillar) => (
@@ -99,13 +99,13 @@ export default function HomePage() {
             align="center"
             eyebrow="Stack"
             title="Built on"
-            description="React 19 and server components by default. Base UI for every interactive primitive — never Radix, never both."
+            description="Sections are React 19 server components by default. Interactive parts, such as menus and accordions, use Base UI."
           />
           <dl className="mx-auto grid max-w-2xl gap-6 text-center sm:grid-cols-4">
             {[
-              ["React", "19, RSC-first"],
-              ["Base UI", "1.0 rc"],
-              ["Tailwind", "v4 tokens"],
+              ["React", "19, server components"],
+              ["Base UI", "1.0 release candidate"],
+              ["Tailwind", "v4"],
               ["Motion", "optional"],
             ].map(([term, detail]) => (
               <div key={term} className="flex flex-col-reverse gap-1">
@@ -119,7 +119,7 @@ export default function HomePage() {
 
       <footer className="border-t py-10">
         <Container className="text-muted-foreground flex flex-wrap items-center justify-between gap-4 text-sm">
-          <p>MIT licensed. Built in the open.</p>
+          <p>MIT licensed. Developed in the open.</p>
           <a
             href={GITHUB_URL}
             target="_blank"

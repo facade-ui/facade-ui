@@ -59,7 +59,7 @@ export interface CardListProps extends SectionBaseProps, ListSlotProps {
   image?: ImageComponent
   link?: LinkComponent
   columns?: 2 | 3
-  /** `card` gives each entry a surface; `plain` is a bare list. */
+  /** `card` adds a border and background to each entry. `plain` is a simple list. */
   variant?: "card" | "plain"
   itemHeadingLevel?: HeadingLevel
   align?: "start" | "center"

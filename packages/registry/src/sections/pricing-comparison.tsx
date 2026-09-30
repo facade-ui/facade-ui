@@ -66,7 +66,7 @@ export interface PricingComparisonProps extends SectionBaseProps {
   eyebrow?: string
   description?: string
   link?: LinkComponent
-  /** Table caption. Always present; hidden visually by default. */
+  /** Table caption. Always present, but visually hidden by default. */
   caption?: string
   showCaption?: boolean
   note?: ReactNode
