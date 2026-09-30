@@ -41,6 +41,7 @@ import {
   ITEM_SCHEMA,
   OUTPUT_DIR,
   PROVIDED_PACKAGES,
+  REGISTRY_HOMEPAGE,
   REGISTRY_JSON,
   REGISTRY_ROOT,
   REGISTRY_SCHEMA,
@@ -61,6 +62,34 @@ const formatJson = async (value: unknown, filepath: string): Promise<string> =>
   format(JSON.stringify(value, null, 2), { ...prettierOptions, filepath, parser: "json" })
 
 const registry = readRegistry()
+
+/**
+ * The note the CLI prints after installing an item. Generated per category
+ * unless the item sets its own `docs`.
+ */
+function docsFor(item: RegistryItem): string {
+  const page = `${REGISTRY_HOMEPAGE}/components/${item.name}`
+  const tokens =
+    'Import styles/facade-tokens.css in your global stylesheet, after @import "tailwindcss".'
+  const categories = item.categories ?? []
+
+  if (item.name === "tokens") {
+    return `${tokens} Docs: ${REGISTRY_HOMEPAGE}/docs/theming`
+  }
+  if (item.name === "themes") {
+    return `Import styles/facade-themes.css after the tokens and set data-facade-theme="warm" (or neutral, vivid) on <html>. Docs: ${REGISTRY_HOMEPAGE}/docs/theming`
+  }
+  if (categories.includes("motion")) {
+    return `Render FacadeMotionProvider once near the root of your app. Icons passed to a -motion section need a client boundary. Docs: ${page}`
+  }
+  if (categories.includes("template")) {
+    return `${tokens} Render the template from a page with your own content object; it sets the page outline (one h1). Docs: ${page}`
+  }
+  if (categories.includes("section")) {
+    return `${tokens} Set headingLevel to fit the page outline (sections default to h2). Pass next/link and next/image through the link and image props. Docs: ${page}`
+  }
+  return `${tokens} Docs: ${page}`
+}
 
 /** source path (`src/ui/button.tsx`) -> the item that ships it. */
 const owner = new Map<string, string>()
@@ -138,7 +167,7 @@ for (const item of registry.items) {
     ...(dependencies.length ? { dependencies } : {}),
     ...(registryDependencies.length ? { registryDependencies } : {}),
     files,
-    ...(item.docs ? { docs: item.docs } : {}),
+    docs: item.docs ?? docsFor(item),
     ...(item.meta ? { meta: item.meta } : {}),
   }
 
