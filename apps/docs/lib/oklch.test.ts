@@ -71,6 +71,28 @@ describe("OKLCH parity between the browser and Node implementations", () => {
 })
 
 /**
+ * Parity only proves the two implementations agree, not that they are right.
+ * These anchor both to published WCAG ratios, given as hex.
+ */
+describe("contrast against known WCAG figures", () => {
+  const CASES: [string, string, number][] = [
+    ["#000000", "#ffffff", 21],
+    ["#ffffff", "#ffffff", 1],
+    ["#767676", "#ffffff", 4.54],
+    ["#777777", "#ffffff", 4.48],
+    ["#595959", "#ffffff", 7.0],
+    ["#ff0000", "#ffffff", 4.0],
+    ["#0000ff", "#ffffff", 8.59],
+  ]
+
+  it.each(CASES)("%s on %s is %s:1", (fg, bg, ratio) => {
+    const css = (hex: string) => formatOklch(fromHex(hex)!)
+    expect(browserContrast(fromHex(fg)!, fromHex(bg)!)).toBeCloseTo(ratio, 1)
+    expect(nodeContrast(nodeParse(css(fg))!, nodeParse(css(bg))!)).toBeCloseTo(ratio, 1)
+  })
+})
+
+/**
  * Hex is now an editable field, so the two conversions have to agree with the
  * browser and with each other. The expected values below were read out of a
  * canvas: the colour was painted with the CSS `oklch()` and the pixel read
