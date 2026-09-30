@@ -55,13 +55,18 @@ const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) 
 
 let cachedIndex: RegistryItem[] | undefined
 
-/** Every published item, in catalogue order. */
+/**
+ * Every browsable item, in catalogue order. The generated `*-demo` examples are
+ * installable but not pages of their own.
+ */
 export function getRegistryItems(): RegistryItem[] {
   if (cachedIndex) return cachedIndex
-  const index = readJson<{ items: { name: string }[] }>(
+  const index = readJson<{ items: { name: string; categories?: string[] }[] }>(
     join(process.cwd(), "public/r", "registry.json"),
   )
-  cachedIndex = index.items.map((entry) => getRegistryItem(entry.name)!)
+  cachedIndex = index.items
+    .filter((entry) => !entry.categories?.includes("example"))
+    .map((entry) => getRegistryItem(entry.name)!)
   return cachedIndex
 }
 
