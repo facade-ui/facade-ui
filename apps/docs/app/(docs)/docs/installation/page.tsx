@@ -15,15 +15,15 @@ export default function InstallationPage() {
     <Prose>
       <h1 className="text-display-sm font-semibold">Installation</h1>
       <p>
-        Facade UI is a shadcn-compatible registry, not an npm component library. The CLI
-        copies source into your project: there is no runtime package to upgrade, and every
-        file is yours to edit.
+        Facade UI is not an npm package. You add each component with the shadcn CLI, which
+        copies its source files into your project. There is no package to upgrade later,
+        and you can edit every file.
       </p>
 
-      <h2>1. Start from a shadcn project</h2>
+      <h2>1. Set up a project with shadcn</h2>
       <p>
-        Any project that has run <code>shadcn init</code> will do. If you are starting
-        fresh:
+        You need a project where you have run <code>shadcn init</code>. To create a new
+        one:
       </p>
       <CodeBlock
         lang="bash"
@@ -33,19 +33,19 @@ cd my-site
 npx shadcn@latest init`}
       />
       <p>
-        Facade UI targets React 19, Tailwind v4 and server components. It needs no
-        configuration beyond what <code>shadcn init</code> already writes.
+        Facade UI needs React 19 and Tailwind v4, and is built for server components. You
+        do not need any configuration beyond what <code>shadcn init</code> sets up.
       </p>
 
       <h2>2. Add the tokens</h2>
       <p>
-        The token layer defines the <code>--facade-*</code> custom properties that
-        sections rely on for display type, section rhythm and motion. It also defines the
-        shadcn colour names, so in a project that already has a theme you can skip this
-        step and Facade will inherit yours.
+        The tokens file defines the <code>--facade-*</code> CSS variables that sections
+        use for heading sizes, spacing and animation. It also defines the shadcn colour
+        names. If your project already has a theme, you can skip this step and the
+        sections will use your colours.
       </p>
       <InstallCommand commands={installCommands("tokens")} />
-      <p>Then import it from your stylesheet, after Tailwind:</p>
+      <p>Then import the file in your stylesheet, after Tailwind:</p>
       <CodeBlock
         lang="css"
         filename="app/globals.css"
@@ -55,16 +55,16 @@ npx shadcn@latest init`}
 
       <h2>3. Add a component</h2>
       <p>
-        Every item is installed by URL. Dependencies — both npm packages and other
-        registry items — are resolved for you.
+        You install each component by its URL. The CLI also installs what the component
+        needs: npm packages and other Facade UI components.
       </p>
       <InstallCommand commands={installCommands("section-header")} />
 
-      <h2>4. Make images and links yours</h2>
+      <h2>4. Use your own image and link components</h2>
       <p>
-        Nothing in the registry imports from <code>next/*</code>, so sections work in any
-        React setup. Where a section renders images or links from data, pass the component
-        you want it to use:
+        The components do not import anything from <code>next/*</code>, so they work with
+        any React framework. Some sections render images or links from your data. Pass the
+        image and link components you want them to use:
       </p>
       <CodeBlock
         filename="app/page.tsx"
@@ -78,16 +78,20 @@ export default function Page() {
 }`}
       />
       <p>
-        They are component types, not render callbacks, which is what lets them cross the
-        server component boundary unchanged.
+        Pass the component itself, such as <code>Image</code>, not a function that renders
+        it. A server component can then hand it to the section.
       </p>
 
-      <h2>Optional: motion</h2>
-      <p>
-        Motion is opt-in. Install the primitives, mount the provider once near your root,
-        and use the <code>-motion</code> variant of any section. The static variant
-        renders identically with JavaScript disabled.
-      </p>
+      <h2>Optional: add animation</h2>
+      <p>Animation is optional. To use it:</p>
+      <ol>
+        <li>Install the motion primitives with the command below.</li>
+        <li>Add the provider once, near the root of your app.</li>
+        <li>
+          Use the <code>-motion</code> version of a section.
+        </li>
+      </ol>
+      <p>The static version of each section looks the same with JavaScript turned off.</p>
       <InstallCommand commands={installCommands("motion-primitives")} />
       <CodeBlock
         filename="app/layout.tsx"

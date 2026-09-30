@@ -480,7 +480,7 @@ export function ThemeCustomiser() {
           href="/docs/customise"
           className="text-muted-foreground hover:text-foreground focus-visible:ring-ring rounded-md text-xs underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2"
         >
-          Contrast table and how to install it
+          See the contrast results and how to install your theme
         </a>
       </div>
     </div>

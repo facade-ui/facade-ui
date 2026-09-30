@@ -6,7 +6,7 @@ import { Badge } from "@registry/ui/badge"
 
 export const metadata: Metadata = {
   title: "Components",
-  description: "Every item in the Facade UI registry.",
+  description: "A list of every Facade UI component, grouped by type.",
 }
 
 export default function ComponentsIndex() {
@@ -17,8 +17,8 @@ export default function ComponentsIndex() {
       <header className="flex flex-col gap-4">
         <h1 className="text-display-sm font-semibold">Components</h1>
         <p className="text-muted-foreground text-pretty text-lg">
-          Every item in the registry. Install any of them with the shadcn CLI; the source
-          lands in your project and becomes yours.
+          All Facade UI components. Install any of them with the shadcn CLI. The source
+          code is copied into your project, and you can change it.
         </p>
       </header>
 

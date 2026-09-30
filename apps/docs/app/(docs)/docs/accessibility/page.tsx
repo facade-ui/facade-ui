@@ -5,8 +5,7 @@ import { Prose } from "@/components/prose"
 
 export const metadata: Metadata = {
   title: "Accessibility",
-  description:
-    "The WCAG 2.2 AA bar Facade UI holds itself to, and how each part of it is enforced.",
+  description: "How Facade UI meets WCAG 2.2 AA, and how each requirement is tested.",
 }
 
 export default function AccessibilityPage() {
@@ -14,123 +13,132 @@ export default function AccessibilityPage() {
     <Prose>
       <h1 className="text-display-sm font-semibold">Accessibility</h1>
       <p>
-        The target is WCAG 2.2 AA. What follows is the part that matters: how each claim
-        is actually checked, because an accessibility statement nobody verifies is just a
-        wish.
+        Facade UI aims to meet WCAG 2.2 AA. This page explains how each requirement is
+        tested.
       </p>
 
       <h2>Contrast</h2>
       <p>
-        <code>scripts/check-contrast.ts</code> parses the real token values out of{" "}
-        <code>globals.css</code> and <code>themes.css</code>, resolves all eight theme
-        scopes, and checks every pair a section can put on screen. Text pairs must clear
-        4.5:1 and the focus ring 3:1. It runs in CI and fails the build.
+        A script, <code>scripts/check-contrast.ts</code>, reads the colour values from{" "}
+        <code>globals.css</code> and <code>themes.css</code>. It checks every text and
+        background pair a section can show, in all eight combinations of theme and mode.
+        Text needs a contrast ratio of at least 4.5:1. Focus rings and form field borders
+        need at least 3:1. The script runs on every change, and a failure stops the build.
       </p>
       <p>
-        The default theme shows the rule at work. White on its orange primary is 3.6:1, so
-        button labels are ink at 5.5:1. And because the orange only clears 3:1 against the
-        page, it is used for fills, icons and rings, never for text.
+        The default theme is an example. White text on its orange primary colour has a
+        ratio of 3.6:1, which is too low, so button labels are near-black at 5.5:1. The
+        orange itself reaches only 3:1 against the page background. That is enough for
+        fills, icons and focus rings, but not for text, so no component uses it as a text
+        colour.
       </p>
       <p>
-        Hairline borders are reported but not enforced. A divider is decorative; a control
-        whose only boundary is a border is not, and those carry their own stronger colour.
+        Thin divider lines are reported but do not have to pass, because a divider is
+        decoration. The border of a form field is different: it is the only thing that
+        shows where the field is. Form fields therefore use a separate, darker border
+        colour.
       </p>
 
       <h2>Keyboard and focus</h2>
       <ul>
-        <li>Every interactive element is reachable and operable by keyboard.</li>
+        <li>You can reach and use every interactive element with the keyboard.</li>
         <li>
-          Focus is always visible: <code>:focus-visible</code> gets a 2px ring with a 2px
-          offset, defined once in the base layer.
+          Focus is always visible. A focused element gets a 2px ring with a 2px offset,
+          through <code>:focus-visible</code>. This is defined once, in the base styles.
         </li>
         <li>
-          Every button size is at least 44&times;44 CSS px, which clears WCAG 2.5.5 rather
-          than the 24px AA floor.
+          Every button is at least 44&times;44 CSS pixels. This meets the stricter WCAG
+          2.5.5 target size, not only the 24-pixel minimum of level AA.
         </li>
         <li>
-          Scrollable code blocks are focusable, so keyboard users can scroll them at all.
+          Code blocks that scroll can take focus, so keyboard users can scroll them.
         </li>
       </ul>
 
-      <h2>Structure</h2>
+      <h2>Headings and landmarks</h2>
       <p>
-        Sections never hard-code a heading level. Each takes <code>headingLevel</code>,
-        and visual size is a separate prop — the same hero is an <code>h1</code> on a
-        landing page and an <code>h2</code> inside a longer one, with no change in
-        appearance.
+        Sections do not set a fixed heading level. Each one has a{" "}
+        <code>headingLevel</code> prop, and a separate prop for visual size. The same hero
+        can be an <code>h1</code> on a landing page and an <code>h2</code> inside a longer
+        page, and look the same in both.
       </p>
       <CodeBlock
-        filename="Outline level is explicit"
+        filename="Setting the heading level"
         code={`<HeroSplit headingLevel={1} ... />   {/* landing page */}
 <HeroSplit headingLevel={2} ... />   {/* inside an existing page */}`}
       />
       <p>
-        A <code>&lt;section&gt;</code> is only a landmark once it has an accessible name,
-        so <code>Section</code> pairs <code>aria-labelledby</code> with the id{" "}
-        <code>SectionHeader</code> puts on the heading. An unnamed band renders as a{" "}
-        <code>div</code> instead of adding a nameless region to the landmark list.
+        A <code>&lt;section&gt;</code> element only counts as a landmark when it has an
+        accessible name. The <code>Section</code> component therefore points{" "}
+        <code>aria-labelledby</code> at the id that <code>SectionHeader</code> puts on the
+        heading. A section without a heading is rendered as a <code>div</code>, so it does
+        not add an unnamed region to the list of landmarks.
       </p>
 
-      <h2>Motion</h2>
+      <h2>Animation</h2>
       <p>
-        <code>FacadeMotionProvider</code> sets <code>reducedMotion=&quot;user&quot;</code>
-        , and the base layer disables CSS transitions under{" "}
-        <code>prefers-reduced-motion</code>. Animations only ever touch{" "}
-        <code>opacity</code> and <code>transform</code>, so they cannot shift layout or
-        contribute to CLS. The one exception is <code>Collapse</code>, where the height
-        change is the interaction itself and is always user-initiated.
+        <code>FacadeMotionProvider</code> follows the reduced-motion setting on the
+        reader&apos;s device, and the base styles turn off CSS transitions when that
+        setting is on. Animations change only <code>opacity</code> and{" "}
+        <code>transform</code>, so they cannot move the layout. The one exception is{" "}
+        <code>Collapse</code>. It animates height, because opening and closing a panel is
+        the interaction itself, and it only happens when the reader asks for it.
       </p>
       <p>
-        Every section ships a static variant and a <code>-motion</code> variant. The
-        static one is the default, and it renders identically with JavaScript disabled.
+        Every section has a static version and a <code>-motion</code> version. The static
+        version is the default, and it looks the same with JavaScript turned off.
       </p>
 
       <h2>Images and icons</h2>
       <ul>
         <li>
-          Data-driven images take a required <code>alt</code>. Logos and avatars use{" "}
-          <code>alt=&quot;&quot;</code> deliberately, because the company or person&apos;s
-          name is already text beside them — announcing both is noise, not information.
+          Images that come from your data must have <code>alt</code> text. Logos and
+          avatars use <code>alt=&quot;&quot;</code> on purpose. The company or
+          person&apos;s name is already shown as text next to the image, so a screen
+          reader would otherwise read it twice.
         </li>
         <li>
-          Icons are <code>aria-hidden</code> unless they carry meaning on their own.{" "}
-          <code>FeatureIcon</code> applies that for you rather than trusting each caller.
+          Icons are hidden from screen readers with <code>aria-hidden</code>, unless the
+          icon alone carries the meaning. <code>FeatureIcon</code> does this for you.
         </li>
       </ul>
 
-      <h2>Things that read differently than they look</h2>
-      <p>A few places deliberately separate the visual form from the spoken one:</p>
+      <h2>Where the spoken text differs from what you see</h2>
+      <p>In a few places, screen readers get different text or a different order:</p>
       <ul>
         <li>
-          <code>Stat</code> puts the label before the value in the DOM — a definition list
-          requires it, and a figure without its label is meaningless read aloud.
+          <code>Stat</code> puts the label before the value in the HTML, because a
+          description list requires that order. A number read aloud without its label
+          means nothing.
         </li>
         <li>
-          <code>PricingTier</code> renders &quot;$29&quot; visually and &quot;29 dollars
-          per month&quot; to screen readers, and a not-included feature says so in words
-          rather than relying on a grey cross.
+          <code>PricingTier</code> shows &quot;$29&quot; on screen and gives &quot;29
+          dollars per month&quot; to screen readers. A feature that is not included says
+          so in words, not only with a grey cross.
         </li>
         <li>
-          <code>Testimonial</code> renders a rating as &quot;Rated 5 out of 5&quot;, not
-          as five separately announced star icons.
+          <code>Testimonial</code> gives a rating as &quot;Rated 5 out of 5&quot;, not as
+          five separate star icons.
         </li>
       </ul>
 
       <h2>What is checked automatically</h2>
       <ul>
-        <li>Token contrast, across all eight theme scopes.</li>
+        <li>Colour contrast, in all eight combinations of theme and mode.</li>
         <li>
-          <code>eslint-plugin-jsx-a11y</code> in strict mode across the whole registry.
+          <code>eslint-plugin-jsx-a11y</code> in strict mode, on every component.
         </li>
         <li>
-          Unit tests for the behaviours above, including reading order and accessible
-          names.
+          Unit tests for the behaviour described on this page, including reading order and
+          accessible names.
         </li>
-        <li>An axe-core scan of every section in light and dark, in Playwright.</li>
+        <li>
+          An axe-core scan of every section in light and dark mode, run with Playwright.
+        </li>
       </ul>
       <p>
-        Automated checks catch perhaps a third of real accessibility problems. The
-        keyboard walkthrough on each section&apos;s page is the other part, and it is
+        Automated checks find only some accessibility problems, perhaps a third. The
+        keyboard walkthrough on each section&apos;s page covers the rest, and it is
         written by hand.
       </p>
     </Prose>

@@ -96,9 +96,9 @@ export function ThemeCustomiserExport() {
         </h2>
         <p className="text-muted-foreground text-pretty text-sm">
           {stored
-            ? "Your palette, against the same pairs and thresholds "
-            : "The shipped default palette, against the same pairs and thresholds "}
-          <code>scripts/check-contrast.ts</code> enforces in CI.
+            ? "Your theme, checked with the same colour pairs and minimum ratios as "
+            : "The default theme, checked with the same colour pairs and minimum ratios as "}
+          <code>scripts/check-contrast.ts</code>.
         </p>
         {(["light", "dark"] as const).map((mode) => (
           <section key={mode} aria-labelledby={`customiser-checks-${mode}`}>
@@ -118,7 +118,7 @@ export function ThemeCustomiserExport() {
           Export
         </h2>
         <p className="text-muted-foreground text-pretty text-sm">
-          Paste this into your stylesheet after the Facade tokens, then set{" "}
+          Paste this CSS into your stylesheet, after the Facade tokens. Then set{" "}
           <code>data-facade-theme=&quot;custom&quot;</code> on <code>&lt;html&gt;</code>.
         </p>
         <figure className="bg-card overflow-hidden rounded-lg border">
