@@ -17,22 +17,17 @@
 
 import { CheckIcon, XIcon } from "lucide-react"
 
-import palettes from "@/.generated/palettes.json"
-import { customThemeCss, useCustomTheme, type CustomTheme } from "@/lib/custom-theme"
+import { customThemeCss, useCustomTheme } from "@/lib/custom-theme"
 import { contrastRatio } from "@/lib/oklch"
 import { checkPalette, type Palette } from "@/lib/theme-tokens"
 import { CopyButton } from "./copy-button"
+import { seedFrom } from "./theme-customiser"
 import { DEFAULT_PRESET } from "./theme-switcher"
 import { cn } from "@registry/lib/utils"
 
-const shipped = palettes as Record<string, Palette>
-
 // Nothing customised yet still has something worth reading: the shipped
 // default, scored by the very same checks.
-const DEFAULT: CustomTheme = {
-  light: shipped[`${DEFAULT_PRESET}-light`]!,
-  dark: shipped[`${DEFAULT_PRESET}-dark`]!,
-}
+const DEFAULT = seedFrom(DEFAULT_PRESET)
 
 function ContrastTable({ palette, mode }: { palette: Palette; mode: "light" | "dark" }) {
   const checks = checkPalette(palette, contrastRatio)

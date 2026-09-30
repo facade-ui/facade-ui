@@ -1,7 +1,10 @@
 "use client"
 
 /**
- * The theme customiser as a panel pinned to the side of the viewport.
+ * The theme customiser as a panel floating over the side of the viewport.
+ *
+ * It floats rather than reserving a gutter, so opening it never reflows the
+ * page being themed.
  *
  * It is a dialog, but deliberately not a modal one: the whole point is to keep
  * reading, scrolling and clicking through the docs while the palette changes
@@ -14,7 +17,7 @@
  *
  * The popup pins its own colours to the shipped palette with inline custom
  * properties. The site is the preview now, so the controls are the one surface
- * that must stay legible while you drag `--foreground` onto `--background`;
+ * that must stay legible while you set `--foreground` to `--background`;
  * editing a broken theme must not break the tool you are using to fix it.
  *
  * a11y: a named dialog with a described purpose, a labelled trigger, and only
@@ -65,18 +68,15 @@ export function ThemeCustomiserPanel() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Popup
-          // globals.css reserves room for the panel from `lg` while this is in
-          // the DOM, so the page being themed is never hidden underneath it.
-          data-facade-customiser=""
           style={safePalette}
           className={cn(
-            "bg-background text-foreground duration-facade-base ease-facade-out fixed z-50 flex flex-col gap-4 overflow-y-auto border p-5 shadow-lg transition-[opacity,transform]",
+            "bg-background text-foreground duration-facade-base ease-facade-out fixed z-50 flex flex-col gap-4 overflow-y-auto border p-5 shadow-xl transition-[opacity,transform]",
             "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
-            // A sheet from the bottom on small screens, a rail on the right
-            // from lg — the same breakpoint the sidebar appears at.
+            // A bottom sheet on small screens; a content-height card in the
+            // top right corner from lg.
             "inset-x-0 bottom-0 max-h-[75dvh] rounded-t-xl",
             "data-[ending-style]:translate-y-4 data-[starting-style]:translate-y-4",
-            "lg:inset-x-auto lg:bottom-4 lg:right-4 lg:top-20 lg:max-h-none lg:w-80 lg:rounded-xl",
+            "lg:inset-x-auto lg:bottom-auto lg:right-4 lg:top-20 lg:max-h-[calc(100dvh-6rem)] lg:w-80 lg:rounded-xl",
             "lg:data-[ending-style]:translate-x-4 lg:data-[ending-style]:translate-y-0 lg:data-[starting-style]:translate-x-4 lg:data-[starting-style]:translate-y-0",
           )}
         >
@@ -92,7 +92,7 @@ export function ThemeCustomiserPanel() {
             </Dialog.Close>
           </div>
           <Dialog.Description className="text-muted-foreground text-pretty text-sm">
-            Changes apply to the whole site as you drag, previews included.
+            Changes apply to the whole site as you make them, previews included.
           </Dialog.Description>
           <ThemeCustomiser />
         </Dialog.Popup>

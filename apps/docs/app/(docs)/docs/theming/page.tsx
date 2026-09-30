@@ -132,9 +132,10 @@ export default function ThemingPage() {
         else needs to change.
       </p>
       <p>
-        To find the numbers, open the customiser with the palette button in the header and
-        drag: it edits the tokens below in OKLCH and applies them to this whole site as
-        you go, so you are judging a real page rather than a swatch. The{" "}
+        The quick way is the customiser, behind the palette button in the header. Pick a
+        brand colour and a neutral and it generates all of the tokens below, for both
+        modes, with every contrast pair already passing — and applies them to this whole
+        site as you go, so you are judging a real page rather than a swatch. The{" "}
         <Link href="/docs/customise">theme customiser</Link> page has the contrast table
         and the CSS to paste back here.
       </p>
