@@ -59,11 +59,11 @@ export interface NavSideProps {
   label?: string
   currentPath?: string
   link?: LinkComponent
-  /** Outline level of the group headings. Defaults to `2`. */
+  /** Heading level of the group headings. Defaults to `2`. */
   headingLevel?: HeadingLevel
-  /** Rendered above the groups — a version switcher, a search trigger. */
+  /** Shown above the groups, such as a version switcher or a search button. */
   children?: ReactNode
-  /** Offset for the sticky sidebar, to clear a fixed header. */
+  /** Top offset of the sticky sidebar, so it clears a fixed header. */
   stickyTop?: string
   className?: string
   id?: string

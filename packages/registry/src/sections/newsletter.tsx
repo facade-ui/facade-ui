@@ -43,9 +43,9 @@ export interface NewsletterProps extends SectionBaseProps {
   title: string
   description?: string
   eyebrow?: string
-  /** Called with the submitted address. Keep the network call outside. */
+  /** Called with the submitted address. Make the network request in your own code. */
   onSubmit?: (email: string) => void
-  /** Drives the button, the live region, and the field's error state. */
+  /** Controls the button, the live region, and the field's error state. */
   status?: NewsletterStatus
   /** Announced on success. */
   successMessage?: ReactNode
@@ -55,7 +55,7 @@ export interface NewsletterProps extends SectionBaseProps {
   hideLabel?: boolean
   placeholder?: string
   submitLabel?: string
-  /** Small print under the form — consent, frequency, unsubscribe. */
+  /** Small print under the form, such as consent, frequency or how to unsubscribe. */
   note?: ReactNode
   /** `inline` puts the button inside the field; `stacked` puts it below. */
   layout?: "inline" | "stacked"

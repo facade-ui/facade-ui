@@ -31,7 +31,7 @@ import { SectionHeader } from "@registry/ui/section-header"
 
 export interface LogoCloudProps extends SectionBaseProps, ListSlotProps {
   items: LogoItem[]
-  /** Optional heading. Omit for a bare strip under a hero. */
+  /** Optional heading. Omit it for a plain strip under a hero. */
   title?: string
   eyebrow?: string
   description?: string
@@ -41,9 +41,9 @@ export interface LogoCloudProps extends SectionBaseProps, ListSlotProps {
   size?: "sm" | "md" | "lg"
   /** Show each company name as text beside its mark. */
   showNames?: boolean
-  /** `row` wraps on one line; `grid` gives every logo equal width. */
+  /** `row` wraps logos on a line. `grid` gives every logo equal width. */
   layout?: "row" | "grid"
-  /** Desaturate and fade logos until hover or focus. */
+  /** Shows logos in grey and faded until hover or focus. */
   muted?: boolean
 }
 

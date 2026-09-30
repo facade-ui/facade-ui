@@ -53,15 +53,15 @@ export interface FaqAccordionProps extends SectionBaseProps, ListSlotProps {
   title?: string
   eyebrow?: string
   description?: string
-  /** Questions open by default, by `value` (or question slug). */
+  /** Questions that start open, by `value` (or question slug). */
   defaultOpen?: string[]
   /** Allow several answers open at once. Default `false`. */
   multiple?: boolean
   itemHeadingLevel?: HeadingLevel
-  /** Keep closed answers findable by browser find-in-page. Default `true`. */
+  /** Lets browser find-in-page reach closed answers. Default `true`. */
   hiddenUntilFound?: boolean
   align?: "start" | "center"
-  /** Emit FAQPage JSON-LD for the items with plain-text answers. */
+  /** Adds FAQPage JSON-LD for the items with plain-text answers. */
   schemaOrg?: boolean
 }
 

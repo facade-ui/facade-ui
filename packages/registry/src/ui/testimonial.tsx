@@ -37,7 +37,10 @@ export interface TestimonialItem {
 export interface TestimonialProps extends TestimonialItem {
   image?: ImageComponent
   size?: "sm" | "md" | "lg"
-  /** `card` adds a bordered surface; `plain` is bare, for a single featured quote. */
+  /**
+   * `card` adds a border and background. `plain` has neither, for a single featured
+   * quote.
+   */
   variant?: "card" | "plain"
   className?: string
   children?: ReactNode

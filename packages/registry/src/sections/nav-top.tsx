@@ -69,12 +69,12 @@ export interface NavTopProps {
   /** Wordmark or logo. Wrapped in a link to `homeHref`. */
   brand: ReactNode
   homeHref?: string
-  /** Buttons on the right, and repeated at the foot of the drawer. */
+  /** Buttons on the right. They are repeated at the bottom of the drawer. */
   actions?: CtaItem[]
   link?: LinkComponent
-  /** Used to mark the active item with `aria-current="page"`. */
+  /** Marks the matching item with `aria-current="page"`. */
   currentPath?: string
-  /** Stick to the top of the viewport. */
+  /** Keeps the header at the top of the viewport. */
   sticky?: boolean
   /** Label for the drawer trigger and dialog. */
   menuLabel?: string

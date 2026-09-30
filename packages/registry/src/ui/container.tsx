@@ -23,9 +23,9 @@ export interface ContainerProps extends Omit<
   "children"
 > {
   as?: ContainerElement
-  /** `lg` is `--facade-container-max`. `sm`/`md` narrow it for prose. */
+  /** `lg` uses `--facade-container-max`. `sm` and `md` are narrower, for text. */
   size?: "sm" | "md" | "lg" | "full"
-  /** Set `false` to remove the horizontal gutter, e.g. for a full-bleed child. */
+  /** Set `false` to remove the side padding, for example for a full-width child. */
   gutter?: boolean
   children?: ReactNode
 }

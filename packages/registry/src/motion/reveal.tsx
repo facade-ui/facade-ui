@@ -34,9 +34,9 @@ export interface RevealProps {
   distance?: number
   as?: MotionTag
   className?: string
-  /** Replay every time the element re-enters the viewport. Default `false`. */
+  /** Replays each time the element comes back into view. Default `false`. */
   repeat?: boolean
-  /** Fraction of the element that must be visible to trigger. Default `0.25`. */
+  /** How much of the element must be visible to start, from 0 to 1. Default `0.25`. */
   amount?: number
 }
 

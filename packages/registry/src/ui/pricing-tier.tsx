@@ -55,7 +55,7 @@ export interface PricingTierItem {
 
 export interface PricingTierProps extends PricingTierItem {
   link?: LinkComponent
-  /** Outline level of the tier name. Defaults to `3` (under a section `<h2>`). */
+  /** Heading level of the plan name. Defaults to `3`, below a section `<h2>`. */
   headingLevel?: HeadingLevel
   as?: "li" | "div"
   className?: string

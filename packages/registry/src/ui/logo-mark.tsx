@@ -35,15 +35,15 @@ export interface LogoItem {
 }
 
 export interface LogoMarkProps extends LogoItem {
-  /** Drop-in for `next/image`. Defaults to `"img"`. */
+  /** Your image component, such as `next/image`. Defaults to `"img"`. */
   image?: ImageComponent
-  /** Drop-in for `next/link`. Defaults to `"a"`. */
+  /** Your link component, such as `next/link`. Defaults to `"a"`. */
   link?: LinkComponent
-  /** Rendered height in px. Width follows the intrinsic ratio. */
+  /** Height in px. The width keeps the logo's proportions. */
   size?: "sm" | "md" | "lg"
-  /** Desaturate until hover/focus. Default `true`. */
+  /** Shows the logo in grey until hover or focus. Default `true`. */
   muted?: boolean
-  /** Show the name as text instead of hiding it. */
+  /** Shows the name as visible text instead of hiding it. */
   showName?: boolean
   className?: string
 }

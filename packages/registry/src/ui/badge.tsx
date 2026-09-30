@@ -39,7 +39,10 @@ export const badgeVariants = cva(
 
 export interface BadgeProps
   extends ComponentPropsWithoutRef<"span">, VariantProps<typeof badgeVariants> {
-  /** Visually hidden prefix, for badges whose meaning is not in the visible text. */
+  /**
+   * A prefix only screen readers announce, for badges whose meaning is not in the visible
+   * text.
+   */
   srLabel?: string
   children?: ReactNode
 }

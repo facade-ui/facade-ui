@@ -36,13 +36,13 @@ export type MotionTag =
 
 export interface FadeInProps {
   children: ReactNode
-  /** Direction the element travels *from*. `"none"` fades in place. */
+  /** The direction the element moves in *from*. `"none"` fades without moving. */
   direction?: FadeDirection
   /** Seconds. Defaults to `--facade-duration-base`. */
   duration?: number
   /** Seconds. */
   delay?: number
-  /** Travel distance in px. Defaults to `--facade-motion-distance` (16px). */
+  /** Distance moved, in px. Defaults to `--facade-motion-distance` (16px). */
   distance?: number
   as?: MotionTag
   className?: string

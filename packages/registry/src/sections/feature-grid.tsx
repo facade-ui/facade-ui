@@ -53,7 +53,7 @@ export interface FeatureGridProps extends SectionBaseProps, ListSlotProps {
   link?: LinkComponent
   columns?: 2 | 3 | 4
   itemHeadingLevel?: HeadingLevel
-  /** `card` draws a bordered surface; `plain` sits directly on the background. */
+  /** `card` adds a border and background. `plain` has neither. */
   variant?: "card" | "plain"
   iconVariant?: "soft" | "solid" | "outline" | "plain"
   align?: "start" | "center"

@@ -37,11 +37,11 @@ export interface HeroCenteredProps extends StackSlotProps {
   eyebrow?: ReactNode
   actions?: CtaItem[]
   link?: LinkComponent
-  /** Small print under the buttons — "No card required", and so on. */
+  /** Small print under the buttons, such as "No card required". */
   note?: ReactNode
-  /** Rendered above the eyebrow. A Badge, an announcement pill, a rating. */
+  /** Shown above the eyebrow, such as a Badge, an announcement or a rating. */
   banner?: ReactNode
-  /** Rendered below the buttons. A screenshot, a video, a logo strip. */
+  /** Shown below the buttons, such as a screenshot, a video or a logo strip. */
   media?: ReactNode
   headingLevel?: HeadingLevel
   size?: "md" | "lg" | "xl"

@@ -24,7 +24,7 @@ import { Testimonial, type TestimonialItem } from "@registry/ui/testimonial"
 export interface TestimonialSingleProps extends Omit<SectionBaseProps, "headingLevel"> {
   item: TestimonialItem
   image?: ImageComponent
-  /** Visually hidden section name, so the band can still be a landmark. */
+  /** A section name only screen readers get, so the section can be a landmark. */
   title?: string
   /** Company logo shown above the quote. Decorative. */
   logoSrc?: string

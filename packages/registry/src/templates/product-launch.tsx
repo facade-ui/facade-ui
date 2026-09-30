@@ -91,9 +91,8 @@ export interface ProductLaunchContent {
 export interface ProductLaunchProps {
   content: ProductLaunchContent
   /**
-   * No `image` prop, unlike the other two templates: every visual in this page
-   * comes through a `media` ReactNode slot, so there is no data-driven image
-   * list for a component type to be threaded into. Pass `<Image />` directly.
+   * Unlike the other two templates, this one has no `image` prop. Every image comes
+   * through a `media` slot, so pass `<Image />` there directly.
    */
   link?: LinkComponent
   currentPath?: string

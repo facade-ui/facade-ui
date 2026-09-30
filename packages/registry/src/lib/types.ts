@@ -26,13 +26,12 @@ export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
 export type HeadingTag = `h${HeadingLevel}`
 
 /**
- * The subset of image props Facade sections pass through. Intentionally all
- * valid DOM attributes so the default `"img"` element works unchanged, while
- * remaining a structural match for `next/image`.
+ * The image props that sections pass to your image component. All are valid DOM
+ * attributes, so the default `"img"` element works, and they also match `next/image`.
  */
 export interface FacadeImageProps {
   src: string
-  /** Required. Pass `""` only for images that are genuinely decorative. */
+  /** Required. Pass `""` only for decorative images. */
   alt: string
   width?: number
   height?: number
@@ -46,7 +45,7 @@ export interface FacadeImageProps {
 /** Drop-in for `next/image`, or the default `"img"`. */
 export type ImageComponent = ElementType<FacadeImageProps>
 
-/** The subset of anchor props Facade sections pass through. */
+/** The link props that sections pass to your link component. */
 export interface FacadeLinkProps {
   href: string
   children?: ReactNode
@@ -93,13 +92,11 @@ export interface CtaItem {
 }
 
 /**
- * How a section's list is built, so the `-motion` variant can be a real wrapper.
+ * Lets you replace the elements a section uses for its list.
  *
- * The static section renders `<List>` and `<Item>` from these slots, defaulting
- * to plain `ul`/`li`. The motion variant passes Base-UI-free `Stagger` and
- * `StaggerItem` adapters instead, which is what lets one file stay entirely free
- * of motion imports while the other gets per-item choreography — rather than
- * settling for a single fade over the whole band.
+ * By default a section renders `ul` and `li`. The `-motion` variant passes `Stagger` and
+ * `StaggerItem` instead, so items animate one by one while the static file imports
+ * nothing from `motion`.
  */
 export interface ListSlotProps {
   /** Wraps the list. Defaults to `"ul"`. */
@@ -109,13 +106,11 @@ export interface ListSlotProps {
 }
 
 /**
- * The stack equivalent of `ListSlotProps`, for sections whose content is a
- * sequence of blocks rather than a list — heroes and CTA bands.
+ * The same as `ListSlotProps`, for sections made of stacked blocks instead of a list,
+ * such as heroes and CTA bands.
  *
- * Defaults to plain `div`s, so the static section is a single flex column with
- * no wrappers of consequence. The `-motion` variant passes `Stagger` and
- * `StaggerItem`, which is how the eyebrow, headline, copy and buttons arrive in
- * sequence without the static file importing anything from `motion`.
+ * By default a section renders `div`s. The `-motion` variant passes `Stagger` and
+ * `StaggerItem`, so the eyebrow, headline, text and buttons appear in sequence.
  */
 export interface StackSlotProps {
   /** Wraps the content stack. Defaults to `"div"`. */
@@ -124,14 +119,17 @@ export interface StackSlotProps {
   blockAs?: ElementType
 }
 
-/** Props shared by every section: outline control plus a styling hook. */
+/** Props shared by every section. */
 export interface SectionBaseProps {
   /** Heading level for the section's own title. Defaults to `2`. */
   headingLevel?: HeadingLevel
-  /** Root element. Defaults to `"section"`. Use `"div"` when already inside one. */
+  /**
+   * Root element. Defaults to `"section"`. Use `"div"` when it is already inside a
+   * `<section>`.
+   */
   as?: "section" | "div" | "article" | "aside"
   className?: string
-  /** Vertical rhythm. Maps to the `--facade-section-y*` tokens. */
+  /** Vertical spacing. Uses the `--facade-section-y*` tokens. */
   spacing?: "sm" | "md" | "lg" | "none"
   id?: string
 }

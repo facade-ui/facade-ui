@@ -31,7 +31,10 @@ export interface TestimonialsGridProps extends SectionBaseProps, ListSlotProps {
   eyebrow?: string
   description?: string
   image?: ImageComponent
-  /** `masonry` flows in columns, so uneven quote lengths do not leave gaps. */
+  /**
+   * `masonry` lets columns have uneven heights, so quotes of different lengths leave no
+   * gaps.
+   */
   columns?: 2 | 3 | "masonry"
   variant?: "card" | "plain"
   align?: "start" | "center"

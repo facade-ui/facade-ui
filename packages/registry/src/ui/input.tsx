@@ -38,13 +38,13 @@ import { cn } from "@registry/lib/utils"
 export interface InputProps extends Omit<ComponentPropsWithoutRef<"input">, "size"> {
   /** Required. Use `hideLabel` if it should not be visible. */
   label: ReactNode
-  /** Keeps the label in the accessibility tree but out of the layout. */
+  /** Hides the label visually but keeps it for screen readers. */
   hideLabel?: boolean
-  /** Help text below the field, associated automatically. */
+  /** Help text below the field. It is linked to the field for you. */
   description?: ReactNode
-  /** Error message. Associated and announced by Base UI. */
+  /** Error message. Base UI links it to the field and announces it. */
   error?: ReactNode
-  /** Rendered inside the field on the trailing edge — a button, a unit. */
+  /** Shown inside the field at its end, such as a button or a unit. */
   trailing?: ReactNode
   /** Classes for the outer Field.Root. */
   className?: string
