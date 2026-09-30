@@ -15,16 +15,18 @@
  * be navigated by heading and each group's expanded state is announced. On small
  * screens it collapses into a Base UI Dialog — a real modal with the focus trap,
  * Escape handling, scroll lock and focus restoration a drawer needs.
+ * The drawer also carries the GitHub link, which the header drops below `lg`.
  */
 
 import { Collapsible } from "@base-ui-components/react/collapsible"
 import { Dialog } from "@base-ui-components/react/dialog"
-import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react"
+import { ChevronDownIcon, ExternalLinkIcon, MenuIcon, XIcon } from "lucide-react"
 import type { Route } from "next"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import type { NavGroup } from "@/lib/registry"
+import { GITHUB_URL } from "@/lib/registry-shared"
 import { buttonVariants } from "@registry/ui/button"
 import { cn } from "@registry/lib/utils"
 
@@ -198,6 +200,19 @@ export function SiteNavMobile({ groups }: SiteNavProps) {
             Browse Facade UI components and guides.
           </Dialog.Description>
           <NavList groups={groups} />
+          <div className="border-border mt-auto border-t pt-4">
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground hover:bg-accent/60 focus-visible:ring-ring flex min-h-9 items-center justify-between gap-2 rounded-md px-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2"
+            >
+              <span>
+                GitHub<span className="sr-only"> (opens in a new tab)</span>
+              </span>
+              <ExternalLinkIcon aria-hidden focusable="false" className="size-4" />
+            </a>
+          </div>
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

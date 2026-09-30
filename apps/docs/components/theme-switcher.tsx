@@ -8,12 +8,12 @@
  * `orange` is the default and needs no attribute. `custom` is backed by a
  * palette built in the customiser; it is offered only once one exists.
  *
- * a11y: two labelled radio groups rather than a single cycling button, so the
- * current value is always announced and reachable by keyboard.
+ * a11y: a radio group from `md`. Below that, one cycling button whose name
+ * states the current mode and the next, confirmed through a live region.
  */
 
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react"
-import { useEffect, useSyncExternalStore } from "react"
+import { useEffect, useState, useSyncExternalStore } from "react"
 
 import {
   CUSTOM_THEME_SELECTOR,
@@ -23,6 +23,7 @@ import {
 } from "@/lib/custom-theme"
 import { EDITABLE_TOKENS } from "@/lib/theme-tokens"
 import { useStoredState } from "@/lib/use-stored-state"
+import { buttonVariants } from "@registry/ui/button"
 import { cn } from "@registry/lib/utils"
 
 export const THEME_STORAGE_KEY = "facade-docs-mode"
@@ -30,6 +31,7 @@ export const PRESET_STORAGE_KEY = "facade-docs-preset"
 
 export type Mode = "light" | "dark" | "system"
 
+/** In the order the compact button cycles: system, light, dark. */
 const MODES: { value: Mode; label: string; icon: typeof SunIcon }[] = [
   { value: "light", label: "Light", icon: SunIcon },
   { value: "dark", label: "Dark", icon: MoonIcon },
@@ -100,6 +102,13 @@ export function useActivePreset(): [Preset, (next: Preset) => void, boolean] {
 export function ThemeSwitcher() {
   const [mode, setMode] = useStoredState<Mode>(THEME_STORAGE_KEY, MODE_VALUES, "system")
   const [preset, setPreset, hasCustom] = useActivePreset()
+  // Nothing is announced until the button has been pressed.
+  const [cycled, setCycled] = useState(false)
+
+  const index = MODES.findIndex((option) => option.value === mode)
+  const current = MODES[index]!
+  const next = MODES[(index + 1) % MODES.length]!
+  const CurrentIcon = current.icon
 
   // Keep the DOM in step with whichever value the store currently holds.
   useEffect(() => {
@@ -121,7 +130,22 @@ export function ThemeSwitcher() {
 
   return (
     <div className="flex items-center gap-2">
-      <fieldset className="border-border flex items-center gap-0.5 rounded-lg border p-0.5">
+      <button
+        type="button"
+        onClick={() => {
+          setMode(next.value)
+          setCycled(true)
+        }}
+        aria-label={`Colour mode: ${current.label}. Switch to ${next.label}`}
+        className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "md:hidden")}
+      >
+        <CurrentIcon aria-hidden />
+      </button>
+      <span aria-live="polite" className="sr-only">
+        {cycled ? `${current.label} colour mode` : ""}
+      </span>
+
+      <fieldset className="border-border hidden items-center gap-0.5 rounded-lg border p-0.5 md:flex">
         <legend className="sr-only">Colour mode</legend>
         {MODES.map(({ value, label, icon: Icon }) => (
           <label
