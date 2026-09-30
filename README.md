@@ -10,8 +10,6 @@ project** — there is no runtime package sitting between you and the markup.
 pnpm dlx shadcn@latest add https://facadeui.dev/r/hero-split.json
 ```
 
-Code quality, accessibility and composability are the product.
-
 ---
 
 ## What is in here
