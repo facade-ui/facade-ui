@@ -26,6 +26,7 @@ import { ThemeSwitcher } from "./theme-switcher"
 const STATIC_LINKS = [
   { href: "/docs/installation", label: "Docs" },
   { href: "/components", label: "Components" },
+  { href: "/templates", label: "Templates" },
   { href: "/docs/theming", label: "Theming" },
 ] as const
 

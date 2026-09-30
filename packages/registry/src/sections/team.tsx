@@ -150,7 +150,7 @@ export function Team({
                   {member.social.map((social) => {
                     const Icon = social.icon as ElementType
                     return (
-                      <li key={social.href}>
+                      <li key={social.label}>
                         <Link
                           href={social.href}
                           target="_blank"
