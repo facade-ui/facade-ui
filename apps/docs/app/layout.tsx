@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
+import { Analytics } from "@vercel/analytics/next"
 import { CustomThemeStyle } from "@/components/custom-theme-style"
 import { themeInitScript } from "@/components/theme-switcher"
 
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             preview iframes. */}
         <CustomThemeStyle />
         {children}
+        <Analytics />
       </body>
     </html>
   )
