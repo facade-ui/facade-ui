@@ -5,6 +5,11 @@
  * `md:` utilities resolve correctly at a chosen width.
  */
 
+import type { Metadata } from "next"
+
+// Iframe content for the component pages; the pages themselves are indexed.
+export const metadata: Metadata = { robots: { index: false, follow: false } }
+
 export default function PreviewLayout({ children }: { children: React.ReactNode }) {
   return <div className="bg-background min-h-0">{children}</div>
 }
