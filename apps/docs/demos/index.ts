@@ -7,7 +7,7 @@
  * the preview above it rather than a paraphrase of it.
  *
  * Adding a demo file and an entry here is all it takes for a component to get a
- * preview, an accessibility scan in six theme scopes, and visual snapshots at
+ * preview, an accessibility scan in eight theme scopes, and visual snapshots at
  * three breakpoints — the e2e suites derive their item list from this map.
  */
 

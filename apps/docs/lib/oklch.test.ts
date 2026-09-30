@@ -29,8 +29,8 @@ const palettes = JSON.parse(
 const scopes = Object.entries(palettes)
 
 describe("OKLCH parity between the browser and Node implementations", () => {
-  it("covers all six shipped theme scopes", () => {
-    expect(scopes).toHaveLength(6)
+  it("covers all eight shipped theme scopes", () => {
+    expect(scopes).toHaveLength(8)
   })
 
   it.each(scopes)("parses every token identically — %s", (_scope, palette) => {

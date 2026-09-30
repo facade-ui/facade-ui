@@ -30,7 +30,7 @@ import { EDITABLE_TOKENS, type Palette } from "@/lib/theme-tokens"
 import { buttonVariants } from "@registry/ui/button"
 import { cn } from "@registry/lib/utils"
 import { ThemeCustomiser } from "./theme-customiser"
-import { useResolvedMode } from "./theme-switcher"
+import { DEFAULT_PRESET, useResolvedMode } from "./theme-switcher"
 
 const shipped = palettes as Record<string, Palette>
 
@@ -39,7 +39,7 @@ export function ThemeCustomiserPanel() {
   const mode = useResolvedMode()
 
   const safePalette = useMemo(() => {
-    const palette = shipped[`neutral-${mode}`]!
+    const palette = shipped[`${DEFAULT_PRESET}-${mode}`]!
     return Object.fromEntries(
       EDITABLE_TOKENS.map((token) => [token, palette[token]]),
     ) as CSSProperties

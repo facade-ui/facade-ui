@@ -5,11 +5,8 @@
  * class) and the Facade preset (`data-facade-theme`). Both are written straight
  * onto `<html>` and mirrored into localStorage.
  *
- * `custom` is a fourth preset, backed by a palette the reader edits in the
- * customiser panel rather than by a block in `themes.css`. It is offered only
- * once such a palette exists, and a stored `custom` with nothing behind it
- * falls back to `neutral` — otherwise the select would show a disabled option
- * as its value.
+ * `orange` is the default and needs no attribute. `custom` is backed by a
+ * palette built in the customiser; it is offered only once one exists.
  *
  * a11y: two labelled radio groups rather than a single cycling button, so the
  * current value is always announced and reachable by keyboard.
@@ -31,7 +28,6 @@ export const THEME_STORAGE_KEY = "facade-docs-mode"
 export const PRESET_STORAGE_KEY = "facade-docs-preset"
 
 export type Mode = "light" | "dark" | "system"
-export type Preset = "neutral" | "warm" | "vivid" | "custom"
 
 const MODES: { value: Mode; label: string; icon: typeof SunIcon }[] = [
   { value: "light", label: "Light", icon: SunIcon },
@@ -39,12 +35,16 @@ const MODES: { value: Mode; label: string; icon: typeof SunIcon }[] = [
   { value: "system", label: "System", icon: MonitorIcon },
 ]
 
-/** The presets with a block in `themes.css`; `custom` is generated at runtime. */
-export const SHIPPED_PRESETS = ["neutral", "warm", "vivid"] as const
+/** The preset that needs no attribute. */
+export const DEFAULT_PRESET = "orange"
+
+/** The presets that ship as CSS; `custom` is generated at runtime. */
+export const SHIPPED_PRESETS = [DEFAULT_PRESET, "neutral", "warm", "vivid"] as const
 export const PRESETS = [...SHIPPED_PRESETS, "custom"] as const
 const MODE_VALUES = ["light", "dark", "system"] as const
 
 export type ShippedPreset = (typeof SHIPPED_PRESETS)[number]
+export type Preset = (typeof PRESETS)[number]
 
 const darkMedia = (): MediaQueryList => window.matchMedia("(prefers-color-scheme: dark)")
 
@@ -54,8 +54,11 @@ export function applyMode(mode: Mode): void {
 }
 
 export function applyPreset(preset: Preset): void {
-  if (preset === "neutral") document.documentElement.removeAttribute("data-facade-theme")
-  else document.documentElement.setAttribute("data-facade-theme", preset)
+  if (preset === DEFAULT_PRESET) {
+    document.documentElement.removeAttribute("data-facade-theme")
+  } else {
+    document.documentElement.setAttribute("data-facade-theme", preset)
+  }
 }
 
 function subscribeToSystem(onChange: () => void): () => void {
@@ -86,11 +89,11 @@ export function useActivePreset(): [Preset, (next: Preset) => void, boolean] {
   const [stored, setPreset] = useStoredState<Preset>(
     PRESET_STORAGE_KEY,
     PRESETS,
-    "neutral",
+    DEFAULT_PRESET,
   )
   const [customTheme] = useCustomTheme()
   const hasCustom = customTheme !== null
-  const preset = stored === "custom" && !hasCustom ? "neutral" : stored
+  const preset = stored === "custom" && !hasCustom ? DEFAULT_PRESET : stored
   return [preset, setPreset, hasCustom]
 }
 
@@ -180,7 +183,7 @@ export const themeInitScript = `
 (function () {
   try {
     var mode = localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)}) || "system";
-    var preset = localStorage.getItem(${JSON.stringify(PRESET_STORAGE_KEY)}) || "neutral";
+    var preset = localStorage.getItem(${JSON.stringify(PRESET_STORAGE_KEY)}) || ${JSON.stringify(DEFAULT_PRESET)};
     var dark = mode === "dark" || (mode === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
     document.documentElement.classList.toggle("dark", dark);
     if (preset === "custom") {
@@ -207,7 +210,7 @@ export const themeInitScript = `
         ".dark" + sel + ",.dark " + sel + "," + sel + " .dark{" + night + "}";
       document.head.appendChild(style);
     }
-    if (preset !== "neutral") document.documentElement.setAttribute("data-facade-theme", preset);
+    if (preset !== ${JSON.stringify(DEFAULT_PRESET)}) document.documentElement.setAttribute("data-facade-theme", preset);
   } catch (e) {}
 })();
 `.trim()

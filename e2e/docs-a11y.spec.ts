@@ -138,7 +138,7 @@ test("the customiser panel themes the whole site without covering it", async ({
         getComputedStyle(document.documentElement).getPropertyValue("--primary").trim(),
       ),
     )
-    .toBe("oklch(0.6 0 0)")
+    .toBe("oklch(0.6 0.222 41.116)")
 
   // The preview iframe is a separate document; it follows through storage.
   await expect
@@ -242,7 +242,7 @@ test("the customiser survives a reload and keeps the panel readable", async ({
     await panel.evaluate((el) =>
       getComputedStyle(el).getPropertyValue("--foreground").trim(),
     ),
-  ).toBe("oklch(0.145 0 0)")
+  ).toBe("oklch(0.147 0.004 49.25)")
   await expect(panel.getByText(/contrast check/)).toBeVisible()
 
   // One click back to a palette CI already guarantees.
@@ -316,5 +316,5 @@ test("the customiser panel is reachable and scrollable from the keyboard", async
   // And from there every control is a tab stop, which is what makes the
   // scrolling panel keyboard-operable at all.
   await page.keyboard.press("Tab")
-  await expect(panel.getByRole("button", { name: "neutral" })).toBeFocused()
+  await expect(panel.getByRole("button", { name: "orange" })).toBeFocused()
 })

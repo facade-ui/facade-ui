@@ -174,8 +174,9 @@ export function Banner({
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon" }),
             "absolute right-2 top-1/2 size-9 -translate-y-1/2",
+            // Ghost's `--foreground` icon can vanish on the primary surface.
             variant === "primary" &&
-              "hover:bg-primary-foreground/15 hover:text-primary-foreground",
+              "text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground",
           )}
         >
           <XIcon aria-hidden focusable="false" className="size-4" />
