@@ -1,16 +1,18 @@
 # Facade UI
 
-**The front of every great website.**
+**Sections and templates for marketing websites.**
 
-A free, open-source (MIT) registry of marketing sections, atoms and a design
-system. You install a piece with the shadcn CLI and its **source lands in your
-project** — there is no runtime package sitting between you and the markup.
+Facade UI gives you the parts a marketing website needs: heroes, feature grids,
+pricing tables, FAQs, footers and full page templates. It is free and open
+source (MIT). You install each part with the shadcn CLI, and its **source code
+is copied into your project**. There is no package to depend on.
 
 ```bash
 pnpm dlx shadcn@latest add https://facadeui.dev/r/hero-split.json
 ```
 
-Code quality, accessibility and composability are the product.
+Every section is tested against WCAG 2.2 AA and uses your existing shadcn
+theme.
 
 ---
 

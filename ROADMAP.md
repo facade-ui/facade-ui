@@ -94,9 +94,6 @@ sensibly cover.
   phase-scoped commits pushed straight to `main` on
   [facade-ui/facade-ui](https://github.com/facade-ui/facade-ui). Worth turning
   on branch protection before the next change.
-- **`facadeui.dev` is not live.** Registry dependency URLs already point at it,
-  which is correct for what ships; the smoke test rewrites them to a local
-  server so it can run offline.
 - **Base UI is at `1.0.0-rc.0`.** Two workarounds are in the tree and both are
   commented with what to revisit: the invalid `aria-orientation` on
   `NavigationMenu.List`, and the fact that `Dialog.Trigger` cannot see through a

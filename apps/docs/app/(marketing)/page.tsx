@@ -42,7 +42,7 @@ export default function HomePage() {
     <>
       <Section spacing="lg" labelledBy="facade-the-front-of-every-great-website">
         <Container className="flex flex-col items-center gap-8 text-center">
-          <Eyebrow tone="primary">Free and open source</Eyebrow>
+          <Eyebrow tone="primary">For marketing websites</Eyebrow>
           <h1
             id="facade-the-front-of-every-great-website"
             className="text-display-lg max-w-3xl text-balance font-semibold"
@@ -50,9 +50,9 @@ export default function HomePage() {
             The front of every great website
           </h1>
           <p className="text-muted-foreground max-w-2xl text-pretty text-lg sm:text-xl">
-            Facade UI is a set of marketing sections and components for React. You install
+            Facade UI gives you the sections a marketing website needs: heroes, feature
+            grids, pricing tables, FAQs and footers, plus full page templates. You install
             each one with the shadcn CLI, which copies its source code into your project.
-            You can read it, change it and keep it.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/docs/installation" className={buttonVariants({ size: "lg" })}>
