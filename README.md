@@ -30,7 +30,7 @@ npx create-next-app@latest my-site -e https://github.com/facade-ui/starter
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffacade-ui%2Fstarter&project-name=my-site&repository-name=my-site)
 
-Building with an AI agent? Point it at [facadeui.dev/docs/agents](https://facadeui.dev/docs/agents) or [facadeui.dev/llms.txt](https://facadeui.dev/llms.txt).
+Building with an AI agent? Point it at [facadeui.dev/docs/agents](https://facadeui.dev/docs/agents) or [facadeui.dev/llms.txt](https://facadeui.dev/llms.txt). Using Claude? Add the [Facade UI plugin](https://claude.ai/customize/plugins/id/86e8de8c-f5a8-41b7-937e-a8990b365185%40anthropic-plugin-directory) from the Claude directory.
 
 ---
 

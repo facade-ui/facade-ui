@@ -23,6 +23,13 @@ export default function AgentsPage() {
         It is also served as plain text at <code>/docs/agents.md</code>, and the whole
         site is indexed at <code>/llms.txt</code>.
       </p>
+      <p>
+        Using Claude (Claude Code, Cowork or the Claude apps)? Add the{" "}
+        <a href="https://claude.ai/customize/plugins/id/86e8de8c-f5a8-41b7-937e-a8990b365185%40anthropic-plugin-directory">
+          Facade UI plugin
+        </a>{" "}
+        from the Claude directory: it gives Claude these instructions in every session.
+      </p>
 
       <h2>What Facade UI is</h2>
       <p>
