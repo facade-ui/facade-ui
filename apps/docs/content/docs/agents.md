@@ -2,6 +2,8 @@
 
 This page tells an AI coding agent how to build a marketing page with Facade UI. It is also served as plain text at https://facadeui.dev/docs/agents.md, and the whole site is at https://facadeui.dev/llms.txt.
 
+Using Claude (Claude Code, Cowork or the Claude apps)? Add the [Facade UI plugin](https://claude.ai/customize/plugins/id/86e8de8c-f5a8-41b7-937e-a8990b365185%40anthropic-plugin-directory) from the Claude directory: it gives Claude these instructions in every session.
+
 ## What Facade UI is
 
 Facade UI is a set of sections and page templates for marketing websites: heroes, feature grids, pricing tables, FAQs, footers and complete pages. Each item is installed with the shadcn CLI, which copies its source into the project. It needs React 19, Tailwind CSS v4 and a project set up with `shadcn init`. Sections use shadcn's colour variable names, so they take an existing shadcn theme.
