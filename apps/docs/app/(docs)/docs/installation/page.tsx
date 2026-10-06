@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import { CodeBlock } from "@/components/code-block"
 import { InstallCommand } from "@/components/install-command"
-import { Prose } from "@/components/prose"
+import { Prose } from "@registry/ui/prose"
 import { installCommands } from "@/lib/registry-shared"
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function InstallationPage() {
   return (
-    <Prose>
+    <Prose className="max-w-3xl pb-20">
       <h1 className="text-display-sm font-semibold">Installation</h1>
       <p>
         Facade UI is not an npm package. You add each component with the shadcn CLI, which
