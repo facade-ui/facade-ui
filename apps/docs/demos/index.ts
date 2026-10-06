@@ -57,6 +57,7 @@ import { Demo as ProductLaunchDemo } from "./product-launch"
 import { Demo as SaasLandingDemo } from "./saas-landing"
 import { Demo as SectionDemo } from "./section"
 import { Demo as SectionHeaderDemo } from "./section-header"
+import { Demo as SelectDemo } from "./select"
 import { Demo as StatDemo } from "./stat"
 import { Demo as StatsDemo } from "./stats"
 import { Demo as StatsMotionDemo } from "./stats-motion"
@@ -116,6 +117,7 @@ export const demos: Record<string, ComponentType> = {
   "saas-landing": SaasLandingDemo,
   section: SectionDemo,
   "section-header": SectionHeaderDemo,
+  select: SelectDemo,
   stat: StatDemo,
   stats: StatsDemo,
   "stats-motion": StatsMotionDemo,
@@ -168,6 +170,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "product-launch": 3600,
   "pricing-tiers": 820,
   "pricing-tiers-motion": 820,
+  select: 260,
   stats: 420,
   "stats-motion": 420,
   steps: 460,
