@@ -28,8 +28,10 @@ import type { ChangelogEntry } from "@registry/sections/changelog-list"
 import type { FaqItem } from "@registry/sections/faq-accordion"
 import type { FeatureItem } from "@registry/sections/feature-grid"
 import type { FeatureRowItem } from "@registry/sections/feature-rows"
+import type { NavSideGroup } from "@registry/sections/nav-side"
 import type { NavItem } from "@registry/sections/nav-top"
 import type { UspItem } from "@registry/sections/usp-list"
+import { Badge } from "@registry/ui/badge"
 import type { LogoItem } from "@registry/ui/logo-mark"
 
 export const ACTIONS: CtaItem[] = [
@@ -541,6 +543,41 @@ export const RELEASES: ChangelogEntry[] = [
     changes: [
       { kind: "added", description: "Twelve core sections and thirteen atoms." },
       { kind: "removed", description: "The Radix dependency. Base UI only." },
+    ],
+  },
+]
+
+// ------------------------------------------------------------------ docs site
+
+export const DOCS_GROUPS: NavSideGroup[] = [
+  {
+    title: "Getting started",
+    links: [
+      { label: "Introduction", href: "#introduction" },
+      { label: "Installation", href: "#installation" },
+      { label: "Theming", href: "#theming" },
+    ],
+  },
+  {
+    title: "Guides",
+    collapsible: true,
+    links: [
+      { label: "Accessibility", href: "#accessibility" },
+      {
+        label: "Using with agents",
+        href: "#agents",
+        badge: <Badge size="sm">New</Badge>,
+      },
+    ],
+  },
+  {
+    title: "Components",
+    collapsible: true,
+    defaultCollapsed: true,
+    links: [
+      { label: "Atoms", href: "#atoms" },
+      { label: "Sections", href: "#sections" },
+      { label: "Templates", href: "#templates" },
     ],
   },
 ]

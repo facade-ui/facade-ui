@@ -19,6 +19,7 @@ export {
   type PricingTierItem,
   type PricingFeature,
 } from "./pricing-tier"
+export { Prose, type ProseProps } from "./prose"
 export { Section, type SectionProps } from "./section"
 export { SectionHeader, sectionTitleId, type SectionHeaderProps } from "./section-header"
 export { Select, type SelectOption, type SelectProps } from "./select"

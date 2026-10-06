@@ -35,10 +35,10 @@ Building with an AI agent? Point it at [facadeui.dev/docs/agents](https://facade
 | Layer              | What it is                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tokens`, `themes` | Tailwind v4 token layer. shadcn-compatible colour names plus `--facade-*` display type, section rhythm and motion. Tailwind's orange on stone by default; three presets: neutral, warm, vivid.                                                                                                                                                                        |
-| Atoms              | `button`, `badge`, `heading`, `eyebrow`, `container`, `section`, `section-header`, `cta-group`, `stat`, `logo-mark`, `feature-icon`, `testimonial`, `pricing-tier`, `input`, `select`, `textarea`                                                                                                                                                                     |
+| Atoms              | `button`, `badge`, `heading`, `eyebrow`, `container`, `section`, `section-header`, `cta-group`, `stat`, `logo-mark`, `feature-icon`, `testimonial`, `pricing-tier`, `input`, `select`, `textarea`, `prose`                                                                                                                                                            |
 | Motion             | `motion-primitives`: `FacadeMotionProvider`, `FadeIn`, `Reveal`, `Stagger`, `Collapse`, and the slot adapters the `-motion` sections use                                                                                                                                                                                                                              |
 | Sections           | `nav-top`, `nav-side`, three heroes, `logo-cloud`, `usp-list`, `feature-grid`, `feature-rows`, `feature-tabs`, `bento-grid`, `stats`, `steps`, `testimonials-grid`, `testimonial-single`, `team`, `pricing-tiers`, `pricing-comparison`, `card-list`, `changelog-list`, `faq-accordion`, `newsletter`, `banner`, `cta-band`, `footer` — most with a `-motion` variant |
-| Templates          | `saas-landing`, `agency`, `product-launch`, `changelog`                                                                                                                                                                                                                                                                                                               |
+| Templates          | `saas-landing`, `agency`, `product-launch`, `changelog`, `docs-site`                                                                                                                                                                                                                                                                                                  |
 
 ## Decisions, and why
 
@@ -63,7 +63,7 @@ The target is WCAG 2.2 AA, and the point is that it is _checked_:
   three presets) from the real CSS and fails if a text pair drops below 4.5:1 or
   the focus ring or a form-field border below 3:1. It has already caught two
   real regressions.
-- `pnpm e2e:a11y` runs axe-core over all 62 previews in all eight scopes, plus
+- `pnpm e2e:a11y` runs axe-core over all 64 previews in all eight scopes, plus
   the docs site itself. It has already caught six real defects:
   `LogoMark`'s resting opacity dimming text below 4.5:1, an invalid
   `aria-orientation` Base UI puts on a `<ul>`, a `<dl>` with its `dt`/`dd` pairs
@@ -112,7 +112,7 @@ through the real shadcn CLI, and typechecks the result.
 
 All four phases of the brief are built: foundations and tooling, the core
 sections, the breadth sections, and the templates plus the theme customiser —
-66 registry items in total. See
+68 registry items in total. See
 [ROADMAP.md](./ROADMAP.md) for what is deliberately still open.
 
 ## Licence

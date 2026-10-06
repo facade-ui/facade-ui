@@ -39,7 +39,8 @@ decoration.
 
 ### Phase 3 — Templates and theming
 
-- Templates: `saas-landing`, `agency`, `product-launch`. Each is composition
+- Templates: `saas-landing`, `agency`, `product-launch` (and, in Phase 5,
+  `changelog` and `docs-site`). Each is composition
   over the existing sections with one content object, and each sets the heading
   outline explicitly rather than leaning on section defaults — so the page has
   exactly one `h1` and no skipped levels.
@@ -80,14 +81,16 @@ decoration.
 - `changelog`: a template for release history, with a new `changelog-list`
   section doing the work. Each release is an article with its own heading,
   anchor and `<time>`, and each change carries its kind as a word.
+- `docs-site`: a documentation page from `nav-top`, `nav-side` and `footer`,
+  with an "On this page" list and previous and next links. The article body is
+  a slot styled by a new `prose` atom, the registry's version of the docs
+  site's own typography.
 
 ## Not started
 
 Nothing from the original brief. What follows is what a second pass would
 sensibly cover.
 
-- **A `docs-site` template.** The obvious remaining gap, and `nav-side` already
-  exists for it.
 - **Dark-mode logo swapping** in `LogoMark`. Most brand marks need a different
   file per theme, and right now that is the caller's problem.
 
