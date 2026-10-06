@@ -32,12 +32,12 @@ Building with an AI agent? Point it at [facadeui.dev/docs/agents](https://facade
 
 ## What is in here
 
-| Layer              | What it is                                                                                                                                                                                     |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens`, `themes` | Tailwind v4 token layer. shadcn-compatible colour names plus `--facade-*` display type, section rhythm and motion. Tailwind's orange on stone by default; three presets: neutral, warm, vivid. |
-| Atoms              | `button`, `badge`, `heading`, `eyebrow`, `container`, `section`, `section-header`, `cta-group`, `stat`, `logo-mark`, `feature-icon`, `testimonial`, `pricing-tier`, `input`, `select`          |
-| Motion             | `motion-primitives`: `FacadeMotionProvider`, `FadeIn`, `Reveal`, `Stagger`, `Collapse`, and the slot adapters the `-motion` sections use                                                       |
-| Sections           | `nav-top`, three heroes, `logo-cloud`, `usp-list`, `feature-grid`, `feature-rows`, `bento-grid`, `faq-accordion`, `cta-band`, `footer` — each with a `-motion` variant                         |
+| Layer              | What it is                                                                                                                                                                                        |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens`, `themes` | Tailwind v4 token layer. shadcn-compatible colour names plus `--facade-*` display type, section rhythm and motion. Tailwind's orange on stone by default; three presets: neutral, warm, vivid.    |
+| Atoms              | `button`, `badge`, `heading`, `eyebrow`, `container`, `section`, `section-header`, `cta-group`, `stat`, `logo-mark`, `feature-icon`, `testimonial`, `pricing-tier`, `input`, `select`, `textarea` |
+| Motion             | `motion-primitives`: `FacadeMotionProvider`, `FadeIn`, `Reveal`, `Stagger`, `Collapse`, and the slot adapters the `-motion` sections use                                                          |
+| Sections           | `nav-top`, three heroes, `logo-cloud`, `usp-list`, `feature-grid`, `feature-rows`, `bento-grid`, `faq-accordion`, `cta-band`, `footer` — each with a `-motion` variant                            |
 
 ## Decisions, and why
 
@@ -62,7 +62,7 @@ The target is WCAG 2.2 AA, and the point is that it is _checked_:
   three presets) from the real CSS and fails if a text pair drops below 4.5:1 or
   the focus ring or a form-field border below 3:1. It has already caught two
   real regressions.
-- `pnpm e2e:a11y` runs axe-core over all 58 previews in all eight scopes, plus
+- `pnpm e2e:a11y` runs axe-core over all 60 previews in all eight scopes, plus
   the docs site itself. It has already caught six real defects:
   `LogoMark`'s resting opacity dimming text below 4.5:1, an invalid
   `aria-orientation` Base UI puts on a `<ul>`, a `<dl>` with its `dt`/`dd` pairs
@@ -111,7 +111,7 @@ through the real shadcn CLI, and typechecks the result.
 
 All four phases of the brief are built: foundations and tooling, the core
 sections, the breadth sections, and the templates plus the theme customiser —
-63 registry items in total. See
+64 registry items in total. See
 [ROADMAP.md](./ROADMAP.md) for what is deliberately still open.
 
 ## Licence
