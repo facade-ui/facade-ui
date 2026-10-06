@@ -42,6 +42,7 @@ import { Demo as HeroSplitDemo } from "./hero-split"
 import { Demo as HeroSplitMotionDemo } from "./hero-split-motion"
 import { Demo as HeroWithMediaDemo } from "./hero-with-media"
 import { Demo as HeroWithMediaMotionDemo } from "./hero-with-media-motion"
+import { Demo as InputDemo } from "./input"
 import { Demo as LogoCloudDemo } from "./logo-cloud"
 import { Demo as LogoCloudMotionDemo } from "./logo-cloud-motion"
 import { Demo as LogoMarkDemo } from "./logo-mark"
@@ -66,6 +67,7 @@ import { Demo as StepsMotionDemo } from "./steps-motion"
 import { Demo as TeamDemo } from "./team"
 import { Demo as TeamMotionDemo } from "./team-motion"
 import { Demo as TestimonialDemo } from "./testimonial"
+import { Demo as TextareaDemo } from "./textarea"
 import { Demo as TestimonialSingleDemo } from "./testimonial-single"
 import { Demo as TestimonialsGridDemo } from "./testimonials-grid"
 import { Demo as TestimonialsGridMotionDemo } from "./testimonials-grid-motion"
@@ -102,6 +104,7 @@ export const demos: Record<string, ComponentType> = {
   "hero-split-motion": HeroSplitMotionDemo,
   "hero-with-media": HeroWithMediaDemo,
   "hero-with-media-motion": HeroWithMediaMotionDemo,
+  input: InputDemo,
   "logo-cloud": LogoCloudDemo,
   "logo-cloud-motion": LogoCloudMotionDemo,
   "logo-mark": LogoMarkDemo,
@@ -129,6 +132,7 @@ export const demos: Record<string, ComponentType> = {
   "testimonial-single": TestimonialSingleDemo,
   "testimonials-grid": TestimonialsGridDemo,
   "testimonials-grid-motion": TestimonialsGridMotionDemo,
+  textarea: TextareaDemo,
   "usp-list": UspListDemo,
   "usp-list-motion": UspListMotionDemo,
 }
@@ -161,6 +165,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "hero-split-motion": 620,
   "hero-with-media": 520,
   "hero-with-media-motion": 520,
+  input: 340,
   "motion-primitives": 460,
   "nav-side": 520,
   "nav-top": 220,
@@ -181,6 +186,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "testimonial-single": 420,
   "testimonials-grid": 900,
   "testimonials-grid-motion": 900,
+  textarea: 560,
   "usp-list": 520,
   "usp-list-motion": 520,
 }

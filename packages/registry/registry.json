@@ -368,6 +368,22 @@
       "registryDependencies": ["https://facadeui.dev/r/utils.json"]
     },
     {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line text field built on Base UI's Field, so the label, help text and error message are connected to the control. Same border and focus ring as Input.",
+      "categories": ["atom"],
+      "files": [
+        {
+          "path": "src/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        }
+      ],
+      "dependencies": ["@base-ui-components/react@1.0.0-rc.0"],
+      "registryDependencies": ["https://facadeui.dev/r/utils.json"]
+    },
+    {
       "name": "nav-top",
       "type": "registry:block",
       "title": "Top navigation",

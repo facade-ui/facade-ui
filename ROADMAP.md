@@ -72,6 +72,11 @@ decoration.
 
 - `select`: a drop-down on Base UI's Select, wired through Field the same way
   `input` is, so label, help text and an external error reach the trigger.
+- `textarea`: the same wiring, with `Field.Control` rendering a `<textarea>`.
+  With `input` and `select` that covers the fields a contact form needs. `input`
+  also got the demo it never had, so it is now scanned and snapshotted too, and
+  that demo showed its border stayed grey on an external error. All three
+  fields now set `Field.Root invalid`, which marks the control and colours it.
 
 ## Not started
 
@@ -80,7 +85,6 @@ sensibly cover.
 
 - **More templates.** `docs-site` and `changelog` are the obvious gaps, and
   `nav-side` and `card-list` already exist for them.
-- **A `Textarea`** to go with `Input` and `Select`, for contact-form sections.
 - **Dark-mode logo swapping** in `LogoMark`. Most brand marks need a different
   file per theme, and right now that is the caller's problem.
 
