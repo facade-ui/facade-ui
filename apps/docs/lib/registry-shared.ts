@@ -12,18 +12,21 @@ export const GITHUB_URL = "https://github.com/facade-ui/facade-ui"
 export const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const
 export type PackageManager = (typeof PACKAGE_MANAGERS)[number]
 
-/** The command a visitor copies to install an item. */
+/**
+ * The command a visitor copies to install an item. `@facade` is in the shadcn
+ * registry directory, so the CLI resolves it with no configuration.
+ */
 export function installCommand(name: string, manager: PackageManager = "pnpm"): string {
-  const url = `${REGISTRY_URL}/r/${name}.json`
+  const item = `@facade/${name}`
   switch (manager) {
     case "npm":
-      return `npx shadcn@latest add ${url}`
+      return `npx shadcn@latest add ${item}`
     case "pnpm":
-      return `pnpm dlx shadcn@latest add ${url}`
+      return `pnpm dlx shadcn@latest add ${item}`
     case "yarn":
-      return `yarn dlx shadcn@latest add ${url}`
+      return `yarn dlx shadcn@latest add ${item}`
     case "bun":
-      return `bunx --bun shadcn@latest add ${url}`
+      return `bunx --bun shadcn@latest add ${item}`
   }
 }
 

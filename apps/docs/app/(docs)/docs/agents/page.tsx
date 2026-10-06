@@ -45,24 +45,9 @@ export default function AgentsPage() {
       <ol>
         <li>
           Make sure <code>components.json</code> exists (
-          <code>npx shadcn@latest init</code>
-          ).
+          <code>npx shadcn@latest init</code>). <code>@facade</code> is in the shadcn
+          registry directory, so it needs no configuration.
         </li>
-        <li>
-          If <code>@facade</code> is not resolved yet, add the registry to{" "}
-          <code>components.json</code>:
-        </li>
-      </ol>
-      <CodeBlock
-        lang="json"
-        filename="components.json"
-        code={`{
-  "registries": {
-    "@facade": "https://facadeui.dev/r/{name}.json"
-  }
-}`}
-      />
-      <ol start={3}>
         <li>Install the tokens and import them after Tailwind:</li>
       </ol>
       <CodeBlock

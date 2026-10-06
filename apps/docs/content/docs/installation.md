@@ -47,7 +47,7 @@ You install each component by name. The CLI also installs what the component nee
 npx shadcn@latest add @facade/section-header
 ```
 
-If the `@facade` namespace is not configured, install by URL instead: `npx shadcn@latest add https://facadeui.dev/r/section-header.json`.
+`@facade` is in the shadcn registry directory, so there is nothing to configure. You can also install by URL: `npx shadcn@latest add https://facadeui.dev/r/section-header.json`.
 
 ## 4. Use your own image and link components
 
