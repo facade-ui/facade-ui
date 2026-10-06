@@ -61,6 +61,7 @@ export function Textarea({
 }: TextareaProps) {
   return (
     <Field.Root
+      name={name}
       invalid={Boolean(error)}
       className={cn("flex w-full flex-col gap-1.5", className)}
     >
@@ -98,13 +99,13 @@ export function Textarea({
       ) : null}
 
       {/* `match` shows an error from outside, which Base UI's own validity
-          state knows nothing about. */}
+          state knows nothing about. Without one, no children are passed, so
+          Base UI shows the browser's own message for a failed check. */}
       <Field.Error
         className="text-destructive text-pretty text-sm"
         match={Boolean(error) || undefined}
-      >
-        {error}
-      </Field.Error>
+        {...(error ? { children: error } : {})}
+      />
     </Field.Root>
   )
 }
