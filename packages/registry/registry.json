@@ -1212,6 +1212,29 @@
       ]
     },
     {
+      "name": "changelog-list",
+      "type": "registry:block",
+      "title": "Changelog list",
+      "description": "A list of releases. Each has a version, a date and its changes, labelled Added, Changed, Fixed, Removed, Deprecated or Security. Every release is its own article with a heading and an anchor.",
+      "categories": ["section"],
+      "files": [
+        {
+          "path": "src/sections/changelog-list.tsx",
+          "type": "registry:component",
+          "target": "components/sections/changelog-list.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/badge.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
       "name": "saas-landing",
       "type": "registry:block",
       "title": "SaaS landing page",
@@ -1297,6 +1320,31 @@
         "https://facadeui.dev/r/newsletter.json",
         "https://facadeui.dev/r/types.json",
         "https://facadeui.dev/r/usp-list.json"
+      ]
+    },
+    {
+      "name": "changelog",
+      "type": "registry:block",
+      "title": "Changelog page",
+      "description": "A complete changelog page built from Facade UI sections: a header, the releases with their changes, and an optional email sign-up. You supply one content object.",
+      "categories": ["template"],
+      "files": [
+        {
+          "path": "src/templates/changelog.tsx",
+          "type": "registry:component",
+          "target": "components/templates/changelog.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/changelog-list.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/cta-group.json",
+        "https://facadeui.dev/r/footer.json",
+        "https://facadeui.dev/r/nav-top.json",
+        "https://facadeui.dev/r/newsletter.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json"
       ]
     }
   ]

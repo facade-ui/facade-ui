@@ -21,6 +21,8 @@ import { Demo as BentoGridMotionDemo } from "./bento-grid-motion"
 import { Demo as ButtonDemo } from "./button"
 import { Demo as CardListDemo } from "./card-list"
 import { Demo as CardListMotionDemo } from "./card-list-motion"
+import { Demo as ChangelogDemo } from "./changelog"
+import { Demo as ChangelogListDemo } from "./changelog-list"
 import { Demo as ContainerDemo } from "./container"
 import { Demo as CtaBandDemo } from "./cta-band"
 import { Demo as CtaBandMotionDemo } from "./cta-band-motion"
@@ -83,6 +85,8 @@ export const demos: Record<string, ComponentType> = {
   button: ButtonDemo,
   "card-list": CardListDemo,
   "card-list-motion": CardListMotionDemo,
+  changelog: ChangelogDemo,
+  "changelog-list": ChangelogListDemo,
   container: ContainerDemo,
   "cta-band": CtaBandDemo,
   "cta-band-motion": CtaBandMotionDemo,
@@ -149,6 +153,8 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   button: 320,
   "card-list": 720,
   "card-list-motion": 720,
+  changelog: 2400,
+  "changelog-list": 1100,
   "cta-band": 700,
   "cta-band-motion": 700,
   "faq-accordion": 620,

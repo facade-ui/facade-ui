@@ -77,14 +77,17 @@ decoration.
   also got the demo it never had, so it is now scanned and snapshotted too, and
   that demo showed its border stayed grey on an external error. All three
   fields now set `Field.Root invalid`, which marks the control and colours it.
+- `changelog`: a template for release history, with a new `changelog-list`
+  section doing the work. Each release is an article with its own heading,
+  anchor and `<time>`, and each change carries its kind as a word.
 
 ## Not started
 
 Nothing from the original brief. What follows is what a second pass would
 sensibly cover.
 
-- **More templates.** `docs-site` and `changelog` are the obvious gaps, and
-  `nav-side` and `card-list` already exist for them.
+- **A `docs-site` template.** The obvious remaining gap, and `nav-side` already
+  exists for it.
 - **Dark-mode logo swapping** in `LogoMark`. Most brand marks need a different
   file per theme, and right now that is the caller's problem.
 
