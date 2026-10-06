@@ -21,10 +21,13 @@ import { Demo as BentoGridMotionDemo } from "./bento-grid-motion"
 import { Demo as ButtonDemo } from "./button"
 import { Demo as CardListDemo } from "./card-list"
 import { Demo as CardListMotionDemo } from "./card-list-motion"
+import { Demo as ChangelogDemo } from "./changelog"
+import { Demo as ChangelogListDemo } from "./changelog-list"
 import { Demo as ContainerDemo } from "./container"
 import { Demo as CtaBandDemo } from "./cta-band"
 import { Demo as CtaBandMotionDemo } from "./cta-band-motion"
 import { Demo as CtaGroupDemo } from "./cta-group"
+import { Demo as DocsSiteDemo } from "./docs-site"
 import { Demo as EyebrowDemo } from "./eyebrow"
 import { Demo as FaqAccordionDemo } from "./faq-accordion"
 import { Demo as FaqAccordionMotionDemo } from "./faq-accordion-motion"
@@ -42,6 +45,7 @@ import { Demo as HeroSplitDemo } from "./hero-split"
 import { Demo as HeroSplitMotionDemo } from "./hero-split-motion"
 import { Demo as HeroWithMediaDemo } from "./hero-with-media"
 import { Demo as HeroWithMediaMotionDemo } from "./hero-with-media-motion"
+import { Demo as InputDemo } from "./input"
 import { Demo as LogoCloudDemo } from "./logo-cloud"
 import { Demo as LogoCloudMotionDemo } from "./logo-cloud-motion"
 import { Demo as LogoMarkDemo } from "./logo-mark"
@@ -54,6 +58,7 @@ import { Demo as PricingTierDemo } from "./pricing-tier"
 import { Demo as PricingTiersDemo } from "./pricing-tiers"
 import { Demo as PricingTiersMotionDemo } from "./pricing-tiers-motion"
 import { Demo as ProductLaunchDemo } from "./product-launch"
+import { Demo as ProseDemo } from "./prose"
 import { Demo as SaasLandingDemo } from "./saas-landing"
 import { Demo as SectionDemo } from "./section"
 import { Demo as SectionHeaderDemo } from "./section-header"
@@ -66,6 +71,7 @@ import { Demo as StepsMotionDemo } from "./steps-motion"
 import { Demo as TeamDemo } from "./team"
 import { Demo as TeamMotionDemo } from "./team-motion"
 import { Demo as TestimonialDemo } from "./testimonial"
+import { Demo as TextareaDemo } from "./textarea"
 import { Demo as TestimonialSingleDemo } from "./testimonial-single"
 import { Demo as TestimonialsGridDemo } from "./testimonials-grid"
 import { Demo as TestimonialsGridMotionDemo } from "./testimonials-grid-motion"
@@ -81,10 +87,13 @@ export const demos: Record<string, ComponentType> = {
   button: ButtonDemo,
   "card-list": CardListDemo,
   "card-list-motion": CardListMotionDemo,
+  changelog: ChangelogDemo,
+  "changelog-list": ChangelogListDemo,
   container: ContainerDemo,
   "cta-band": CtaBandDemo,
   "cta-band-motion": CtaBandMotionDemo,
   "cta-group": CtaGroupDemo,
+  "docs-site": DocsSiteDemo,
   eyebrow: EyebrowDemo,
   "faq-accordion": FaqAccordionDemo,
   "faq-accordion-motion": FaqAccordionMotionDemo,
@@ -102,6 +111,7 @@ export const demos: Record<string, ComponentType> = {
   "hero-split-motion": HeroSplitMotionDemo,
   "hero-with-media": HeroWithMediaDemo,
   "hero-with-media-motion": HeroWithMediaMotionDemo,
+  input: InputDemo,
   "logo-cloud": LogoCloudDemo,
   "logo-cloud-motion": LogoCloudMotionDemo,
   "logo-mark": LogoMarkDemo,
@@ -114,6 +124,7 @@ export const demos: Record<string, ComponentType> = {
   "pricing-tiers": PricingTiersDemo,
   "pricing-tiers-motion": PricingTiersMotionDemo,
   "product-launch": ProductLaunchDemo,
+  prose: ProseDemo,
   "saas-landing": SaasLandingDemo,
   section: SectionDemo,
   "section-header": SectionHeaderDemo,
@@ -129,6 +140,7 @@ export const demos: Record<string, ComponentType> = {
   "testimonial-single": TestimonialSingleDemo,
   "testimonials-grid": TestimonialsGridDemo,
   "testimonials-grid-motion": TestimonialsGridMotionDemo,
+  textarea: TextareaDemo,
   "usp-list": UspListDemo,
   "usp-list-motion": UspListMotionDemo,
 }
@@ -145,8 +157,11 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   button: 320,
   "card-list": 720,
   "card-list-motion": 720,
+  changelog: 2400,
+  "changelog-list": 1100,
   "cta-band": 700,
   "cta-band-motion": 700,
+  "docs-site": 1500,
   "faq-accordion": 620,
   "faq-accordion-motion": 620,
   "feature-grid": 800,
@@ -161,6 +176,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "hero-split-motion": 620,
   "hero-with-media": 520,
   "hero-with-media-motion": 520,
+  input: 340,
   "motion-primitives": 460,
   "nav-side": 520,
   "nav-top": 220,
@@ -168,6 +184,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "pricing-comparison": 820,
   "pricing-tier": 620,
   "product-launch": 3600,
+  prose: 640,
   "pricing-tiers": 820,
   "pricing-tiers-motion": 820,
   select: 260,
@@ -181,6 +198,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "testimonial-single": 420,
   "testimonials-grid": 900,
   "testimonials-grid-motion": 900,
+  textarea: 560,
   "usp-list": 520,
   "usp-list-motion": 520,
 }

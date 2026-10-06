@@ -368,6 +368,37 @@
       "registryDependencies": ["https://facadeui.dev/r/utils.json"]
     },
     {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line text field built on Base UI's Field, so the label, help text and error message are connected to the control. Same border and focus ring as Input.",
+      "categories": ["atom"],
+      "files": [
+        {
+          "path": "src/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        }
+      ],
+      "dependencies": ["@base-ui-components/react@1.0.0-rc.0"],
+      "registryDependencies": ["https://facadeui.dev/r/utils.json"]
+    },
+    {
+      "name": "prose",
+      "type": "registry:ui",
+      "title": "Prose",
+      "description": "Styles for an article body: headings, paragraphs, lists, links, code, quotes and tables on the Facade type scale. Wrap rendered markdown or hand-written HTML in it.",
+      "categories": ["atom"],
+      "files": [
+        {
+          "path": "src/ui/prose.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/prose.tsx"
+        }
+      ],
+      "registryDependencies": ["https://facadeui.dev/r/utils.json"]
+    },
+    {
       "name": "nav-top",
       "type": "registry:block",
       "title": "Top navigation",
@@ -1196,6 +1227,29 @@
       ]
     },
     {
+      "name": "changelog-list",
+      "type": "registry:block",
+      "title": "Changelog list",
+      "description": "A list of releases. Each has a version, a date and its changes, labelled Added, Changed, Fixed, Removed, Deprecated or Security. Every release is its own article with a heading and an anchor.",
+      "categories": ["section"],
+      "files": [
+        {
+          "path": "src/sections/changelog-list.tsx",
+          "type": "registry:component",
+          "target": "components/sections/changelog-list.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/badge.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
       "name": "saas-landing",
       "type": "registry:block",
       "title": "SaaS landing page",
@@ -1281,6 +1335,56 @@
         "https://facadeui.dev/r/newsletter.json",
         "https://facadeui.dev/r/types.json",
         "https://facadeui.dev/r/usp-list.json"
+      ]
+    },
+    {
+      "name": "changelog",
+      "type": "registry:block",
+      "title": "Changelog page",
+      "description": "A complete changelog page built from Facade UI sections: a header, the releases with their changes, and an optional email sign-up. You supply one content object.",
+      "categories": ["template"],
+      "files": [
+        {
+          "path": "src/templates/changelog.tsx",
+          "type": "registry:component",
+          "target": "components/templates/changelog.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/changelog-list.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/cta-group.json",
+        "https://facadeui.dev/r/footer.json",
+        "https://facadeui.dev/r/nav-top.json",
+        "https://facadeui.dev/r/newsletter.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/types.json"
+      ]
+    },
+    {
+      "name": "docs-site",
+      "type": "registry:block",
+      "title": "Documentation page",
+      "description": "A documentation page built from Facade UI sections: top navigation, side navigation, the article, an 'On this page' list and previous and next links. You supply one content object and the article body.",
+      "categories": ["template"],
+      "files": [
+        {
+          "path": "src/templates/docs-site.tsx",
+          "type": "registry:component",
+          "target": "components/templates/docs-site.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/eyebrow.json",
+        "https://facadeui.dev/r/footer.json",
+        "https://facadeui.dev/r/heading.json",
+        "https://facadeui.dev/r/nav-side.json",
+        "https://facadeui.dev/r/nav-top.json",
+        "https://facadeui.dev/r/prose.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
       ]
     }
   ]
