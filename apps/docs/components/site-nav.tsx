@@ -4,7 +4,7 @@
  * The docs sidebar.
  *
  * Groups are Base UI Collapsibles, closed by default so the whole catalogue —
- * sixty-two items — does not arrive as one unscrollable wall. "Getting started"
+ * more than sixty items — does not arrive as one unscrollable wall. "Getting started"
  * opens on load, and so does whichever group holds the current page: landing on
  * a component from a link or a search result and finding the sidebar unable to
  * tell you where you are would be worse than the wall.

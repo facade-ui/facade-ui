@@ -352,6 +352,22 @@
       "registryDependencies": ["https://facadeui.dev/r/utils.json"]
     },
     {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "A drop-down list built on Base UI's Select and Field. The label, help text and error message are connected to the control, and a hidden input carries the chosen value when a form is submitted.",
+      "categories": ["atom"],
+      "files": [
+        {
+          "path": "src/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
+        }
+      ],
+      "dependencies": ["@base-ui-components/react@1.0.0-rc.0", "lucide-react@^1.47.0"],
+      "registryDependencies": ["https://facadeui.dev/r/utils.json"]
+    },
+    {
       "name": "nav-top",
       "type": "registry:block",
       "title": "Top navigation",

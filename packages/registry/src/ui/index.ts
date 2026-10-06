@@ -11,6 +11,7 @@ export { CtaGroup, type CtaGroupProps } from "./cta-group"
 export { Eyebrow, type EyebrowProps } from "./eyebrow"
 export { Heading, type HeadingProps } from "./heading"
 export { FeatureIcon, featureIconVariants, type FeatureIconProps } from "./feature-icon"
+export { Input, type InputProps } from "./input"
 export { LogoMark, type LogoMarkProps, type LogoItem } from "./logo-mark"
 export {
   PricingTier,
@@ -20,6 +21,7 @@ export {
 } from "./pricing-tier"
 export { Section, type SectionProps } from "./section"
 export { SectionHeader, sectionTitleId, type SectionHeaderProps } from "./section-header"
+export { Select, type SelectOption, type SelectProps } from "./select"
 export { Stat, type StatProps, type StatItem } from "./stat"
 export {
   Testimonial,

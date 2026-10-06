@@ -68,6 +68,11 @@ decoration.
   token for both modes, always passing contrast. Every token is still editable
   under Advanced, and the panel floats instead of pushing the page aside.
 
+### Phase 5 — Forms and more templates
+
+- `select`: a drop-down on Base UI's Select, wired through Field the same way
+  `input` is, so label, help text and an external error reach the trigger.
+
 ## Not started
 
 Nothing from the original brief. What follows is what a second pass would
@@ -75,7 +80,7 @@ sensibly cover.
 
 - **More templates.** `docs-site` and `changelog` are the obvious gaps, and
   `nav-side` and `card-list` already exist for them.
-- **A `Select` and `Textarea`** to go with `Input`, for contact-form sections.
+- **A `Textarea`** to go with `Input` and `Select`, for contact-form sections.
 - **Dark-mode logo swapping** in `LogoMark`. Most brand marks need a different
   file per theme, and right now that is the caller's problem.
 
@@ -97,4 +102,7 @@ sensibly cover.
 - **Base UI is at `1.0.0-rc.0`.** Two workarounds are in the tree and both are
   commented with what to revisit: the invalid `aria-orientation` on
   `NavigationMenu.List`, and the fact that `Dialog.Trigger` cannot see through a
-  wrapper component when checking for a native button.
+  wrapper component when checking for a native button. One finding has no
+  workaround: an open `Select` renders focus-guard spans that axe reports as
+  `aria-hidden-focus`. They hand focus straight back to the list, so nothing can
+  rest on them, and the axe gate scans previews closed.
