@@ -16,11 +16,7 @@ is copied into your project**. There is no package to depend on.
 npx shadcn@latest add @facade/saas-landing
 ```
 
-That installs a complete landing page and the sixteen sections it is made of. Any single piece works the same way: `npx shadcn@latest add @facade/hero-split`. Until `@facade` is in the shadcn directory, add it to `components.json` first:
-
-```json
-{ "registries": { "@facade": "https://facadeui.dev/r/{name}.json" } }
-```
+That installs a complete landing page and the sixteen sections it is made of. Any single piece works the same way: `npx shadcn@latest add @facade/hero-split`. `@facade` is in the shadcn registry directory, so there is nothing to configure.
 
 Starting from nothing? The [starter](https://github.com/facade-ui/starter) is a Next.js app with a complete landing page already in place:
 

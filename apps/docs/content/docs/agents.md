@@ -10,18 +10,8 @@ Facade UI is a set of sections and page templates for marketing websites: heroes
 
 ## Set up
 
-1. Make sure `components.json` exists (`npx shadcn@latest init`).
-2. If `@facade` is not resolved yet, add the registry to `components.json`:
-
-```json
-{
-  "registries": {
-    "@facade": "https://facadeui.dev/r/{name}.json"
-  }
-}
-```
-
-3. Install the tokens and import them after Tailwind:
+1. Make sure `components.json` exists (`npx shadcn@latest init`). `@facade` is in the shadcn registry directory, so it needs no configuration.
+2. Install the tokens and import them after Tailwind:
 
 ```bash
 npx shadcn@latest add @facade/tokens
