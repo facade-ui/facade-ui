@@ -16,10 +16,11 @@
  *    a bare asterisk whose meaning is a convention rather than information.
  *  - The error is rendered by `Field.Error`, which Base UI associates with the
  *    control, so it is announced rather than merely appearing underneath.
- *  - `aria-invalid` is set explicitly when `error` is passed in. Base UI derives
- *    it from the control's own `ValidityState`, which knows nothing about an
- *    error that came back from a server — so without this, an externally
- *    supplied message is described but the field is not marked invalid.
+ *  - `Field.Root invalid` is set when `error` is passed in. Base UI otherwise
+ *    derives validity from the control's own `ValidityState`, which knows
+ *    nothing about an error that came back from a server — so without it, an
+ *    external message is described but the field is neither marked
+ *    `aria-invalid` nor given the red border.
  *  - 44px tall, matching every other control in the registry.
  *
  * `label` is required. Pass `hideLabel` for a search or subscribe field where
@@ -60,11 +61,16 @@ export function Input({
   trailing,
   className,
   inputClassName,
+  name,
   required,
   ...props
 }: InputProps) {
   return (
-    <Field.Root className={cn("flex w-full flex-col gap-1.5", className)}>
+    <Field.Root
+      name={name}
+      invalid={Boolean(error)}
+      className={cn("flex w-full flex-col gap-1.5", className)}
+    >
       <Field.Label
         className={cn("text-foreground text-sm font-medium", hideLabel && "sr-only")}
       >
@@ -75,9 +81,8 @@ export function Input({
 
       <div className="relative flex w-full items-center">
         <BaseInput
+          name={name}
           required={required}
-          // See the header: Base UI cannot infer this from an external error.
-          aria-invalid={error ? true : undefined}
           className={cn(
             "border-input bg-background text-foreground placeholder:text-muted-foreground",
             "h-11 w-full rounded-md border px-3.5 text-base",
@@ -101,14 +106,14 @@ export function Input({
         </Field.Description>
       ) : null}
 
-      {/* `match` lets an externally-supplied error show regardless of the
-          control's own ValidityState, which is what a server-side error is. */}
+      {/* `match` shows an error from outside, which Base UI's own validity
+          state knows nothing about. Without one, no children are passed, so
+          Base UI shows the browser's own message for a failed check. */}
       <Field.Error
         className="text-destructive text-pretty text-sm"
         match={Boolean(error) || undefined}
-      >
-        {error}
-      </Field.Error>
+        {...(error ? { children: error } : {})}
+      />
     </Field.Root>
   )
 }

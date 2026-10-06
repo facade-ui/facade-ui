@@ -24,11 +24,14 @@ import {
 
 import type { CtaItem } from "@registry/lib/types"
 import type { BentoItem } from "@registry/sections/bento-grid"
+import type { ChangelogEntry } from "@registry/sections/changelog-list"
 import type { FaqItem } from "@registry/sections/faq-accordion"
 import type { FeatureItem } from "@registry/sections/feature-grid"
 import type { FeatureRowItem } from "@registry/sections/feature-rows"
+import type { NavSideGroup } from "@registry/sections/nav-side"
 import type { NavItem } from "@registry/sections/nav-top"
 import type { UspItem } from "@registry/sections/usp-list"
+import { Badge } from "@registry/ui/badge"
 import type { LogoItem } from "@registry/ui/logo-mark"
 
 export const ACTIONS: CtaItem[] = [
@@ -487,5 +490,94 @@ export const TEAM = [
     role: "Engineering",
     bio: "Writes the source you will be reading after you run the install command.",
     social: [{ label: "their website", href: "https://example.com", icon: GlobeIcon }],
+  },
+]
+
+// ------------------------------------------------------------------ changelog
+
+export const RELEASES: ChangelogEntry[] = [
+  {
+    version: "v0.3.0",
+    tag: "Latest",
+    title: "Templates and the theme customiser",
+    dateTime: "2026-09-21",
+    dateLabel: "21 September 2026",
+    href: "#v030",
+    summary: "Three whole pages, and a panel that edits the theme on any page.",
+    changes: [
+      {
+        kind: "added",
+        description: "SaaS landing, agency and product launch templates.",
+      },
+      {
+        kind: "added",
+        description: "A theme customiser that scores contrast as you edit.",
+      },
+      { kind: "fixed", description: "The light input border now clears 3:1." },
+    ],
+  },
+  {
+    version: "v0.2.0",
+    title: "Breadth sections",
+    dateTime: "2026-09-14",
+    dateLabel: "14 September 2026",
+    href: "#v020",
+    changes: [
+      {
+        kind: "added",
+        description: "Stats, testimonials, pricing, team and newsletter.",
+      },
+      {
+        kind: "changed",
+        description: "Sections take headingLevel instead of a fixed h2.",
+      },
+      { kind: "deprecated", description: "The size prop on Eyebrow. Use className." },
+    ],
+  },
+  {
+    version: "v0.1.0",
+    title: "First release",
+    dateTime: "2026-09-02",
+    dateLabel: "2 September 2026",
+    href: "#v010",
+    changes: [
+      { kind: "added", description: "Twelve core sections and thirteen atoms." },
+      { kind: "removed", description: "The Radix dependency. Base UI only." },
+    ],
+  },
+]
+
+// ------------------------------------------------------------------ docs site
+
+export const DOCS_GROUPS: NavSideGroup[] = [
+  {
+    title: "Getting started",
+    links: [
+      { label: "Introduction", href: "#introduction" },
+      { label: "Installation", href: "#installation" },
+      { label: "Theming", href: "#theming" },
+    ],
+  },
+  {
+    title: "Guides",
+    collapsible: true,
+    links: [
+      { label: "Accessibility", href: "#accessibility" },
+      {
+        label: "Using with agents",
+        href: "#agents",
+        badge: <Badge size="sm">New</Badge>,
+      },
+    ],
+  },
+  {
+    title: "Components",
+    collapsible: true,
+    defaultCollapsed: true,
+    links: [
+      { label: "Atoms", href: "#atoms" },
+      { label: "Sections", href: "#sections" },
+      { label: "Templates", href: "#templates" },
+    ],
   },
 ]
