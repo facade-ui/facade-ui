@@ -27,6 +27,7 @@ import { Demo as ContainerDemo } from "./container"
 import { Demo as CtaBandDemo } from "./cta-band"
 import { Demo as CtaBandMotionDemo } from "./cta-band-motion"
 import { Demo as CtaGroupDemo } from "./cta-group"
+import { Demo as DocsSiteDemo } from "./docs-site"
 import { Demo as EyebrowDemo } from "./eyebrow"
 import { Demo as FaqAccordionDemo } from "./faq-accordion"
 import { Demo as FaqAccordionMotionDemo } from "./faq-accordion-motion"
@@ -57,6 +58,7 @@ import { Demo as PricingTierDemo } from "./pricing-tier"
 import { Demo as PricingTiersDemo } from "./pricing-tiers"
 import { Demo as PricingTiersMotionDemo } from "./pricing-tiers-motion"
 import { Demo as ProductLaunchDemo } from "./product-launch"
+import { Demo as ProseDemo } from "./prose"
 import { Demo as SaasLandingDemo } from "./saas-landing"
 import { Demo as SectionDemo } from "./section"
 import { Demo as SectionHeaderDemo } from "./section-header"
@@ -91,6 +93,7 @@ export const demos: Record<string, ComponentType> = {
   "cta-band": CtaBandDemo,
   "cta-band-motion": CtaBandMotionDemo,
   "cta-group": CtaGroupDemo,
+  "docs-site": DocsSiteDemo,
   eyebrow: EyebrowDemo,
   "faq-accordion": FaqAccordionDemo,
   "faq-accordion-motion": FaqAccordionMotionDemo,
@@ -121,6 +124,7 @@ export const demos: Record<string, ComponentType> = {
   "pricing-tiers": PricingTiersDemo,
   "pricing-tiers-motion": PricingTiersMotionDemo,
   "product-launch": ProductLaunchDemo,
+  prose: ProseDemo,
   "saas-landing": SaasLandingDemo,
   section: SectionDemo,
   "section-header": SectionHeaderDemo,
@@ -157,6 +161,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "changelog-list": 1100,
   "cta-band": 700,
   "cta-band-motion": 700,
+  "docs-site": 1500,
   "faq-accordion": 620,
   "faq-accordion-motion": 620,
   "feature-grid": 800,
@@ -179,6 +184,7 @@ export const DEMO_INITIAL_HEIGHT: Record<string, number> = {
   "pricing-comparison": 820,
   "pricing-tier": 620,
   "product-launch": 3600,
+  prose: 640,
   "pricing-tiers": 820,
   "pricing-tiers-motion": 820,
   select: 260,
