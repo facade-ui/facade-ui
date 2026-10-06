@@ -24,6 +24,7 @@ import { ChevronDownIcon, ExternalLinkIcon, MenuIcon, XIcon } from "lucide-react
 import type { Route } from "next"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 
 import type { NavGroup } from "@/lib/registry"
 import { GITHUB_URL } from "@/lib/registry-shared"
@@ -61,16 +62,14 @@ function NavGroupSection({
   startOpen: boolean
   onNavigate?: () => void
 }) {
-  // `defaultOpen` is read once, on mount. That is the behaviour we want: the
-  // group holding the page you arrived on opens, and nothing snaps shut or
-  // springs open underneath you as you navigate.
+  // Only the first value counts: the group holding the page you arrived on
+  // opens, and nothing snaps shut or springs open as you navigate. Held in
+  // state because Base UI logs an error if `defaultOpen` changes after mount.
   const holdsCurrentPage = links.some((link) => link.href === pathname)
+  const [initialOpen] = useState(startOpen || holdsCurrentPage)
 
   return (
-    <Collapsible.Root
-      defaultOpen={startOpen || holdsCurrentPage}
-      className="flex flex-col"
-    >
+    <Collapsible.Root defaultOpen={initialOpen} className="flex flex-col">
       <h2>
         <Collapsible.Trigger className="text-foreground hover:bg-accent/60 focus-visible:ring-ring group flex min-h-9 w-full cursor-pointer items-center justify-between gap-2 rounded-md px-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2">
           {title}
