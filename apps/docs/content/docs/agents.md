@@ -47,7 +47,7 @@ Rules that keep the page correct:
 
 ## Templates
 
-`saas-landing`, `agency` and `product-launch` are complete pages built from the sections above. Install one, render it from `app/page.tsx` with your own content object, and remove what you do not need. A template sets the outline for you: one `h1`, sections at `h2`.
+`saas-landing`, `agency`, `product-launch` and `changelog` are complete pages built from the sections above. Install one, render it from `app/page.tsx` with your own content object, and remove what you do not need. A template sets the outline for you: one `h1`, sections at `h2`.
 
 ```tsx
 import { SaasLanding } from "@/components/templates/saas-landing"

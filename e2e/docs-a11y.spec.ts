@@ -25,6 +25,7 @@ const PAGES = [
   "/components",
   "/templates",
   "/templates/saas-landing",
+  "/templates/changelog",
   "/docs/installation",
   "/docs/theming",
   "/docs/customise",

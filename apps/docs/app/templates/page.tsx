@@ -12,7 +12,7 @@ import { SectionHeader } from "@registry/ui/section-header"
 export const metadata: Metadata = {
   title: "Templates",
   description:
-    "Complete marketing pages built from Facade UI sections: a SaaS landing page, an agency site and a product launch. Install one with a single command.",
+    "Complete marketing pages built from Facade UI sections: a SaaS landing page, an agency site, a product launch and a changelog. Install one with a single command.",
   alternates: { canonical: "/templates" },
 }
 
