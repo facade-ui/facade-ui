@@ -118,7 +118,7 @@ export function FeatureTabs({
                   key={valueOf(item)}
                   value={valueOf(item)}
                   className={cn(
-                    "text-muted-foreground hover:text-foreground data-[selected]:text-foreground",
+                    "text-muted-foreground hover:text-foreground data-[active]:text-foreground",
                     "duration-facade-fast ease-facade-out flex min-h-12 shrink-0 cursor-pointer items-center gap-2",
                     "whitespace-nowrap rounded-t-md px-4 text-sm font-medium transition-colors",
                     "focus-visible:ring-ring outline-none focus-visible:ring-2",
