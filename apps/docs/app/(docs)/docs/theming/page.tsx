@@ -101,7 +101,7 @@ export default function ThemingPage() {
         The prefix stops them from clashing with any name shadcn adds later.
       </p>
       <div className="overflow-x-auto rounded-lg border">
-        <table className="w-full border-collapse text-left text-sm">
+        <table className="w-full border-collapse text-left text-sm [&_td]:border-b-0 [&_th]:border-b-0">
           <caption className="sr-only">Design tokens that start with --facade-</caption>
           <thead className="bg-muted/40">
             <tr>

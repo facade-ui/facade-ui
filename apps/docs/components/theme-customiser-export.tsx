@@ -34,7 +34,7 @@ function ContrastTable({ palette, mode }: { palette: Palette; mode: "light" | "d
 
   return (
     <div className="overflow-x-auto rounded-lg border">
-      <table className="w-full border-collapse text-left text-sm">
+      <table className="w-full border-collapse text-left text-sm [&_td]:border-b-0 [&_th]:border-b-0">
         <caption className="sr-only">Contrast results for the {mode} palette</caption>
         <thead className="bg-muted/40">
           <tr>
@@ -134,7 +134,7 @@ export function ThemeCustomiserExport() {
             aria-label="Exported CSS"
             className="focus-visible:ring-ring max-h-80 overflow-auto focus-visible:outline-none focus-visible:ring-2"
           >
-            <pre className="p-4 font-mono text-xs">
+            <pre className="bg-transparent p-4 font-mono text-xs leading-4">
               <code>{css}</code>
             </pre>
           </div>
