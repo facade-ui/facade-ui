@@ -27,11 +27,11 @@
  * the design calls for a placeholder instead — the label stays in the
  * accessibility tree, which a placeholder alone never does.
  *
- * Dependencies: @base-ui-components/react, react, @registry/lib/utils.
+ * Dependencies: @base-ui/react, react, @registry/lib/utils.
  */
 
-import { Field } from "@base-ui-components/react/field"
-import { Input as BaseInput } from "@base-ui-components/react/input"
+import { Field } from "@base-ui/react/field"
+import { Input as BaseInput } from "@base-ui/react/input"
 import type { ComponentPropsWithoutRef, ReactNode } from "react"
 
 import { cn } from "@registry/lib/utils"

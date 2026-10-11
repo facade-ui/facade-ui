@@ -92,6 +92,15 @@ decoration.
   the browser's own validation message, and they did not put their `name` on
   `Field.Root`, which `Form` needs to route errors. Both are fixed.
 
+### Base UI 1.x
+
+- Moved from `@base-ui-components/react@1.0.0-rc.0` to the stable
+  `@base-ui/react`. Two workarounds went with it: the `aria-orientation`
+  override on `NavigationMenu.List`, and the note that `Dialog.Trigger` warns
+  when `render` gets a wrapper component. Both are fixed upstream.
+- `feature-tabs` styled its selected tab with `data-selected`, which Base UI
+  never sets. It now targets `data-active`, and a test pins it.
+
 ## Not started
 
 Nothing from the original brief. What follows is what a second pass would
@@ -115,10 +124,6 @@ sensibly cover.
   phase-scoped commits pushed straight to `main` on
   [facade-ui/facade-ui](https://github.com/facade-ui/facade-ui). Worth turning
   on branch protection before the next change.
-- **Base UI is at `1.0.0-rc.0`.** Two workarounds are in the tree and both are
-  commented with what to revisit: the invalid `aria-orientation` on
-  `NavigationMenu.List`, and the fact that `Dialog.Trigger` cannot see through a
-  wrapper component when checking for a native button. One finding has no
-  workaround: an open `Select` renders focus-guard spans that axe reports as
-  `aria-hidden-focus`. They hand focus straight back to the list, so nothing can
-  rest on them, and the axe gate scans previews closed.
+- **An open `Select` still trips axe.** Base UI 1.9 renders focus-guard spans
+  that axe reports as `aria-hidden-focus`. They hand focus straight back to the
+  list, so nothing can rest on them, and the axe gate scans previews closed.

@@ -21,13 +21,13 @@
  *    item is never hidden inside a collapsed section.
  *  - The sidebar scrolls independently and the drawer traps focus.
  *
- * Dependencies: @base-ui-components/react, lucide-react, react,
+ * Dependencies: @base-ui/react, lucide-react, react,
  * @registry/lib/types, @registry/lib/utils, @registry/ui/button,
  * @registry/ui/heading.
  */
 
-import { Collapsible } from "@base-ui-components/react/collapsible"
-import { Dialog } from "@base-ui-components/react/dialog"
+import { Collapsible } from "@base-ui/react/collapsible"
+import { Dialog } from "@base-ui/react/dialog"
 import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react"
 import { useState, type ElementType, type ReactNode } from "react"
 

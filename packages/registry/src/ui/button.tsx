@@ -13,7 +13,7 @@
  *   <Button render={<span />} nativeButton={false}>Toggle</Button>
  *
  * Do not use `render` for links. Two things go wrong, both verified against
- * Base UI 1.0.0-rc.0 in `button.test.tsx`:
+ * Base UI 1.9 in `button.test.tsx`:
  *
  *   - with `nativeButton` left at its default, the anchor is emitted with
  *     `type="button"` and, when disabled, a `disabled` attribute — neither is
@@ -30,14 +30,14 @@
  * always visible, and `loading` sets `aria-busy` while keeping the label in the
  * accessible name so it never changes mid-interaction.
  *
- * Dependencies: @base-ui-components/react, class-variance-authority,
+ * Dependencies: @base-ui/react, class-variance-authority,
  * lucide-react, react, @/lib/utils.
  */
 
 import {
   Button as BaseButton,
   type ButtonProps as BaseButtonProps,
-} from "@base-ui-components/react/button"
+} from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Loader2Icon } from "lucide-react"
 

@@ -87,7 +87,7 @@ export function importsOf(source: string): string[] {
   return found
 }
 
-/** `motion/react` -> `motion`, `@base-ui-components/react/button` -> the package. */
+/** `motion/react` -> `motion`, `@base-ui/react/button` -> the package. */
 export function packageNameOf(specifier: string): string {
   if (specifier.startsWith("@")) {
     const [scope, name] = specifier.split("/")

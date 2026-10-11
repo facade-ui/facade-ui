@@ -118,7 +118,7 @@
         }
       ],
       "dependencies": [
-        "@base-ui-components/react@1.0.0-rc.0",
+        "@base-ui/react@^1.9.0",
         "class-variance-authority@^0.7.1",
         "lucide-react@^1.47.0"
       ],
@@ -348,7 +348,7 @@
           "target": "components/ui/input.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0"],
+      "dependencies": ["@base-ui/react@^1.9.0"],
       "registryDependencies": ["https://facadeui.dev/r/utils.json"]
     },
     {
@@ -364,7 +364,7 @@
           "target": "components/ui/select.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0", "lucide-react@^1.47.0"],
+      "dependencies": ["@base-ui/react@^1.9.0", "lucide-react@^1.47.0"],
       "registryDependencies": ["https://facadeui.dev/r/utils.json"]
     },
     {
@@ -380,7 +380,7 @@
           "target": "components/ui/textarea.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0"],
+      "dependencies": ["@base-ui/react@^1.9.0"],
       "registryDependencies": ["https://facadeui.dev/r/utils.json"]
     },
     {
@@ -411,7 +411,7 @@
           "target": "components/sections/nav-top.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0", "lucide-react@^1.47.0"],
+      "dependencies": ["@base-ui/react@^1.9.0", "lucide-react@^1.47.0"],
       "registryDependencies": [
         "https://facadeui.dev/r/button.json",
         "https://facadeui.dev/r/container.json",
@@ -762,7 +762,7 @@
           "target": "components/sections/faq-accordion.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0", "lucide-react@^1.47.0"],
+      "dependencies": ["@base-ui/react@^1.9.0", "lucide-react@^1.47.0"],
       "registryDependencies": [
         "https://facadeui.dev/r/container.json",
         "https://facadeui.dev/r/heading.json",
@@ -1070,7 +1070,7 @@
           "target": "components/sections/feature-tabs.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0"],
+      "dependencies": ["@base-ui/react@^1.9.0"],
       "registryDependencies": [
         "https://facadeui.dev/r/container.json",
         "https://facadeui.dev/r/heading.json",
@@ -1218,7 +1218,7 @@
           "target": "components/sections/nav-side.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0", "lucide-react@^1.47.0"],
+      "dependencies": ["@base-ui/react@^1.9.0", "lucide-react@^1.47.0"],
       "registryDependencies": [
         "https://facadeui.dev/r/button.json",
         "https://facadeui.dev/r/heading.json",
@@ -1262,7 +1262,7 @@
           "target": "components/sections/contact-form.tsx"
         }
       ],
-      "dependencies": ["@base-ui-components/react@1.0.0-rc.0"],
+      "dependencies": ["@base-ui/react@^1.9.0"],
       "registryDependencies": [
         "https://facadeui.dev/r/button.json",
         "https://facadeui.dev/r/container.json",

@@ -17,12 +17,12 @@
  *    A wrapped tab strip breaks the one-row mental model the arrow keys imply.
  *  - Panel headings sit a level below the section's own.
  *
- * Dependencies: @base-ui-components/react, react, @registry/lib/types,
+ * Dependencies: @base-ui/react, react, @registry/lib/types,
  * @registry/lib/utils, @registry/ui/container, @registry/ui/heading,
  * @registry/ui/section, @registry/ui/section-header.
  */
 
-import { Tabs } from "@base-ui-components/react/tabs"
+import { Tabs } from "@base-ui/react/tabs"
 import type { ElementType, ReactNode } from "react"
 
 import type { HeadingLevel, IconComponent, SectionBaseProps } from "@registry/lib/types"
@@ -118,7 +118,7 @@ export function FeatureTabs({
                   key={valueOf(item)}
                   value={valueOf(item)}
                   className={cn(
-                    "text-muted-foreground hover:text-foreground data-[selected]:text-foreground",
+                    "text-muted-foreground hover:text-foreground data-[active]:text-foreground",
                     "duration-facade-fast ease-facade-out flex min-h-12 shrink-0 cursor-pointer items-center gap-2",
                     "whitespace-nowrap rounded-t-md px-4 text-sm font-medium transition-colors",
                     "focus-visible:ring-ring outline-none focus-visible:ring-2",
