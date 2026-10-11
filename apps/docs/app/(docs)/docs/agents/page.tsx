@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { CodeBlock } from "@/components/code-block"
-import { Prose } from "@/components/prose"
+import { Prose } from "@registry/ui/prose"
 
 export const metadata: Metadata = {
   title: "For AI agents",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function AgentsPage() {
   return (
-    <Prose>
+    <Prose className="max-w-3xl pb-20">
       <h1 className="text-display-sm font-semibold">For AI agents</h1>
       <p>
         This page tells an AI coding agent how to build a marketing page with Facade UI.

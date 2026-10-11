@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { CodeBlock } from "@/components/code-block"
-import { Prose } from "@/components/prose"
+import { Prose } from "@registry/ui/prose"
 
 export const metadata: Metadata = {
   title: "Theming",
@@ -50,7 +50,7 @@ const TOKENS: [string, string, string][] = [
 
 export default function ThemingPage() {
   return (
-    <Prose>
+    <Prose className="max-w-3xl pb-20">
       <h1 className="text-display-sm font-semibold">Theming</h1>
       <p>
         Facade UI is styled with design tokens, which are CSS variables. There are two
@@ -101,7 +101,7 @@ export default function ThemingPage() {
         The prefix stops them from clashing with any name shadcn adds later.
       </p>
       <div className="overflow-x-auto rounded-lg border">
-        <table className="w-full border-collapse text-left text-sm">
+        <table className="w-full border-collapse text-left text-sm [&_td]:border-b-0 [&_th]:border-b-0">
           <caption className="sr-only">Design tokens that start with --facade-</caption>
           <thead className="bg-muted/40">
             <tr>

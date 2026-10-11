@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { Prose } from "@/components/prose"
+import { Prose } from "@registry/ui/prose"
 import { ThemeCustomiserExport } from "@/components/theme-customiser-export"
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function CustomisePage() {
   return (
-    <Prose className="max-w-none">
+    <Prose className="pb-20">
       <h1 className="text-display-sm font-semibold">Theme customiser</h1>
       <p>
         To open the customiser, select the palette button in the header. It works on any

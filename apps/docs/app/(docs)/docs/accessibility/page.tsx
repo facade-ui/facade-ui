@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { CodeBlock } from "@/components/code-block"
-import { Prose } from "@/components/prose"
+import { Prose } from "@registry/ui/prose"
 
 export const metadata: Metadata = {
   title: "Accessibility",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function AccessibilityPage() {
   return (
-    <Prose>
+    <Prose className="max-w-3xl pb-20">
       <h1 className="text-display-sm font-semibold">Accessibility</h1>
       <p>
         Facade UI aims to meet WCAG 2.2 AA. This page explains how each requirement is
