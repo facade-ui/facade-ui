@@ -59,12 +59,9 @@ reference. Static sections are server components and are unaffected; anything
 that renders a `-motion` variant, `FeatureTabs`, or a template while passing
 icons needs `"use client"` on the file that passes them.
 
-**Base UI's `render` prop cannot see through a wrapper component.** Passing
-`render={<Button />}` to `Dialog.Trigger` logs a warning on every mount even
-though the DOM ends up correct. Style the Base UI part with `buttonVariants`
-instead. And never use `render` to turn a button component into a link — Base
-UI emits `type="button"` on the anchor, or `role="button"` with
-`nativeButton={false}`.
+**Never use `render` to turn a button component into a link.** Base UI emits
+`type="button"` on the anchor, or `role="button"` with `nativeButton={false}`.
+Style the link with `buttonVariants` instead.
 
 ## Visual snapshots
 

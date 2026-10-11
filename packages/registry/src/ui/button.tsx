@@ -13,7 +13,7 @@
  *   <Button render={<span />} nativeButton={false}>Toggle</Button>
  *
  * Do not use `render` for links. Two things go wrong, both verified against
- * Base UI 1.0.0-rc.0 in `button.test.tsx`:
+ * Base UI 1.9 in `button.test.tsx`:
  *
  *   - with `nativeButton` left at its default, the anchor is emitted with
  *     `type="button"` and, when disabled, a `disabled` attribute — neither is

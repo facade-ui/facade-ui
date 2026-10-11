@@ -50,12 +50,7 @@ export function ThemeCustomiserPanel() {
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen} modal={false} disablePointerDismissal>
-      {/* buttonVariants, not render={<Button />}: Base UI inspects the element
-          handed to `render` to decide whether it is a native button, and cannot
-          see through a wrapper component — so it warns on every mount even
-          though the DOM ends up correct. Base UI renders a real <button> here.
-
-          Hidden below `sm`, where the header's own controls already fill the
+      {/* Hidden below `sm`, where the header's own controls already fill the
           row and a side panel is the wrong shape for the screen anyway. */}
       <Dialog.Trigger
         aria-label="Customise theme"

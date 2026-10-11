@@ -174,10 +174,6 @@ export function SiteNav({ groups }: SiteNavProps) {
 export function SiteNavMobile({ groups }: SiteNavProps) {
   return (
     <Dialog.Root>
-      {/* buttonVariants, not render={<Button />}: Base UI inspects the element
-          handed to `render` to decide whether it is a native button, and cannot
-          see through a wrapper component — so it warns on every mount even
-          though the DOM ends up correct. Base UI renders a real <button> here. */}
       <Dialog.Trigger
         aria-label="Open navigation"
         className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "lg:hidden")}
