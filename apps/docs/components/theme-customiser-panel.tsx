@@ -24,7 +24,7 @@
  * opacity and transform animated on the way in and out.
  */
 
-import { Dialog } from "@base-ui-components/react/dialog"
+import { Dialog } from "@base-ui/react/dialog"
 import { PaletteIcon, XIcon } from "lucide-react"
 import { useMemo, useState, type CSSProperties } from "react"
 

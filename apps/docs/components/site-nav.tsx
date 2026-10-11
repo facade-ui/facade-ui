@@ -18,8 +18,8 @@
  * The drawer also carries the GitHub link, which the header drops below `lg`.
  */
 
-import { Collapsible } from "@base-ui-components/react/collapsible"
-import { Dialog } from "@base-ui-components/react/dialog"
+import { Collapsible } from "@base-ui/react/collapsible"
+import { Dialog } from "@base-ui/react/dialog"
 import { ChevronDownIcon, ExternalLinkIcon, MenuIcon, XIcon } from "lucide-react"
 import type { Route } from "next"
 import Link from "next/link"

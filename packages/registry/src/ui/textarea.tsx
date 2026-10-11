@@ -16,10 +16,10 @@
  *  - At least 44px tall, and it can be resized vertically unless `resize` is
  *    `none`, so long answers stay readable without a scrollbar.
  *
- * Dependencies: @base-ui-components/react, react, @registry/lib/utils.
+ * Dependencies: @base-ui/react, react, @registry/lib/utils.
  */
 
-import { Field } from "@base-ui-components/react/field"
+import { Field } from "@base-ui/react/field"
 import type { ComponentPropsWithoutRef, ReactNode } from "react"
 
 import { cn } from "@registry/lib/utils"

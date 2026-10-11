@@ -13,7 +13,7 @@
  * current one is marked by a ring rather than a second colour.
  */
 
-import { Collapsible } from "@base-ui-components/react/collapsible"
+import { Collapsible } from "@base-ui/react/collapsible"
 import { ChevronDownIcon, RotateCcwIcon } from "lucide-react"
 import { useId, useMemo, useState } from "react"
 

@@ -20,11 +20,11 @@
  *    label.
  *  - Contact details are a `<dl>`, so each value is read with its label.
  *
- * Dependencies: @base-ui-components/react, react, @registry/lib/types,
+ * Dependencies: @base-ui/react, react, @registry/lib/types,
  * @registry/lib/utils, @registry/ui/*.
  */
 
-import { Form } from "@base-ui-components/react/form"
+import { Form } from "@base-ui/react/form"
 import {
   useEffect,
   useRef,

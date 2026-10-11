@@ -18,12 +18,12 @@
  * placeholder is a `null` entry in Base UI's `items`, because a function child
  * on `Select.Value` could not be rendered from a server component.
  *
- * Dependencies: @base-ui-components/react, lucide-react, react,
+ * Dependencies: @base-ui/react, lucide-react, react,
  * @registry/lib/utils.
  */
 
-import { Field } from "@base-ui-components/react/field"
-import { Select as BaseSelect } from "@base-ui-components/react/select"
+import { Field } from "@base-ui/react/field"
+import { Select as BaseSelect } from "@base-ui/react/select"
 import { CheckIcon, ChevronDownIcon } from "lucide-react"
 import type { ReactNode } from "react"
 

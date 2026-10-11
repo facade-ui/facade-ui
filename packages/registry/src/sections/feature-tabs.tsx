@@ -17,12 +17,12 @@
  *    A wrapped tab strip breaks the one-row mental model the arrow keys imply.
  *  - Panel headings sit a level below the section's own.
  *
- * Dependencies: @base-ui-components/react, react, @registry/lib/types,
+ * Dependencies: @base-ui/react, react, @registry/lib/types,
  * @registry/lib/utils, @registry/ui/container, @registry/ui/heading,
  * @registry/ui/section, @registry/ui/section-header.
  */
 
-import { Tabs } from "@base-ui-components/react/tabs"
+import { Tabs } from "@base-ui/react/tabs"
 import type { ElementType, ReactNode } from "react"
 
 import type { HeadingLevel, IconComponent, SectionBaseProps } from "@registry/lib/types"

@@ -22,12 +22,12 @@
  * Set `schemaOrg` to emit FAQPage structured data. It only includes answers
  * given as plain strings, since markup cannot go in JSON-LD.
  *
- * Dependencies: @base-ui-components/react, lucide-react, react,
+ * Dependencies: @base-ui/react, lucide-react, react,
  * @registry/lib/types, @registry/lib/utils, @registry/ui/container,
  * @registry/ui/heading, @registry/ui/section, @registry/ui/section-header.
  */
 
-import { Accordion } from "@base-ui-components/react/accordion"
+import { Accordion } from "@base-ui/react/accordion"
 import { ChevronDownIcon } from "lucide-react"
 import type { ElementType, ReactNode } from "react"
 
