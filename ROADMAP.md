@@ -39,7 +39,8 @@ decoration.
 
 ### Phase 3 — Templates and theming
 
-- Templates: `saas-landing`, `agency`, `product-launch`. Each is composition
+- Templates: `saas-landing`, `agency`, `product-launch` (and, in Phase 5,
+  `changelog` and `docs-site`). Each is composition
   over the existing sections with one content object, and each sets the heading
   outline explicitly rather than leaning on section defaults — so the page has
   exactly one `h1` and no skipped levels.
@@ -72,15 +73,24 @@ decoration.
 
 - `select`: a drop-down on Base UI's Select, wired through Field the same way
   `input` is, so label, help text and an external error reach the trigger.
+- `textarea`: the same wiring, with `Field.Control` rendering a `<textarea>`.
+  With `input` and `select` that covers the fields a contact form needs. `input`
+  also got the demo it never had, so it is now scanned and snapshotted too, and
+  that demo showed its border stayed grey on an external error. All three
+  fields now set `Field.Root invalid`, which marks the control and colours it.
+- `changelog`: a template for release history, with a new `changelog-list`
+  section doing the work. Each release is an article with its own heading,
+  anchor and `<time>`, and each change carries its kind as a word.
+- `docs-site`: a documentation page from `nav-top`, `nav-side` and `footer`,
+  with an "On this page" list and previous and next links. The article body is
+  a slot styled by a new `prose` atom, the registry's version of the docs
+  site's own typography.
 
 ## Not started
 
 Nothing from the original brief. What follows is what a second pass would
 sensibly cover.
 
-- **More templates.** `docs-site` and `changelog` are the obvious gaps, and
-  `nav-side` and `card-list` already exist for them.
-- **A `Textarea`** to go with `Input` and `Select`, for contact-form sections.
 - **Dark-mode logo swapping** in `LogoMark`. Most brand marks need a different
   file per theme, and right now that is the caller's problem.
 

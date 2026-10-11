@@ -116,6 +116,45 @@ function NavLinks({
   )
 }
 
+/**
+ * Holds the first `startOpen` it gets. Base UI reads `defaultOpen` once and
+ * logs an error if it changes later, which it would on every client-side
+ * navigation into another group. A group then stays as the user left it.
+ */
+function CollapsibleGroup({
+  group,
+  startOpen,
+  headingId,
+  headingLevel,
+  children,
+}: {
+  group: NavSideGroup
+  startOpen: boolean
+  headingId: string
+  headingLevel: HeadingLevel
+  children: ReactNode
+}) {
+  const [initialOpen] = useState(startOpen)
+
+  return (
+    <Collapsible.Root defaultOpen={initialOpen} className="flex flex-col gap-1.5">
+      <Heading level={headingLevel} id={headingId}>
+        <Collapsible.Trigger className="text-foreground hover:bg-accent/60 focus-visible:ring-ring group flex min-h-9 w-full cursor-pointer items-center justify-between gap-2 rounded-md px-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2">
+          {group.title}
+          <ChevronDownIcon
+            aria-hidden
+            focusable="false"
+            className="text-muted-foreground duration-facade-fast ease-facade-out size-4 transition-transform group-data-[panel-open]:rotate-180"
+          />
+        </Collapsible.Trigger>
+      </Heading>
+      <Collapsible.Panel className="duration-facade-base ease-facade-out h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] data-[ending-style]:h-0 data-[starting-style]:h-0">
+        {children}
+      </Collapsible.Panel>
+    </Collapsible.Root>
+  )
+}
+
 function NavGroups({
   groups,
   currentPath,
@@ -156,31 +195,21 @@ function NavGroups({
         }
 
         return (
-          <Collapsible.Root
+          <CollapsibleGroup
             key={group.title}
+            group={group}
             // Never start collapsed around the page the user is on.
-            defaultOpen={holdsCurrent || !group.defaultCollapsed}
-            className="flex flex-col gap-1.5"
+            startOpen={holdsCurrent || !group.defaultCollapsed}
+            headingId={headingId}
+            headingLevel={headingLevel}
           >
-            <Heading level={headingLevel} id={headingId}>
-              <Collapsible.Trigger className="text-foreground hover:bg-accent/60 focus-visible:ring-ring group flex min-h-9 w-full cursor-pointer items-center justify-between gap-2 rounded-md px-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2">
-                {group.title}
-                <ChevronDownIcon
-                  aria-hidden
-                  focusable="false"
-                  className="text-muted-foreground duration-facade-fast ease-facade-out size-4 transition-transform group-data-[panel-open]:rotate-180"
-                />
-              </Collapsible.Trigger>
-            </Heading>
-            <Collapsible.Panel className="duration-facade-base ease-facade-out h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] data-[ending-style]:h-0 data-[starting-style]:h-0">
-              <NavLinks
-                group={group}
-                currentPath={currentPath}
-                link={link}
-                onNavigate={onNavigate}
-              />
-            </Collapsible.Panel>
-          </Collapsible.Root>
+            <NavLinks
+              group={group}
+              currentPath={currentPath}
+              link={link}
+              onNavigate={onNavigate}
+            />
+          </CollapsibleGroup>
         )
       })}
     </div>

@@ -1,7 +1,7 @@
 /**
  * ProductLaunch — a single-product launch page.
  *
- * The narrowest of the three templates, and deliberately so: a launch page has
+ * The narrowest of the marketing templates, and deliberately so: a launch page has
  * one job. A dismissible banner, a centred hero, the bento grid that shows the
  * thing off, a short USP strip, tabbed detail for people who want it, an FAQ,
  * and one email capture. No pricing table, no team — both dilute a launch.

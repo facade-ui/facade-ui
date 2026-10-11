@@ -136,11 +136,11 @@ export default function AgentsPage() {
 
       <h2>Templates</h2>
       <p>
-        <code>saas-landing</code>, <code>agency</code> and <code>product-launch</code> are
-        complete pages built from the sections above. Install one, render it from{" "}
-        <code>app/page.tsx</code> with your own content object, and remove what you do not
-        need. A template sets the outline for you: one <code>h1</code>, sections at{" "}
-        <code>h2</code>.
+        <code>saas-landing</code>, <code>agency</code>, <code>product-launch</code>,{" "}
+        <code>changelog</code> and <code>docs-site</code> are complete pages built from
+        the sections above. Install one, render it from <code>app/page.tsx</code> with
+        your own content object, and remove what you do not need. A template sets the
+        outline for you: one <code>h1</code>, sections at <code>h2</code>.
       </p>
       <CodeBlock
         filename="app/page.tsx"
