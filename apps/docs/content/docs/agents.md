@@ -50,18 +50,20 @@ Rules that keep the page correct:
 `saas-landing`, `agency`, `product-launch`, `changelog` and `docs-site` are complete pages built from the sections above. Install one, render it from `app/page.tsx` with your own content object, and remove what you do not need. A template sets the outline for you: one `h1`, sections at `h2`.
 
 ```tsx
+import Link from "next/link"
+
 import { SaasLanding } from "@/components/templates/saas-landing"
 
 import { content } from "./content"
 
 export default function Page() {
-  return <SaasLanding {...content} />
+  return <SaasLanding content={content} link={Link} />
 }
 ```
 
 ## Animation
 
-Motion is optional. Every section has a static version (the default) and a `-motion` version. To use motion: install `@facade/motion-primitives`, render `FacadeMotionProvider` once near the root, then use the `-motion` items. Animations only touch `opacity` and `transform` and follow the user's reduced-motion setting.
+Motion is optional. Every section has a static version (the default), and most also have a `-motion` version. To use motion: install `@facade/motion-primitives`, render `FacadeMotionProvider` once near the root, then use the `-motion` items. Animations only touch `opacity` and `transform` and follow the user's reduced-motion setting.
 
 ## Theme
 

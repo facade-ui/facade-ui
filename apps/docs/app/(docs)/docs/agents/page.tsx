@@ -144,19 +144,21 @@ export default function AgentsPage() {
       </p>
       <CodeBlock
         filename="app/page.tsx"
-        code={`import { SaasLanding } from "@/components/templates/saas-landing"
+        code={`import Link from "next/link"
+
+import { SaasLanding } from "@/components/templates/saas-landing"
 
 import { content } from "./content"
 
 export default function Page() {
-  return <SaasLanding {...content} />
+  return <SaasLanding content={content} link={Link} />
 }`}
       />
 
       <h2>Animation</h2>
       <p>
-        Motion is optional. Every section has a static version (the default) and a{" "}
-        <code>-motion</code> version. To use motion: install{" "}
+        Motion is optional. Every section has a static version (the default), and most
+        also have a <code>-motion</code> version. To use motion: install{" "}
         <code>@facade/motion-primitives</code>, render <code>FacadeMotionProvider</code>{" "}
         once near the root, then use the <code>-motion</code> items. Animations only touch{" "}
         <code>opacity</code> and <code>transform</code> and follow the user&apos;s
