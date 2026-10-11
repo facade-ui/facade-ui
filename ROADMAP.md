@@ -85,6 +85,12 @@ decoration.
   with an "On this page" list and previous and next links. The article body is
   a slot styled by a new `prose` atom, the registry's version of the docs
   site's own typography.
+- `contact-form`: the section the field atoms were for. Fields come in as
+  typed data and render as `input`, `select` or `textarea`. Base UI's `Form`
+  runs the browser's checks and maps server errors to their fields; editing a
+  field clears its error. Building it showed two gaps in the atoms: they hid
+  the browser's own validation message, and they did not put their `name` on
+  `Field.Root`, which `Form` needs to route errors. Both are fixed.
 
 ## Not started
 

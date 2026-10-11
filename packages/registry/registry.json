@@ -1250,6 +1250,32 @@
       ]
     },
     {
+      "name": "contact-form",
+      "type": "registry:block",
+      "title": "Contact form",
+      "description": "A contact form built from Input, Select and Textarea, with your contact details beside it. It checks required fields, shows errors from your server on the right field, and announces the result. It makes no network call itself.",
+      "categories": ["section"],
+      "files": [
+        {
+          "path": "src/sections/contact-form.tsx",
+          "type": "registry:component",
+          "target": "components/sections/contact-form.tsx"
+        }
+      ],
+      "dependencies": ["@base-ui-components/react@1.0.0-rc.0"],
+      "registryDependencies": [
+        "https://facadeui.dev/r/button.json",
+        "https://facadeui.dev/r/container.json",
+        "https://facadeui.dev/r/input.json",
+        "https://facadeui.dev/r/section.json",
+        "https://facadeui.dev/r/section-header.json",
+        "https://facadeui.dev/r/select.json",
+        "https://facadeui.dev/r/textarea.json",
+        "https://facadeui.dev/r/types.json",
+        "https://facadeui.dev/r/utils.json"
+      ]
+    },
+    {
       "name": "saas-landing",
       "type": "registry:block",
       "title": "SaaS landing page",
