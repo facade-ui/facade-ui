@@ -66,10 +66,10 @@ The target is WCAG 2.2 AA, and the point is that it is _checked_:
 - `pnpm e2e:a11y` runs axe-core over all 65 previews in all eight scopes, plus
   the docs site itself. It has already caught six real defects:
   `LogoMark`'s resting opacity dimming text below 4.5:1, an invalid
-  `aria-orientation` Base UI puts on a `<ul>`, a `<dl>` with its `dt`/`dd` pairs
-  nested two `div`s deep, a `<div>` where an `<li>` belongs inside an `<ol>`,
-  syntax-highlighting themes whose comment colour failed AA, and a scrollable
-  export block no keyboard user could reach.
+  `aria-orientation` Base UI used to put on a `<ul>`, a `<dl>` with its
+  `dt`/`dd` pairs nested two `div`s deep, a `<div>` where an `<li>` belongs
+  inside an `<ol>`, syntax-highlighting themes whose comment colour failed AA,
+  and a scrollable export block no keyboard user could reach.
 - `eslint-plugin-jsx-a11y` runs in **strict** mode across the whole registry.
 - Unit tests pin reading order, accessible names, heading levels, focus return
   and Escape handling.

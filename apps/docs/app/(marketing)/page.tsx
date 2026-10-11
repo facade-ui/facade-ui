@@ -104,7 +104,7 @@ export default function HomePage() {
           <dl className="mx-auto grid max-w-2xl gap-6 text-center sm:grid-cols-4">
             {[
               ["React", "19, server components"],
-              ["Base UI", "1.0 release candidate"],
+              ["Base UI", "1.x, stable"],
               ["Tailwind", "v4"],
               ["Motion", "optional"],
             ].map(([term, detail]) => (
