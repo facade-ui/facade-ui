@@ -80,5 +80,5 @@ Step 3 is the only way to produce Linux baselines without Docker. With Docker
 installed you can skip the round trip:
 
 ```bash
-docker run --rm -v "$PWD":/w -w /w mcr.microsoft.com/playwright:v1.63.0-noble   bash -c "corepack enable && pnpm install --frozen-lockfile && pnpm --filter @facade-ui/docs build && pnpm exec playwright test e2e/visual.spec.ts --update-snapshots"
+docker run --rm -v "$PWD":/w -w /w mcr.microsoft.com/playwright:v1.65.0-noble   bash -c "npm i -g pnpm && pnpm install --frozen-lockfile && pnpm --filter @facade-ui/docs build && pnpm exec playwright test e2e/visual.spec.ts --update-snapshots"
 ```

@@ -9,6 +9,15 @@ const config: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  // Agents guess these paths for an item's page; send them to the real one.
+  // `:name` keeps a `.md` suffix, so the markdown twins redirect too.
+  async redirects() {
+    return ["/sections", "/docs/sections", "/docs/components"].map((from) => ({
+      source: `${from}/:name`,
+      destination: "/components/:name",
+      permanent: true,
+    }))
+  },
 }
 
 export default config
